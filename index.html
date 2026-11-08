@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#10b981">
+<meta name="color-scheme" content="only light">
+<title>智慧補貨預測器</title>
+<link rel="manifest" href="manifest.json">
+<style id="tw">*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
+html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4}
+body{margin:0;line-height:inherit}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}
+a{color:inherit;text-decoration:inherit}
+b,strong{font-weight:bolder}
+button,input,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}
+button,select{text-transform:none}
+button,[type=button],[type=submit]{-webkit-appearance:button;background-color:transparent;background-image:none}
+blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre{margin:0}
+hr{height:0;color:inherit;border-top-width:1px}
+ol,ul,menu{list-style:none;margin:0;padding:0}
+textarea{resize:vertical}
+input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}
+button,[role=button]{cursor:pointer}
+:disabled{cursor:default}
+img,svg,video{display:block;vertical-align:middle}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1em}
+[hidden]{display:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+.-translate-x-1\/2{transform:translateX(-50.0%)}
+.absolute{position:absolute}
+.accent-emerald-500{accent-color:#10b981}
+.bg-amber-400{background-color:#fbbf24}
+.bg-amber-50{background-color:#fffbeb}
+.bg-amber-500{background-color:#f59e0b}
+.bg-emerald-100{background-color:#d1fae5}
+.bg-emerald-200{background-color:#a7f3d0}
+.bg-emerald-400{background-color:#34d399}
+.bg-emerald-50{background-color:#ecfdf5}
+.bg-emerald-500{background-color:#10b981}
+.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-from),var(--tw-gradient-to))}
+.bg-indigo-400{background-color:#818cf8}
+.bg-orange-50{background-color:#fff7ed}
+.bg-orange-500{background-color:#f97316}
+.bg-rose-400{background-color:#fb7185}
+.bg-rose-50{background-color:#fff1f2}
+.bg-rose-500{background-color:#f43f5e}
+.bg-sky-100{background-color:#e0f2fe}
+.bg-sky-200{background-color:#bae6fd}
+.bg-sky-50{background-color:#f0f9ff}
+.bg-sky-500{background-color:#0ea5e9}
+.bg-sky-600{background-color:#0284c7}
+.bg-slate-100{background-color:#f1f5f9}
+.bg-slate-200{background-color:#e2e8f0}
+.bg-slate-300{background-color:#cbd5e1}
+.bg-slate-400{background-color:#94a3b8}
+.bg-slate-50{background-color:#f8fafc}
+.bg-slate-500{background-color:#64748b}
+.bg-slate-800{background-color:#1e293b}
+.bg-slate-900\/40{background-color:rgba(15,23,42,0.4)}
+.bg-teal-400{background-color:#2dd4bf}
+.bg-transparent{background-color:transparent}
+.bg-violet-400{background-color:#a78bfa}
+.bg-violet-500{background-color:#8b5cf6}
+.bg-white{background-color:#ffffff}
+.bg-white\/20{background-color:rgba(255,255,255,0.2)}
+.bg-yellow-100{background-color:#fef9c3}
+.bg-yellow-200{background-color:#fef08a}
+.bg-yellow-400{background-color:#facc15}
+.bg-yellow-50{background-color:#fefce8}
+.block{display:block}
+.border{border-width:1px}
+.border-2{border-width:2px}
+.border-amber-200{border-color:#fde68a}
+.border-b{border-bottom-width:1px}
+.border-emerald-300{border-color:#6ee7b7}
+.border-emerald-500{border-color:#10b981}
+.border-l-4{border-left-width:4px}
+.border-sky-500{border-color:#0ea5e9}
+.border-slate-100{border-color:#f1f5f9}
+.border-slate-200{border-color:#e2e8f0}
+.border-slate-300{border-color:#cbd5e1}
+.border-t{border-top-width:1px}
+.border-transparent{border-color:transparent}
+.border-y{border-top-width:1px;border-bottom-width:1px}
+.bottom-0{bottom:0px}
+.bottom-\[5\.5rem\]{bottom:5.5rem}
+.break-all{word-break:break-all}
+.break-words{overflow-wrap:break-word}
+.contents{display:contents}
+.cursor-pointer{cursor:pointer}
+.fixed{position:fixed}
+.flex{display:flex}
+.flex-1{flex:1 1 0%}
+.flex-col{flex-direction:column}
+.flex-wrap{flex-wrap:wrap}
+.focus-within\:ring-emerald-400:focus-within{--tw-ring-color:#34d399}
+.focus\:ring-emerald-300:focus{--tw-ring-color:#6ee7b7}
+.focus\:ring-emerald-400:focus{--tw-ring-color:#34d399}
+.font-bold{font-weight:700}
+.font-extrabold{font-weight:800}
+.font-normal{font-weight:400}
+.font-semibold{font-weight:600}
+.from-amber-400{--tw-gradient-from:#fbbf24}
+.from-emerald-400{--tw-gradient-from:#34d399}
+.from-emerald-500{--tw-gradient-from:#10b981}
+.gap-0\.5{gap:0.125rem}
+.gap-1{gap:0.25rem}
+.gap-1\.5{gap:0.375rem}
+.gap-2{gap:0.5rem}
+.gap-3{gap:0.75rem}
+.gap-4{gap:1rem}
+.gap-x-3{column-gap:0.75rem}
+.gap-y-1{row-gap:0.25rem}
+.grid{display:grid}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.grid-cols-7{grid-template-columns:repeat(7,minmax(0,1fr))}
+.h-1{height:0.25rem}
+.h-1\.5{height:0.375rem}
+.h-10{height:2.5rem}
+.h-11{height:2.75rem}
+.h-12{height:3rem}
+.h-14{height:3.5rem}
+.h-2{height:0.5rem}
+.h-2\.5{height:0.625rem}
+.h-20{height:5rem}
+.h-28{height:7rem}
+.h-3{height:0.75rem}
+.h-5{height:1.25rem}
+.h-6{height:1.5rem}
+.h-7{height:1.75rem}
+.h-8{height:2rem}
+.h-9{height:2.25rem}
+.h-full{height:100%}
+.hidden{display:none}
+.inline-block{display:inline-block}
+.inline-flex{display:inline-flex}
+.inset-0{inset:0px}
+.inset-x-0{left:0px;right:0px}
+.italic{font-style:italic}
+.items-center{align-items:center}
+.items-end{align-items:flex-end}
+.items-start{align-items:flex-start}
+.justify-between{justify-content:space-between}
+.justify-center{justify-content:center}
+.justify-end{justify-content:flex-end}
+.last\:border-0:last-child{border-width:0px}
+.leading-7{line-height:1.75rem}
+.leading-relaxed{line-height:1.625}
+.left-1\/2{left:50.0%}
+.line-through{text-decoration-line:line-through}
+.list-decimal{list-style-type:decimal}
+.list-disc{list-style-type:disc}
+.max-w-\[92vw\]{max-width:92vw}
+.max-w-md{max-width:28rem}
+.max-w-sm{max-width:24rem}
+.mb-1{margin-bottom:0.25rem}
+.mb-1\.5{margin-bottom:0.375rem}
+.mb-2{margin-bottom:0.5rem}
+.mb-3{margin-bottom:0.75rem}
+.mb-4{margin-bottom:1rem}
+.min-h-screen{min-height:100vh}
+.min-w-0{min-width:0px}
+.ml-1{margin-left:0.25rem}
+.ml-2{margin-left:0.5rem}
+.ml-auto{margin-left:auto}
+.mr-1{margin-right:0.25rem}
+.mr-2{margin-right:0.5rem}
+.mt-0\.5{margin-top:0.125rem}
+.mt-1{margin-top:0.25rem}
+.mt-1\.5{margin-top:0.375rem}
+.mt-2{margin-top:0.5rem}
+.mt-3{margin-top:0.75rem}
+.mt-4{margin-top:1rem}
+.mt-5{margin-top:1.25rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.my-0\.5{margin-top:0.125rem;margin-bottom:0.125rem}
+.my-1{margin-top:0.25rem;margin-bottom:0.25rem}
+.my-2{margin-top:0.5rem;margin-bottom:0.5rem}
+.my-3{margin-top:0.75rem;margin-bottom:0.75rem}
+.opacity-45{opacity:0.45}
+.opacity-80{opacity:0.8}
+.opacity-90{opacity:0.9}
+.opacity-95{opacity:0.95}
+.outline-none{outline:2px solid transparent;outline-offset:2px}
+.overflow-hidden{overflow:hidden}
+.overflow-x-auto{overflow-x:auto}
+.overflow-y-auto{overflow-y:auto}
+.p-0\.5{padding:0.125rem}
+.p-1{padding:0.25rem}
+.p-1\.5{padding:0.375rem}
+.p-2{padding:0.5rem}
+.p-3{padding:0.75rem}
+.p-4{padding:1rem}
+.p-5{padding:1.25rem}
+.p-6{padding:1.5rem}
+.pb-2{padding-bottom:0.5rem}
+.pb-24{padding-bottom:6rem}
+.pl-1{padding-left:0.25rem}
+.pl-2{padding-left:0.5rem}
+.pl-3{padding-left:0.75rem}
+.pl-5{padding-left:1.25rem}
+.place-items-center{place-items:center}
+.placeholder\:text-slate-300::placeholder{color:#cbd5e1}
+.pr-1{padding-right:0.25rem}
+.pt-1{padding-top:0.25rem}
+.pt-2{padding-top:0.5rem}
+.pt-3{padding-top:0.75rem}
+.pt-4{padding-top:1rem}
+.pt-5{padding-top:1.25rem}
+.px-0\.5{padding-left:0.125rem;padding-right:0.125rem}
+.px-1{padding-left:0.25rem;padding-right:0.25rem}
+.px-2{padding-left:0.5rem;padding-right:0.5rem}
+.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}
+.px-3{padding-left:0.75rem;padding-right:0.75rem}
+.px-4{padding-left:1rem;padding-right:1rem}
+.px-5{padding-left:1.25rem;padding-right:1.25rem}
+.py-1{padding-top:0.25rem;padding-bottom:0.25rem}
+.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}
+.py-12{padding-top:3rem;padding-bottom:3rem}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem}
+.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}
+.py-3{padding-top:0.75rem;padding-bottom:0.75rem}
+.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}
+.py-8{padding-top:2rem;padding-bottom:2rem}
+.relative{position:relative}
+.resize-none{resize:none}
+.right-1{right:0.25rem}
+.right-4{right:1rem}
+.right-5{right:1.25rem}
+.ring-2{--tw-ring-shadow:0 0 0 calc(2px + var(--tw-ring-offset-width,0px)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.ring-4{--tw-ring-shadow:0 0 0 calc(4px + var(--tw-ring-offset-width,0px)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.ring-emerald-300{--tw-ring-color:#6ee7b7}
+.ring-emerald-400{--tw-ring-color:#34d399}
+.ring-transparent{--tw-ring-color:transparent}
+.rounded{border-radius:0.25rem}
+.rounded-2xl{border-radius:1rem}
+.rounded-3xl{border-radius:1.5rem}
+.rounded-b-2xl{border-bottom-left-radius:1rem;border-bottom-right-radius:1rem}
+.rounded-b-3xl{border-bottom-left-radius:1.5rem;border-bottom-right-radius:1.5rem}
+.rounded-full{border-radius:9999px}
+.rounded-l-full{border-top-left-radius:9999px;border-bottom-left-radius:9999px}
+.rounded-lg{border-radius:0.5rem}
+.rounded-r-full{border-top-right-radius:9999px;border-bottom-right-radius:9999px}
+.rounded-t-3xl{border-top-left-radius:1.5rem;border-top-right-radius:1.5rem}
+.rounded-xl{border-radius:0.75rem}
+.self-stretch{align-self:stretch}
+.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shadow-\[0_-4px_16px_rgba\(15\,23\,42\,\.06\)\]{--tw-shadow:0 -4px 16px rgba(15,23,42,.06);--tw-shadow-colored:0 -4px 16px rgba(15,23,42,.06);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shadow-emerald-500\/25{--tw-shadow-color:rgba(16,185,129,0.25);--tw-shadow:var(--tw-shadow-colored)}
+.shadow-emerald-600\/25{--tw-shadow-color:rgba(5,150,105,0.25);--tw-shadow:var(--tw-shadow-colored)}
+.shadow-emerald-600\/30{--tw-shadow-color:rgba(5,150,105,0.3);--tw-shadow:var(--tw-shadow-colored)}
+.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shadow-rose-500\/20{--tw-shadow-color:rgba(244,63,94,0.2);--tw-shadow:var(--tw-shadow-colored)}
+.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 rgb(0 0 0 / 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow,0 0 #0000);}
+.shrink-0{flex-shrink:0}
+.space-y-1 > :not([hidden]) ~ :not([hidden]){margin-top:0.25rem}
+.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){margin-top:0.375rem}
+.space-y-2 > :not([hidden]) ~ :not([hidden]){margin-top:0.5rem}
+.space-y-3 > :not([hidden]) ~ :not([hidden]){margin-top:0.75rem}
+.space-y-4 > :not([hidden]) ~ :not([hidden]){margin-top:1rem}
+.sticky{position:sticky}
+.text-2xl{font-size:1.5rem;line-height:2rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
+.text-4xl{font-size:2.25rem;line-height:2.5rem}
+.text-5xl{font-size:3rem;line-height:1}
+.text-amber-300{color:#fcd34d}
+.text-amber-600{color:#d97706}
+.text-amber-700{color:#b45309}
+.text-amber-800{color:#92400e}
+.text-amber-900{color:#78350f}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-center{text-align:center}
+.text-emerald-300{color:#6ee7b7}
+.text-emerald-600{color:#059669}
+.text-emerald-700{color:#047857}
+.text-emerald-800{color:#065f46}
+.text-left{text-align:left}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-orange-600{color:#ea580c}
+.text-right{text-align:right}
+.text-rose-500{color:#f43f5e}
+.text-rose-600{color:#e11d48}
+.text-sky-600{color:#0284c7}
+.text-sky-800{color:#075985}
+.text-slate-300{color:#cbd5e1}
+.text-slate-400{color:#94a3b8}
+.text-slate-500{color:#64748b}
+.text-slate-600{color:#475569}
+.text-slate-700{color:#334155}
+.text-slate-800{color:#1e293b}
+.text-slate-900{color:#0f172a}
+.text-sm{font-size:0.875rem;line-height:1.25rem}
+.text-teal-700{color:#0f766e}
+.text-violet-600{color:#7c3aed}
+.text-white{color:#ffffff}
+.text-xl{font-size:1.25rem;line-height:1.75rem}
+.text-xs{font-size:0.75rem;line-height:1rem}
+.text-yellow-700{color:#a16207}
+.to-emerald-600{--tw-gradient-to:#059669}
+.to-rose-500{--tw-gradient-to:#f43f5e}
+.to-teal-600{--tw-gradient-to:#0d9488}
+.top-0{top:0px}
+.top-1{top:0.25rem}
+.top-14{top:3.5rem}
+.top-2{top:0.5rem}
+.tracking-widest{letter-spacing:0.1em}
+.transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
+.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}
+.translate-x-5{transform:translateX(1.25rem)}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.underline{text-decoration-line:underline}
+.w-1\.5{width:0.375rem}
+.w-10{width:2.5rem}
+.w-11{width:2.75rem}
+.w-12{width:3rem}
+.w-14{width:3.5rem}
+.w-16{width:4rem}
+.w-2{width:0.5rem}
+.w-2\.5{width:0.625rem}
+.w-20{width:5rem}
+.w-24{width:6rem}
+.w-28{width:7rem}
+.w-3{width:0.75rem}
+.w-32{width:8rem}
+.w-5{width:1.25rem}
+.w-52{width:13rem}
+.w-6{width:1.5rem}
+.w-7{width:1.75rem}
+.w-8{width:2rem}
+.w-9{width:2.25rem}
+.w-full{width:100%}
+.whitespace-nowrap{white-space:nowrap}
+.z-10{z-index:10}
+.z-20{z-index:20}
+.z-30{z-index:30}
+.z-40{z-index:40}
+.z-50{z-index:50}</style>
+
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+body{background:linear-gradient(180deg,#ecfdf5 0,#f8fafc 260px) fixed;font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-tap-highlight-color:transparent}
+button:active:not(:disabled){transform:scale(.97)}button{transition:transform .12s,opacity .2s}
+#app.fresh>*{animation:up .3s ease both}html{color-scheme:only light}button.text-xs{position:relative}button.text-xs::after{content:"";position:absolute;inset:-9px -7px}select[data-cs]{padding-top:6px;padding-bottom:6px}#npage textarea,#npage #ntitle,#nview{background:#fff;color:#0f172a;-webkit-text-fill-color:#0f172a;caret-color:#0f172a}#npage ::placeholder{color:#94a3b8;-webkit-text-fill-color:#94a3b8}.mo nav,.mo #fab{display:none}.lm *{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.lm [data-act],.lm [data-cal],.lm article{outline:1px dashed rgba(14,165,233,.45);outline-offset:-1px}@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:1.5rem;box-shadow:0 1px 2px rgba(15,23,42,.05),0 3px 10px -5px rgba(15,23,42,.14)}
+body.mo>[id^="m-"]{bottom:auto!important;height:var(--vvh,100%)}.kb nav,.kb #fab{display:none}.sheet-h{max-height:calc(var(--vvh,100dvh) - .75rem)}
+input[type=date]{color-scheme:light;color:#0f172a}input[type=date]::-webkit-calendar-picker-indicator{filter:brightness(0) opacity(.55);opacity:1}
+.num{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body class="text-slate-800">
+<div class="max-w-md mx-auto min-h-screen pb-24">
+  <header class="px-5 pt-5 pb-2 flex items-end justify-between">
+    <div><p class="text-xs font-semibold tracking-widest text-emerald-600">SMART REPLENISH</p><h1 id="title" class="text-2xl font-extrabold"></h1></div>
+    <div class="flex items-center gap-2"><button id="menuBtn" data-act="menu" aria-label="選單" class="relative w-9 h-9 rounded-full bg-white shadow-sm text-base">☰<i id="menuDot" style="display:none" class="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500"></i></button><span id="count" class="text-xs font-semibold bg-white rounded-full px-3 py-1 shadow-sm text-slate-500"></span></div>
+  </header>
+  <div id="menu" style="display:none" class="fixed z-30 right-4 top-14 bg-white rounded-2xl shadow-xl p-1 w-52"><button data-act="trash" id="mtrash" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-sm">🗑️ 垃圾桶</button><button data-act="cmd" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-sm">⌨️ 指令（AI 一鍵操作）</button></div>
+  <div id="shade" style="display:none" class="px-4"><div id="shp" class="bg-white rounded-b-3xl shadow-sm overflow-hidden" style="max-height:0;transition:max-height .28s ease"><div id="shpc" class="p-4 space-y-3"></div></div><div class="flex justify-center"><button id="sht" aria-label="通知與提醒" class="flex items-center gap-2 bg-white rounded-b-2xl shadow-sm px-5 py-1.5" style="touch-action:none"></button></div></div>
+  <div id="fixd" style="display:none" class="px-4"><div id="fxp" class="bg-white rounded-b-3xl shadow-sm overflow-hidden" style="max-height:0;transition:max-height .28s ease"><div id="fxpc" class="p-3 space-y-3"></div></div><div class="flex justify-center"><button id="fxt" aria-label="固定收支" class="flex items-center gap-2 bg-white rounded-b-2xl shadow-sm px-5 py-1.5" style="touch-action:none"></button></div></div>
+  <main id="app" class="px-4 pt-3 space-y-4"></main>
+  <nav class="fixed bottom-0 inset-x-0 z-10 bg-white border-t border-slate-200 shadow-[0_-4px_16px_rgba(15,23,42,.06)]" style="padding-bottom:env(safe-area-inset-bottom,0px)"><div id="nav" class="max-w-md mx-auto grid"></div></nav>
+</div>
+
+<button id="fab" data-act="add" aria-label="新增物品" class="fixed z-10 right-5 bottom-[5.5rem] w-14 h-14 rounded-full bg-emerald-500 text-white text-3xl shadow-xl shadow-emerald-600/30">＋</button>
+<div id="toast" class="fixed z-30 left-1/2 -translate-x-1/2 top-2 max-w-[92vw] bg-slate-800 text-white rounded-2xl px-4 py-3 text-sm items-center gap-3 shadow-xl" style="display:none"></div>
+<div id="m-det" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div id="det" class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"></div></div>
+<div id="m-exp" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-4 sheet-h overflow-y-auto" style="padding-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))">
+ <div class="grid grid-cols-2 bg-slate-100 rounded-2xl p-1"><button data-act="tomexp" class="py-2 rounded-xl text-sm font-bold bg-white shadow-sm">💸 支出</button><button data-act="tominc" class="py-2 rounded-xl text-sm font-bold text-slate-500">💰 收入</button></div>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span data-csw="e" class="shrink-0"></span><input id="ea" type="number" inputmode="decimal" min="0" placeholder="金額" class="w-full bg-transparent py-3.5 text-2xl font-bold outline-none num"></div>
+ <div id="ec" class="flex flex-wrap gap-2"></div>
+ <select id="ei" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none"></select>
+ <input id="enn" maxlength="20" placeholder="新物品名稱" style="display:none" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <label id="esw" class="flex items-center gap-2 text-sm" style="display:none"><input id="es" type="checkbox" checked class="w-5 h-5 accent-emerald-500">同步到補貨（記錄為一次補貨，並計入該物品分析）</label>
+ <div id="ewho"></div>
+ <input id="en" maxlength="30" placeholder="備註（選填）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">日期</span><input id="ed" type="date" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm outline-none"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="saveexp" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div></div></div>
+<div id="m-trash" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><div class="flex items-center justify-between"><h2 id="tt" class="text-lg font-bold">🗑️ 垃圾桶</h2><button data-act="close" class="text-slate-400 text-xl px-2" aria-label="關閉">✕</button></div><p class="text-xs text-slate-400">刪除的項目保留 30 天，按「恢復」會完整還原。</p><div id="tl"></div></div></div>
+<div id="m-pan" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="pt2" class="text-lg font-bold"></h2>
+ <input id="pnm" maxlength="20" placeholder="物品名稱，例如：牛奶" class="w-full bg-slate-50 rounded-2xl px-4 py-3 outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div id="pnames" class="flex flex-wrap gap-2"></div><div class="flex items-center gap-3"><span class="text-sm text-slate-500">圖示</span><span id="picw"></span><span class="text-sm text-slate-500 ml-2">數量</span><span id="qwn" class="inline-flex items-center gap-1"></span></div>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">效期</span><input id="pe" type="date" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm outline-none"></div>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">提前提醒</span><input id="pln" type="number" min="0" inputmode="numeric" class="w-16 bg-slate-100 rounded-xl px-2 py-2 text-center font-bold outline-none"><select id="plu" class="bg-slate-100 rounded-xl px-2 py-2 text-sm font-bold outline-none"><option value="day">天</option><option value="week">週</option><option value="month">個月</option><option value="year">年</option></select></div><div id="plp" class="flex flex-wrap gap-2"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="psave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div>
+ <button id="pdl" data-act="pdel" class="w-full py-2 text-sm text-rose-500 font-semibold">刪除這項</button></div></div>
+<div id="m-pq" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-center justify-center p-5"><div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3"><h2 class="text-lg font-bold">更新效期？</h2><p id="pqt" class="text-sm text-slate-600"></p>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">新效期</span><input id="pqd" type="date" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm outline-none"></div>
+ <div class="grid grid-cols-3 gap-2"><button data-act="pqyes" class="py-3 rounded-2xl bg-emerald-500 text-white font-bold text-sm">要更新</button><button data-act="pqno" class="py-3 rounded-2xl bg-slate-100 font-bold text-sm">不要</button><button data-act="pqlater" class="py-3 rounded-2xl bg-slate-100 font-bold text-sm">稍後再辦</button></div></div></div>
+<div id="m-away" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 class="text-lg font-bold">新增不在家期間</h2>
+ <div class="flex items-center gap-2"><input id="af" type="date" class="flex-1 bg-slate-100 rounded-xl px-3 py-2 text-sm outline-none"><span>~</span><input id="ato" type="date" class="flex-1 bg-slate-100 rounded-xl px-3 py-2 text-sm outline-none"></div>
+ <input id="anote" maxlength="20" placeholder="備註，例如：出國、回老家" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div id="awho" class="flex flex-wrap items-center gap-2"></div>
+ <p class="text-xs text-slate-400">這段期間不計入消耗；過去或未來的日期都可以設定，系統會自動重算。</p>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="asave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div>
+ <button id="adl" data-act="adel2" class="w-full py-2 text-sm text-rose-500 font-semibold">刪除這段</button></div></div>
+<div id="m-edit" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="xt" class="text-lg font-bold"></h2>
+ <p id="xq" class="text-xs text-amber-700 bg-amber-50 rounded-xl px-3 py-2" style="display:none">⚡ 這是快速補貨紀錄，按「儲存」後就視為已確認。</p>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">日期</span><input id="xd" type="date" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm outline-none"></div>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span data-csw="x" class="shrink-0"></span><input id="xa" type="number" inputmode="decimal" min="0" placeholder="金額（補貨可留空）" class="w-full bg-transparent py-3 text-xl font-bold outline-none num"></div><div id="xqrow" class="flex items-center gap-3"><span class="text-sm text-slate-500">數量</span><span id="qwx" class="inline-flex items-center gap-1"></span></div><p id="xinfo" class="text-sm text-slate-500"></p>
+ <input id="xn" maxlength="30" placeholder="備註" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400"><div id="xwho"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="xcancel" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="xsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div></div></div>
+<div id="m-dup" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-center justify-center p-5"><div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3"><h2 class="text-lg font-bold">發現同名物品</h2><p id="dupt" class="text-sm text-slate-600"></p><button data-act="dupm" class="w-full py-3 rounded-2xl bg-emerald-500 text-white font-bold">合併紀錄到現有物品</button><button data-act="dupk" class="w-full py-3 rounded-2xl bg-slate-100 font-bold">兩個都保留（還原的加「（還原）」）</button><button data-act="close" class="w-full py-2 text-sm text-slate-500 font-semibold">取消</button></div></div>
+<div id="m-quick" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><div class="flex items-center justify-between"><h2 class="text-lg font-bold">⚡ 待確認的快速補貨</h2><button data-act="close" class="text-slate-400 text-xl px-2" aria-label="關閉">✕</button></div><p class="text-xs text-slate-400">快速補貨使用今天的日期與上次的價格。按「確認無誤」，或點進去修改並儲存，就不再算快速補貨。</p><div id="ql"></div></div></div>
+<div id="m-iedit" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div id="ie" class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"></div></div>
+<div id="m-cmd" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><div class="flex items-center justify-between"><h2 class="text-lg font-bold">⌨️ 指令</h2><button data-act="close" class="text-slate-400 text-xl px-2" aria-label="關閉">✕</button></div>
+ <p class="text-xs text-slate-400 leading-relaxed">① 按「複製提示詞」貼給 AI　② 對 AI 說你要做什麼（也可以傳發票照片）　③ 把 AI 回覆的指令貼在下面，預覽後按「確認執行」。</p>
+ <button data-act="cmdcopy" class="w-full py-2.5 rounded-xl bg-slate-100 font-bold text-sm">📋 複製提示詞</button><textarea id="cmdp" readonly rows="3" style="display:none" class="w-full bg-slate-50 rounded-xl p-2 text-xs"></textarea>
+ <textarea id="cmdin" rows="5" placeholder="把 AI 給的指令貼在這裡" class="w-full bg-slate-50 rounded-2xl p-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400"></textarea><div id="cmdout" class="text-sm space-y-1"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="cmdprev" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">預覽</button><button data-act="cmdrun" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">確認執行</button></div></div></div>
+<div id="m-ph" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><div class="flex items-center justify-between"><h2 class="text-lg font-bold">🕘 用完的歷史紀錄</h2><button data-act="close" class="text-slate-400 text-xl px-2" aria-label="關閉">✕</button></div><div id="phl"></div></div></div>
+<div id="m-inc" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><div id="iseg" class="grid grid-cols-2 bg-slate-100 rounded-2xl p-1"><button data-act="tomexp" class="py-2 rounded-xl text-sm font-bold text-slate-500">💸 支出</button><button data-act="tominc" class="py-2 rounded-xl text-sm font-bold bg-white shadow-sm">💰 收入</button></div><h2 id="it2" class="text-lg font-bold">新增收入</h2>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span data-csw="i" class="shrink-0"></span><input id="ia" type="number" inputmode="decimal" min="0" placeholder="金額" class="w-full bg-transparent py-3 text-2xl font-bold outline-none num"></div>
+ <div id="icc" class="flex flex-wrap items-center gap-2"></div>
+ <div id="idr" class="flex items-center gap-2"><span class="text-sm text-slate-500">日期</span><input id="idt" type="date"></div>
+ <div id="ird" class="flex items-center gap-2" style="display:none"><span class="text-sm text-slate-500">每月</span><input id="iday" type="number" inputmode="numeric" min="1" max="31" class="w-16 bg-slate-100 rounded-xl px-2 py-2 text-center font-bold outline-none"><span class="text-sm text-slate-500">號自動新增</span></div>
+ <input id="inote" maxlength="30" placeholder="備註（選填）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <label id="irc" class="flex items-center gap-2 text-sm"><input id="irec" type="checkbox" class="w-5 h-5 accent-emerald-500">每月固定這天自動新增（例如月薪）</label>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="incsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div></div></div>
+<div id="m-hoard" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-center justify-center p-5"><div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3"><h2 class="text-lg font-bold">補貨間隔很短</h2><p id="hq" class="text-sm text-slate-600"></p>
+ <button data-act="hoardstock" class="w-full py-3 rounded-2xl bg-emerald-500 text-white font-bold">📦 囤貨（庫存增加）</button><button data-act="hoardused" class="w-full py-3 rounded-2xl bg-slate-100 font-bold">✅ 上一份其實用完了</button>
+ <button data-act="hoardnever" class="w-full py-2 text-sm text-slate-400 font-semibold">這個物品之後不要再問</button><p class="text-xs text-slate-400">只問這一次；選「囤貨」不會把短間隔當成你的用量。</p></div></div>
+<div id="m-goal" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="gt2" class="text-lg font-bold">存款目標</h2>
+ <input id="gn" maxlength="16" placeholder="目標名稱，例如：旅遊基金" class="w-full bg-slate-50 rounded-2xl px-4 py-3 outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4"><span data-csw="g" class="shrink-0"></span><span class="text-slate-400 text-sm mr-2 shrink-0 whitespace-nowrap">目標</span><input id="gtg" type="number" inputmode="numeric" placeholder="金額" class="w-full bg-transparent py-3 font-bold outline-none text-right num"></div>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4"><span class="text-slate-400 text-sm mr-2 shrink-0 whitespace-nowrap">已存</span><input id="gsv" type="number" inputmode="numeric" placeholder="金額" class="w-full bg-transparent py-3 font-bold outline-none text-right num"></div>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">期限（選填）</span><input id="gdu" type="date"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="goalsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div><button id="gdl" data-act="goaldel" class="w-full py-2 text-sm text-rose-500 font-semibold">刪除這個目標</button></div></div>
+<div id="npage" style="display:none;padding-top:env(safe-area-inset-top,0px)" class="fixed inset-x-0 top-0 bottom-0 z-40 bg-white flex-col max-w-md mx-auto">
+ <div class="flex items-center gap-1 px-2 py-2 border-b border-slate-100"><button data-act="nback" aria-label="返回" class="w-10 h-10 rounded-full text-xl">←</button><span class="flex-1"></span><button data-act="nundo" aria-label="上一步" class="w-10 h-10 rounded-full text-lg">↶</button><button data-act="nredo" aria-label="下一步" class="w-10 h-10 rounded-full text-lg">↷</button><button id="nprev" data-act="nprev" aria-label="預覽模式" class="w-10 h-10 rounded-full text-lg">👁</button><button data-act="ndel" aria-label="刪除記事" class="w-10 h-10 rounded-full text-lg">🗑️</button></div>
+ <div class="px-4 pt-3 flex items-center gap-2"><input id="ntitle" maxlength="60" placeholder="標題" class="flex-1 min-w-0 text-xl font-extrabold outline-none"><button id="nbell" data-act="nbell" aria-label="提醒日期" class="w-10 h-10 rounded-full bg-slate-100 text-lg">🔔</button></div>
+ <div id="nbellrow" style="display:none" class="px-4 py-2 items-center gap-2"><span class="text-xs text-slate-500">提醒</span><input id="ndt" type="date"><input id="ntm" type="time" style="display:none" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm font-semibold outline-none"><button data-act="nbclr" aria-label="清除提醒" class="w-8 h-8 rounded-full bg-slate-100 text-sm">✕</button></div>
+ <div id="ntool" class="flex gap-1 px-3 py-2 overflow-x-auto border-y border-slate-100 items-center"><button data-nt="h" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">H</button><button data-nt="b" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">B</button><button data-nt="i" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm italic font-bold">I</button><button data-nt="mark" class="shrink-0 px-3 py-1.5 rounded-lg bg-yellow-100 text-sm font-bold">標注</button><button data-nt="todo" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">☐ 待辦</button><button data-nt="ul" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">• 清單</button><button data-nt="quote" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">❝ 引用</button><button data-nt="link" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-100 text-sm font-bold">🔗 網址</button><button data-nt="today" class="shrink-0 px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 text-sm font-bold">📋 今日待辦</button><button data-act="nlink" class="shrink-0 px-3 py-1.5 rounded-lg bg-sky-100 text-sky-800 text-sm font-bold">📍 抓取 App 連結</button><select id="ntpl" aria-label="排版範本" class="shrink-0 px-2 py-1.5 rounded-lg bg-slate-100 text-sm font-bold outline-none"><option value="">📄 範本…</option></select></div>
+ <textarea id="nbody" placeholder="開始寫…（支援 Markdown：# 標題、**粗體**、==標注==、- [ ] 待辦、[名稱](網址)、貼網址會自動變連結）" class="flex-1 w-full p-4 outline-none resize-none text-base leading-relaxed"></textarea>
+ <div id="nview" style="display:none" class="flex-1 overflow-y-auto p-4 leading-relaxed"></div></div>
+<div id="linkbar" style="display:none;padding-top:env(safe-area-inset-top,0px)" class="fixed inset-x-0 top-0 z-50 bg-sky-600 text-white items-center gap-3 px-4 py-3 text-sm"><span class="flex-1">📍 連結模式：<b>長按</b>任何項目取得連結（可切換分頁尋找）</span><button data-act="lcancel" class="px-3 py-1.5 rounded-xl bg-white/20 font-bold">取消</button></div>
+<div id="m-inv" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="ivt" class="text-lg font-bold">新增標的</h2>
+ <div id="imk" class="flex flex-wrap items-center gap-2"></div>
+ <input id="ivs" maxlength="24" placeholder="標的（例如：0050、AAPL、BTC）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div class="grid grid-cols-2 gap-2"><div class="flex items-center bg-slate-50 rounded-2xl px-3"><span class="text-xs text-slate-400 mr-1 shrink-0 whitespace-nowrap">數量</span><input id="ivq" type="number" inputmode="decimal" placeholder="股數" class="w-full bg-transparent py-3 font-bold outline-none text-right num"></div><div class="flex items-center bg-slate-50 rounded-2xl px-3"><span data-csw="iv" class="shrink-0"></span><span class="text-xs text-slate-400 mr-1 shrink-0 whitespace-nowrap">買入價</span><input id="ivb" type="number" inputmode="decimal" placeholder="單價" class="w-full bg-transparent py-3 font-bold outline-none text-right num"></div></div>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">買入日</span><input id="ivd" type="date"></div>
+ <input id="ivn" maxlength="30" placeholder="備註（選填）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none">
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="invsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div></div></div>
+<div id="m-sell" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="slt" class="text-lg font-bold">已賣出</h2><p id="sli" class="text-sm text-slate-500"></p>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span id="slc" class="text-xs font-bold text-slate-500 mr-1 shrink-0"></span><span class="text-slate-400 font-bold mr-2 shrink-0 whitespace-nowrap">賣出價</span><input id="isp" type="number" inputmode="decimal" placeholder="單價" class="w-full bg-transparent py-3 text-2xl font-bold outline-none num"></div><p id="slp" class="text-sm font-bold"></p>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">賣出日</span><input id="isd" type="date"></div>
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="isellsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">確認賣出</button></div></div></div>
+<div id="m-div" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"><h2 id="dvt" class="text-lg font-bold">新增配息</h2>
+ <div class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span data-csw="dv" class="shrink-0"></span><input id="idm" type="number" inputmode="decimal" placeholder="實收金額" class="w-full bg-transparent py-3 text-2xl font-bold outline-none num"></div>
+ <div class="flex items-center gap-2"><span class="text-sm text-slate-500">日期</span><input id="idd" type="date"></div><input id="idn" maxlength="30" placeholder="備註（選填，例如：第三季）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none">
+ <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="flex-1 py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="idivsave" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">儲存</button></div></div></div>
+<div id="m-invd" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center"><div id="invd" class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 sheet-h overflow-y-auto"></div></div>
+<div id="m-iask" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-center justify-center p-5"><div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3"><h2 class="text-lg font-bold">要自動記帳嗎？</h2><p class="text-sm text-slate-600">賣出時把「已實現損益」記進月曆（賺→收入、賠→支出），備註寫標的與買入／賣出價；配息會記為收入。之後都照你的選擇，可以在設定裡改。</p>
+ <button data-act="iaskyes" class="w-full py-3 rounded-2xl bg-emerald-500 text-white font-bold">好，之後都自動記帳</button><button data-act="iaskno" class="w-full py-3 rounded-2xl bg-slate-100 font-bold">不用，我自己記</button></div></div>
+<div id="m-add" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center">
+  <div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-4 sheet-h overflow-y-auto" style="padding-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))">
+    <h2 class="text-lg font-bold">新增物品</h2>
+    <input id="name" maxlength="20" placeholder="物品名稱，例如：衛生紙" class="w-full bg-slate-50 rounded-2xl px-4 py-3.5 text-lg outline-none ring-2 ring-transparent focus:ring-emerald-400">
+    <div id="emojis" class="grid grid-cols-6 gap-2"></div>
+    <p class="text-xs text-slate-400">或一鍵加入常見物品（先用一般週期預估，補貨兩次後改用你的實際用量）</p><div id="common" class="flex flex-wrap gap-2"></div>
+    <div class="grid grid-cols-2 gap-3 sticky bottom-0 bg-white pt-2"><button data-act="close" class="py-3 rounded-2xl bg-slate-100 font-bold">取消</button><button data-act="save" class="py-3 rounded-2xl bg-emerald-500 text-white font-bold">新增</button></div>
+  </div>
+</div>
+<div id="m-price" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-end justify-center">
+  <div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-4 sheet-h overflow-y-auto" style="padding-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))">
+    <h2 id="pt" class="text-lg font-bold"></h2>
+    <div class="flex flex-wrap items-center gap-2"><span class="text-sm text-slate-500">購買日期</span><span id="dchips" class="contents"></span><input id="pd" type="date" class="bg-slate-100 rounded-xl px-3 py-1.5 text-sm outline-none"></div>
+    <div id="pw" class="flex items-center bg-slate-50 rounded-2xl px-4 ring-2 ring-transparent focus-within:ring-emerald-400"><span data-csw="p" class="shrink-0"></span><input id="price" type="number" inputmode="decimal" min="0" placeholder="單價（這次花了多少？）" class="w-full bg-transparent py-3.5 text-2xl font-bold outline-none num"></div>
+    <input id="pn" maxlength="30" placeholder="備註（選填，例如：特價、蝦皮）" class="w-full bg-slate-50 rounded-2xl px-4 py-3 text-sm outline-none ring-2 ring-transparent focus:ring-emerald-400">
+    <div id="pwho"></div>
+    <div class="flex gap-3 sticky bottom-0 bg-white pt-2"><button data-act="saveprice" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">確認補貨</button></div>
+  </div>
+</div>
+<div id="m-pro" class="fixed inset-0 z-20 bg-slate-900/40 hidden items-center justify-center p-5">
+  <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 text-center">
+    <div class="text-5xl">🔒</div><h2 class="text-lg font-bold">已達免費上限</h2>
+    <p class="text-slate-600">免費版最多追蹤 3 個物品。一次買斷 NT$ 99，即可解鎖無限物品。</p>
+    <button data-act="buy" class="w-full py-3 rounded-2xl bg-emerald-500 text-white text-base font-bold">解鎖無限物品・NT$ 99</button>
+    <button data-act="close" class="w-full py-3 text-slate-500 font-semibold">先不要</button>
+    <p class="text-xs text-slate-400">（目前為模擬結帳，之後會串接真正的付款連結）</p>
+  </div>
+</div>
+
+<script>
+const KEY='smartReplenish',FREE=3,EMOJIS=['🧻','☕','🧴','🧼','🪥','🥛','🍚','🥚','🧃','💊','🐱','🧽'];
+const U={day:1,week:7,month:30.4,year:365},UN={day:'天',week:'週',month:'個月',year:'年'};
+const PRESETS=[
+ {id:'ny',n:'新年購物季',m:1,d:1,e:'🎍'},{id:'val',n:'情人節',m:2,d:14,e:'💝'},{id:'w38',n:'三八女王節',m:3,d:8,e:'👑'},
+ {id:'mom',n:'母親節',nth:[5,0,2],e:'🌷'},{id:'618',n:'618 年中慶',m:6,d:18,e:'🛍️'},{id:'anni',n:'百貨週年慶',m:10,d:16,e:'🏬',a:1},
+ {id:'d11',n:'雙11 購物節',m:11,d:11,e:'🔥'},{id:'bf',n:'黑色星期五',bf:1,e:'🖤'},{id:'d12',n:'雙12',m:12,d:12,e:'🎁'},{id:'xmas',n:'聖誕檔期',m:12,d:25,e:'🎄'}];
+const T={rose:['text-rose-600','bg-rose-500'],amber:['text-amber-600','bg-amber-500'],emerald:['text-emerald-600','bg-emerald-500'],slate:['text-slate-500','bg-slate-400']};
+let S=load(),V='home',pick=EMOJIS[0],delId=null,pend=null;
+function load(){
+ const base={items:[],expenses:[],pantry:[],trash:[],members:[{id:'m0',name:'我'}],away:[],pHist:[],notes:[],inv:{items:[],markets:['台股','美股','ETF','加密貨幣','基金']},fin:{income:[],icats:['月薪','獎金','津貼','分紅','其他'],buckets:[{id:'b1',n:'日常開銷',p:50},{id:'b2',n:'投資',p:20},{id:'b3',n:'娛樂',p:10},{id:'b4',n:'存款',p:20}],recur:[],recurX:[],savings:0,goals:[],efM:6,salary:0},emojis:[],catList:['保健品','食材','清潔','日用品','寵物'],expCats:[{e:'🧴',n:'日用品'},{e:'🥬',n:'食材'},{e:'💊',n:'保健'},{e:'🐱',n:'寵物'},{e:'🍽️',n:'外食'},{e:'📦',n:'其他'}],userStatus:{isPremium:false},settings:{expense:true,sales:true,multi:true,away:false,cats:true,catAsk:true,col:{},cap:2,acc:{},base:'TWD',fx:{TWD:1,USD:32,JPY:0.21,EUR:35,CNY:4.4,HKD:4.1,GBP:41,KRW:0.024,AUD:21,SGD:24},cs:{TWD:'NT$ ',USD:'US$ ',JPY:'JP¥ ',EUR:'€ ',CNY:'CN¥ ',HKD:'HK$ ',GBP:'£ ',KRW:'₩ ',AUD:'A$ ',SGD:'S$ '},curs:['TWD','USD','JPY','EUR','CNY','HKD','GBP','KRW','AUD','SGD'],fxOk:false,budgetCur:'TWD',inv:true,invAuto:'ask',ov:{},rm:[],hoardAsk:true,fin:true,nt:{},redD:0,orgD:7,notify:'off',notifyTime:'09:00',lastNote:'',presets:[3,7,14,30],pantry:true,pantryAsk:true,pantryLead:7,size:16,n:1,unit:'month',budget:0,lead:7,off:{},custom:[]}};
+ try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&Array.isArray(d.items)){d.expenses=d.expenses||[];d.pantry=d.pantry||[];d.trash=d.trash||[];d.members=d.members||[];d.pHist=d.pHist||[];d.notes=d.notes||[];d.inv=Object.assign({},base.inv,d.inv);d.fin=Object.assign({},base.fin,d.fin);d.catList=d.catList||['保健品','食材','清潔','日用品','寵物'];d.expCats=d.expCats||base.expCats;d.emojis=d.emojis||[];d.away=d.away||[];d.userStatus=Object.assign(base.userStatus,d.userStatus);d.settings=Object.assign(base.settings,d.settings);return d}}catch(e){}
+ return base;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=()=>iso(new Date()),toD=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const diff=(a,b)=>Math.round((toD(b)-toD(a))/864e5);
+const addDays=(s,n)=>{const d=toD(s);d.setDate(d.getDate()+Math.round(n));return iso(d)};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const baseC=()=>set.base||'TWD',cOf=x=>(x&&x.cur)||'TWD',fxr=c=>set.fx[c]??1,toBase=(n,c)=>!c||c===baseC()?(+n||0):(+n||0)*fxr(c)/fxr(baseC()),fromBase=(n,c)=>!c||c===baseC()?n:n*fxr(baseC())/fxr(c),symOf=c=>set.cs[c]||(c+' '),decOf=c=>c==='TWD'||c==='JPY'||c==='KRW'?0:2;
+const money=(n,c)=>{c=c||baseC();const k=Math.pow(10,decOf(c));return symOf(c)+(Math.round((+n||0)*k)/k).toLocaleString('zh-TW',{maximumFractionDigits:decOf(c)})};
+const CUR0={TWD:1,USD:1,JPY:1,EUR:1,CNY:1,HKD:1,GBP:1,KRW:1,AUD:1,SGD:1},CU={},cuOf=k=>k==='fs'?(S.fin.salaryCur||baseC()):k==='fsv'?(S.fin.savingsCur||baseC()):k==='bud'?(set.budgetCur||baseC()):(CU[k]||baseC());
+const curSel=k=>`<select data-cs="${k}" aria-label="貨幣" class="bg-transparent font-bold text-sm outline-none shrink-0 mr-1">${set.curs.map(c=>`<option value="${c}" ${cuOf(k)===c?'selected':''}>${c}</option>`).join('')}</select>`;
+const fillCur=()=>document.querySelectorAll('[data-csw]').forEach(e=>{e.innerHTML=curSel(e.dataset.csw)});
+const set=S.settings;S.trash=S.trash.filter(t=>diff(t.at,today())<30);
+
+const byDate=it=>[...it.history].sort((a,b)=>a.restockDate<b.restockDate?-1:a.restockDate>b.restockDate?1:0);
+// 以「最近 6 次購買」為窗口：每份平均撐幾天 ＝ 首次到最近一次的天數 ÷ (次數-1)；提前補貨、囤貨都不會算歪
+const NM=()=>set.multi?Math.max(1,S.members.length):1;
+// 每天的「在家比例」：不在家人數 ÷ 總人數；全員不在家＝0（暫停）。計算時才套用，所以事後補登行程也會自動修正歷史
+function wt(ds){const N=NM(),ids=new Set();let k=0;for(const p of S.away)if(ds>=p.from&&ds<=p.to){if(p.who&&p.who.length)p.who.forEach(i=>ids.add(i));else k+=p.n}k+=ids.size;return Math.max(0,(N-Math.min(k,N))/N)}
+function eff(a,b){let t=0;for(let d=a;d<b;d=addDays(d,1))t+=wt(d);return t}
+function addEff(a,e){let d=a,t=0;for(let i=0;i<3650;i++){t+=wt(d);d=addDays(d,1);if(t>=e-1e-9)return d}return d}
+const tmean=a=>{a=[...a].sort((x,y)=>x-y);if(a.length>=5)a=a.slice(1,-1);return a.reduce((s,x)=>s+x,0)/a.length};
+// 同一天的多筆補貨＝同一次補貨、份數累加；只取「參考期間內」最近最多 40 次，期間內少於 3 次就取最近 3 次
+function evts(it){const m={};let lastD=null;byDate(it).forEach(h=>{const dd=h.stock&&lastD?lastD:h.restockDate;lastD=dd;const e=m[dd]||(m[dd]={date:dd,u:0,pr:[]});if(h.real)e.real=true;e.u+=h.qty||1;if(h.price!=null&&!h.gift)e.pr.push(toBase(h.price,cOf(h)))});
+ const E=Object.values(m).sort((a,b)=>a.date<b.date?-1:1),lim=addDays(today(),-365*(set.cap||2)),r=E.filter(e=>e.date>=lim);return (r.length>=3?r:E.slice(-3)).slice(-40)}
+// 用量＝(首次到最近一次的有效天數)÷(已消耗份數)，並以多個視窗做近期加權；價格取去極值平均，單次買貴不會帶偏
+const wm=o=>o.reduce((a,x)=>a+x.w*x.v,0)/o.reduce((a,x)=>a+x.w,0);
+// 每次找偏差最大的觀測，用「其餘觀測」的中誤差判斷；超過 max(3×中誤差, 平均的15%) 才剔除，最多剔除 30%，最多 5 輪
+function adj(o){const n0=o.length;o=[...o];for(let i=0;i<5&&o.length>Math.ceil(n0*.7)&&o.length>=4;i++){const m=wm(o),w=o.reduce((a,x)=>Math.abs(x.v-m)>Math.abs(a.v-m)?x:a),r=o.filter(x=>x!==w),mr=wm(r),
+  sd=Math.sqrt(r.reduce((a,x)=>a+x.w*(x.v-mr)**2,0)/r.reduce((a,x)=>a+x.w,0)*r.length/(r.length-1));if(Math.abs(w.v-mr)<=Math.max(3*sd,.15*mr))break;o=r}return wm(o)}
+function stat(it){const E=evts(it),n=E.length;if(n<2)return{E};const cum=[0];for(let i=1;i<n;i++)cum.push(cum[i-1]+eff(E[i-1].date,E[i].date));
+ const lo=n>=3?3:2;let sw=0,sa=0,wc=0,sc=0;
+ for(let k=lo;k<=n;k++){const w=Math.pow(.93,k-lo),g=E.slice(n-k,n-1),sp=cum[n-1]-cum[n-k],U=g.reduce((a,e)=>a+e.u,0);if(sp<=0||!U)continue;
+  sw+=w;sa+=w*sp/U;const pu=g.filter(e=>e.pr.length).map(e=>e.pr.reduce((a,x)=>a+x,0)/e.pr.length);if(pu.length){wc+=w;sc+=w*tmean(pu)*U/sp}}
+ let avg=sw?sa/sw:null,c=wc?sc/wc:null;
+ // 依庫存期切段（買量大＝價格高但撐得久，不會被誤判成粗差），每段得到「每份天數」與「每日成本」兩種觀測值，用平差剔除粗差
+ if(avg&&n>=4){const stt=[0];for(let i=1;i<n;i++)if(cum[i]-cum[i-1]>=.7*avg||E[i].real)stt.push(i);stt.push(n);const to=[],co=[],m=stt.length-2;
+  for(let j=0;j<m;j++){const g=E.slice(stt[j],stt[j+1]),sp=cum[stt[j+1]]-cum[stt[j]],U=g.reduce((a,e)=>a+e.u,0),rec=Math.pow(.93,m-1-j);if(sp<=0||!U)continue;
+   to.push({v:sp/U,w:U*rec});const pe=g.filter(e=>e.pr.length);if(pe.length){const pu=pe.reduce((a,e)=>a+e.pr.reduce((x,y)=>x+y,0)/e.pr.length,0)/pe.length;co.push({v:pu*U/sp,w:sp*rec})}}
+  if(to.length>=3)avg=adj(to);if(co.length>=3)c=adj(co)}
+ return{E,cum,avg,c}}
+function recalc(it){
+ it.history=byDate(it);it.history.forEach((x,i)=>{if(!x.uid)x.uid=it.id+'-'+i+x.restockDate});const st=stat(it),E=st.E;
+ const avg=(E.length>=3||!it.typical)&&st.avg!=null?st.avg:(it.typical||null),l=it.history[it.history.length-1];
+ it.averageCycleDays=avg!=null?Math.round(avg*10)/10:null;it.lastRestockDate=l?l.restockDate:null;it.predictedDepleteDate=null;
+ if(avg&&E.length){let s0=0;for(let i=1;i<E.length;i++)if(st.cum&&(st.cum[i]-st.cum[i-1]>=.7*avg||E[i].real))s0=i;
+  // 庫存推算：每份可撐 avg 天；提前補貨或一天按多次，庫存會累加（不在家的日子不消耗）
+  let r=addEff(E[s0].date,avg*E[s0].u);for(let i=s0+1;i<E.length;i++)r=addEff(r>E[i].date?r:E[i].date,avg*E[i].u);it.predictedDepleteDate=r}
+}
+const urgency=it=>it.predictedDepleteDate?diff(today(),it.predictedDepleteDate):(it.history.length?4000:5000);
+// 每日成本 ＝ 窗口內「已消耗」的購買（不含最新一次）平均價 × 份數 ÷ 天數
+const cpd=it=>{const c=stat(it).c;return c==null?null:c};
+const perPeriod=c=>c*set.n*U[set.unit],plabel=()=>`每 ${set.n} ${UN[set.unit]}`;
+
+function occ(p){
+ const t=toD(today());
+ for(let y=t.getFullYear();y<=t.getFullYear()+1;y++){
+  let d;
+  if(p.bf){const dow=new Date(y,10,1).getDay();d=new Date(y,10,1+((4-dow+7)%7)+21+1)}
+  else if(p.nth){const dw=new Date(y,p.nth[0]-1,1).getDay();d=new Date(y,p.nth[0]-1,1+((p.nth[1]-dw+7)%7)+(p.nth[2]-1)*7)}else d=new Date(y,p.m-1,p.d);
+  if(iso(d)>=iso(t))return iso(d);
+ }
+}
+const salePool=()=>PRESETS.filter(p=>!(set.rm||[]).includes(p.id)).map(p=>set.ov&&set.ov[p.id]?{...p,...set.ov[p.id],bf:0,nth:null,a:0}:p).concat(set.custom);
+function sales(){return salePool().map(p=>({...p,date:occ(p),on:!set.off[p.id]})).map(p=>({...p,left:diff(today(),p.date)})).sort((a,b)=>a.left-b.left)}
+
+function card(it){
+ let main,sub,tone='slate',pct=null,ic='';
+ if(it.predictedDepleteDate){
+  const n=diff(today(),it.predictedDepleteDate);
+  main=n<0?`已超過預測 ${-n} 天`:n===0?'預計今天用完':`預計 ${n} 天後用完`;
+  tone=n<=3?'rose':n<=7?'amber':'emerald';ic=n<=3?'⚠️ ':n<=7?'⏳ ':'✅ ';
+  sub=`預測 ${it.predictedDepleteDate}・約每 ${it.averageCycleDays} 天補一次${it.history.length<2?'（一般週期估計）':''}`;
+  pct=Math.min(100,Math.max(4,diff(it.lastRestockDate,today())/Math.max(1,diff(it.lastRestockDate,it.predictedDepleteDate))*100));
+ }else{main=it.history.length?'再補貨一次就能預測':'尚未開始';sub='買了就按「補貨」，不用等用完'}
+ let money_='';
+ if(set.expense){
+  const c=cpd(it),ps=it.history.filter(h=>h.price!=null&&!h.gift),n=ps.length;
+  if(c!=null)money_+=`<span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold">${plabel()}約 ${money(perPeriod(c))}</span>`;
+  if(n){const lr=ps[n-1],pr=ps[n-2],lc=cOf(lr),tr=pr&&cOf(pr)===lc?(lr.price>pr.price?`<span class="text-rose-500"> ↑${money(lr.price-pr.price,lc)}</span>`:lr.price<pr.price?`<span class="text-emerald-600"> ↓${money(pr.price-lr.price,lc)}</span>`:''):'';money_+=`<span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">上次 ${money(lr.price,lc)}${tr}</span>`}
+  if(money_)money_=`<div class="flex flex-wrap gap-2 mt-3">${money_}</div>`;
+ }
+ return `<article id="it-${it.id}" class="card p-4 transition-shadow">
+  <div class="flex items-center gap-3">
+   <div data-act="detail" data-id="${it.id}" class="w-14 h-14 rounded-2xl bg-slate-50 grid place-items-center text-3xl cursor-pointer">${esc(it.icon)}</div>
+   <div data-act="detail" data-id="${it.id}" class="flex-1 min-w-0 cursor-pointer"><h3 class="font-bold text-lg truncate">${esc(it.name)}</h3><p class="font-bold ${T[tone][0]}">${ic}${main}</p><p class="text-xs text-slate-400">${sub}</p></div>
+   <button data-act="del" data-id="${it.id}" class="text-xs ${delId===it.id?'text-rose-600 font-bold':'text-slate-300'} px-2 py-1">${delId===it.id?'確認刪除？':'刪除'}</button>
+  </div>
+  ${pct!=null?`<div class="h-2 rounded-full bg-slate-100 mt-4 overflow-hidden"><div class="h-full rounded-full ${T[tone][1]}" style="width:${pct}%"></div></div>`:''}${money_}
+  ${set.expense?`<div class="grid grid-cols-2 gap-2 mt-4"><button data-act="restock" data-id="${it.id}" class="py-3 rounded-2xl text-sm font-bold bg-emerald-50 text-emerald-700">📝 詳細補貨</button><button data-act="quick" data-id="${it.id}" class="py-3 rounded-2xl text-sm font-bold text-white bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md shadow-emerald-500/25">⚡ 快速補貨${qn(it)}</button></div>`:`<button data-act="restock" data-id="${it.id}" class="w-full mt-4 py-3 rounded-2xl text-base font-bold text-white bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md shadow-emerald-500/25">🟢 補貨</button>`}</article>`;
+}
+
+let Q='',last=null,editRec=null,tt;
+const COMMON=[['🧻','衛生紙',20],['🧴','洗髮精',45],['🧼','沐浴乳',40],['🪥','牙膏',45],['🧺','洗衣精',40],['🧽','洗碗精',30],['☕','咖啡豆',14],['🥛','牛奶',7],['🥚','雞蛋',7],['🐱','貓砂',21],['💊','保健品',30],['👁️','隱形眼鏡',30]];
+const drawCommon=()=>{$('common').innerHTML=COMMON.map(([e,n,t])=>`<button data-act="common" data-e="${e}" data-n="${n}" data-t="${t}" class="px-3 py-2 rounded-full bg-slate-50 text-sm font-semibold">${e} ${n}</button>`).join('')};
+function toast(m,a){clearTimeout(tt);const t=$('toast');t.innerHTML=`<span>${m}</span>${a||''}`;t.style.display='flex';tt=setTimeout(()=>t.style.display='none',6000)}
+function addItem(n,e,t){
+ const d=S.items.find(i=>i.name.toLowerCase()===n.toLowerCase());
+ if(d){closeAll();toast(`「${esc(n)}」已經在清單裡了`);setTimeout(()=>focusItem(d.id),120);return}
+ if(!S.userStatus.isPremium&&S.items.length>=FREE){closeAll();show('m-pro');return}
+ const it={id:Date.now()+Math.random().toString(36).slice(2,5),name:n,icon:e,typical:t||null,history:[],averageCycleDays:null,lastRestockDate:null,predictedDepleteDate:null};
+ recalc(it);S.items.push(it);save();closeAll();render();
+}
+function addP(it,d,p,n,q){const base0=it.averageCycleDays;const r={cur:NCUR||undefined,qty:q>1?q:undefined,uid:(Date.now()+Math.random().toString(36).slice(2,5)),restockDate:d,price:p!=null&&p>=0?p:null,note:n||'',who:whoSel.slice(),gift:giftSel};NCUR=null;it.history.push(r);recalc(it);save();closeAll();render();last={id:it.id,uid:r.uid};
+ pantryCheck(it.name);hoardCheck(it,r,base0);toast(`${it.icon} ${esc(it.name)}${q>1?' ×'+q:''} 已補貨${d===today()?'':'（'+d+'）'}`,'<button data-act="undo" class="font-bold text-emerald-300">復原</button><button data-act="chd" class="font-bold text-amber-300">改日期</button>')}
+function openR(id,rec){pend=id;editRec=rec;{const it0=S.items.find(x=>x.id===id),l0=it0&&it0.history.filter(h=>h.price!=null).pop();CU.p=l0?cOf(l0):baseC()}whoSel=[];giftSel=false;drawWho();const it=S.items.find(x=>x.id===id),ps=it.history.filter(h=>h.price!=null);
+ $('pt').textContent=rec?'修改補貨日期':`${it.icon} ${it.name} 補貨`;$('pd').value=rec?rec.restockDate:today();drawDays();
+ $('pw').style.display=rec?'none':'flex';$('pn').style.display=rec?'none':'block';$('pn').value='';qv.p=1;$('price').value=ps.length?ps[ps.length-1].price:'';updTot();show('m-price')}
+const listHtml=()=>{const all=[...S.items].sort((a,b)=>urgency(a)-urgency(b)),it=Q?all.filter(i=>i.name.toLowerCase().includes(Q.toLowerCase())):all;
+ return it.length?(set.cats&&!Q&&it.some(i=>i.cat)?grouped(it):it.map(card).join('')):`<div class="text-center text-slate-500 py-12"><div class="text-5xl mb-2">${Q?'🔍':'📦'}</div><p class="font-bold">${Q?'找不到符合的物品':'還沒有追蹤任何物品'}</p><p class="text-sm mt-1">${Q?'換個關鍵字試試':'點右下角的 ＋ 新增，或一鍵加入常見物品'}</p></div>`};
+function home(){
+ const all=[...S.items].sort((a,b)=>urgency(a)-urgency(b));let h='';
+ if(false)h+='<div class="rounded-2xl px-4 py-2.5 bg-sky-50 text-sky-800 text-sm font-semibold">✈️ 目前有人不在家，預測已自動調整</div>';
+ const pe=[];
+ if(pe.length)h+=`<div data-act="gopan" class="rounded-3xl p-4 bg-amber-50 text-amber-900 border border-amber-200 cursor-pointer"><p class="font-bold text-sm">⏰ 小倉庫快到期</p><p class="text-sm mt-1">${pe.slice(0,3).map(p=>{const n=diff(today(),p.exp);return esc(p.name)+(n<0?' 已過期':n===0?' 今天到期':` ${n} 天後到期`)}).join('、')}${pe.length>3?` 等 ${pe.length} 項`:''}</p></div>`;
+ const sale=null;
+ if(sale){const low=all.filter(i=>urgency(i)<=14).map(i=>i.icon+i.name);
+  h+=`<div class="rounded-3xl p-4 text-white bg-gradient-to-br from-amber-400 to-rose-500 shadow-lg shadow-rose-500/20"><p class="font-bold">${sale.e} ${esc(sale.n)} ${sale.left?`還有 ${sale.left} 天`:'就是今天！'}</p><p class="text-sm opacity-95 mt-1">${low.length?`快用完的 ${esc(low.slice(0,3).join('、'))}，可以趁特價先補貨。`:'目前庫存充足，可以先看看有沒有想囤的好物。'}</p></div>`}
+ const top=all[0];
+ if(top){const u=urgency(top),t=top.predictedDepleteDate?`${top.icon} ${esc(top.name)} ${u<=0?'今天前後用完':u+' 天後用完'}`:'',sp=set.expense?monthSpend(0):null;
+  h+=`<section data-act="gotop" data-id="${top.id}" class="cursor-pointer rounded-3xl p-5 text-white bg-gradient-to-br from-emerald-500 to-teal-600 shadow-xl shadow-emerald-600/25"><p class="text-xs font-semibold opacity-80">${t?'最需要留意':'一切安好'}</p><p class="text-xl font-extrabold mt-1">${t||'目前沒有快用完的物品 🎉'}</p>${sp!=null?`<p class="text-sm mt-3 opacity-90">本月支出 <b class="num text-base">${money(sp)}</b></p>`:''}</section>`}
+ if(!set.cats&&set.catAsk!==false&&all.length>=8)h+=`<div class="rounded-3xl p-4 bg-white shadow-sm"><p class="font-bold text-sm">🗂️ 物品變多了，要用分類整理嗎？</p><p class="text-xs text-slate-500 mt-1">例如保健品、食材、清潔用品，可展開收合。</p><div class="flex gap-2 mt-3"><button data-act="catson" class="flex-1 py-2 rounded-xl bg-emerald-500 text-white text-sm font-bold">開啟分類</button><button data-act="catsno" class="flex-1 py-2 rounded-xl bg-slate-100 text-sm font-bold">不用了</button></div></div>`;
+ if(all.length>=4)h+=`<input id="q" value="${esc(Q)}" placeholder="🔍 搜尋物品" class="w-full bg-white rounded-2xl px-4 py-3 text-sm shadow-sm outline-none ring-2 ring-transparent focus:ring-emerald-300">`;
+ if(quickList().length)h+=`<button data-act="qlist" class="w-full py-2.5 rounded-2xl bg-amber-50 text-amber-800 text-sm font-bold">⚡ ${quickGroups().length} 筆快速補貨待確認</button>`;return h+`<div id="list" class="space-y-4">${listHtml()}</div>`;
+}
+const entriesAll=()=>S.items.flatMap(it=>it.history.map(h=>({kind:'buy',id:it.id,uid:h.uid,date:h.restockDate,amount:h.price!=null?h.price*(h.qty||1):null,cur:cOf(h),bamt:h.price!=null?toBase(h.price*(h.qty||1),cOf(h)):null,title:it.icon+' '+it.name+((h.qty||1)>1?' ×'+h.qty:''),note:h.note||'',who:h.who||[],gift:!!h.gift}))).concat(S.expenses.map(x=>({kind:'exp',id:x.id,uid:x.id,date:x.date,amount:x.amount,cur:cOf(x),bamt:toBase(x.amount,cOf(x)),title:x.cat,note:x.note||'',who:x.who||[],gift:!!x.gift})));
+function monthSpend(off){
+ const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-off);const k=d.getFullYear()+'-'+pad(d.getMonth()+1);
+ return entriesAll().filter(e=>e.date.slice(0,7)===k).reduce((a,e)=>a+cnt(e),0);
+}
+function ana(){
+ const cur=monthSpend(0),prev=monthSpend(1),bars=[5,4,3,2,1,0].map(o=>[new Date(new Date().getFullYear(),new Date().getMonth()-o,1).getMonth()+1,monthSpend(o)]);
+ const max=Math.max(1,...bars.map(b=>b[1])),rows=S.items.map(i=>({i,c:cpd(i)})).filter(r=>r.c!=null).sort((a,b)=>b.c-a.c);
+ const tot=rows.reduce((s,r)=>s+r.c,0),fc=tot*30.4,bud=toBase(+set.budget||0,set.budgetCur||baseC());
+ const dl=prev?Math.round((cur-prev)/prev*100):null,bp=bud?Math.min(100,cur/bud*100):0,bt=bp>=100?'rose':bp>=80?'amber':'emerald';
+ const sel=(k,o)=>`<select data-set="${k}" class="bg-slate-100 rounded-xl px-3 py-2 font-bold text-sm outline-none">${o}</select>`;
+ return (quickList().length?`<div class="rounded-2xl p-3 bg-amber-50 text-amber-800 text-sm font-semibold">⚠️ 內含 ${quickGroups().length} 筆快速補貨，價格可能些許不準確 <button data-act="qlist" class="underline ml-1">查看</button></div>`:'')+`<section class="card p-5"><p class="text-sm text-slate-500 font-semibold">本月支出</p><p class="text-4xl font-extrabold mt-1 num">${money(cur)}</p>
+  <p class="text-sm mt-1 font-semibold ${dl==null?'text-slate-400':dl>0?'text-rose-500':'text-emerald-600'}">${dl==null?'上個月沒有紀錄可比較':`比上個月 ${dl>0?'多':'少'} ${Math.abs(dl)}%（${money(prev)}）`}</p>
+  <div class="flex items-end gap-2 h-28 mt-5">${bars.map(([m,v],i)=>`<div class="flex-1 flex flex-col items-center justify-end h-full"><div class="w-full rounded-lg ${i===5?'bg-emerald-500':'bg-emerald-200'}" style="height:${Math.max(3,v/max*100)}%"></div><span class="text-xs text-slate-400 mt-1">${m}月</span></div>`).join('')}</div></section>
+  <section class="card p-5"><div class="flex items-center justify-between"><h2 class="font-bold">每月預算</h2><div class="flex items-center bg-slate-100 rounded-xl px-3">${curSel('bud')}<input data-set="budget" type="number" inputmode="numeric" value="${+set.budget||''}" placeholder="未設定" class="w-24 bg-transparent py-2 font-bold outline-none text-right num"></div></div>
+  ${bud?`<div class="h-3 rounded-full bg-slate-100 mt-4 overflow-hidden"><div class="h-full rounded-full ${T[bt][1]}" style="width:${bp}%"></div></div><p class="text-sm mt-2 font-semibold ${T[bt][0]}">${cur>bud?`已超出預算 ${money(cur-bud)}`:bp>=80?`快到上限了，剩 ${money(bud-cur)}`:`還剩 ${money(bud-cur)} 可用`}</p>`:'<p class="text-xs text-slate-400 mt-2">設定後會在這裡提醒你是否超支。</p>'}</section>
+  ${perMember()}<section class="card p-5"><div class="flex items-center justify-between mb-1"><h2 class="font-bold">各物品消耗成本</h2></div>
+  <div class="flex items-center gap-2 mb-4"><span class="text-sm text-slate-500">每</span><input data-set="n" type="number" min="1" value="${set.n}" class="w-16 bg-slate-100 rounded-xl px-3 py-2 font-bold text-center outline-none num">${sel('unit',Object.keys(UN).map(k=>`<option value="${k}" ${set.unit===k?'selected':''}>${UN[k]}</option>`).join(''))}<span class="text-sm text-slate-500">花多少</span></div>
+  ${rows.length?rows.map(r=>`<div class="mb-4 cursor-pointer" data-act="detail" data-id="${r.i.id}"><div class="flex justify-between text-sm"><span class="font-semibold">${esc(r.i.icon)} ${esc(r.i.name)}</span><span class="font-bold num">${money(perPeriod(r.c))}</span></div><div class="h-2 rounded-full bg-slate-100 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-emerald-400" style="width:${r.c/rows[0].c*100}%"></div></div><p class="text-xs text-slate-400 mt-1">平均每天 ${money(r.c)}・占總消耗 ${Math.round(r.c/tot*100)}%${ex(r.i)?`・另記帳 ${money(ex(r.i))}`:''}${r.i.history.some(h=>h.price==null&&!h.gift)?'・含未填價格估算':''}</p></div>`).join('')+`<div class="rounded-2xl bg-emerald-50 p-3 text-sm text-emerald-800"><b>全部合計</b> ${plabel()}約 ${money(perPeriod(tot))}；依目前用量，下個月預估要花 <b>${money(fc)}</b>。</div>`:''}${pendHtml()}</section>`;
+}
+
+let SV='cal',CM=new Date(new Date().getFullYear(),new Date().getMonth(),1),CD=today(),dp=null,ecat='🧴 日用品';
+const ECATS=['🧴 日用品','🥬 食材','💊 保健','🐱 寵物','🍽️ 外食','📦 其他'],md=d=>d.slice(5).replace('-','/');
+let CV='cal';
+function fixView(){const F=S.fin,sum=a=>a.reduce((x,r)=>x+toBase(r.amount,cOf(r)),0),col=(title,list,add,edit,del,cls)=>`<section class="card p-4"><div class="flex items-center justify-between mb-2"><h3 class="font-bold text-sm ${cls}">${title}</h3><button data-act="${add}" class="w-8 h-8 rounded-full bg-slate-100 font-bold" aria-label="新增">＋</button></div>${list.length?list.map(r=>`<div data-act="${edit}" data-id="${r.id}" class="py-2 border-b border-slate-100 last:border-0 cursor-pointer"><p class="text-sm font-bold truncate">${esc(r.cat)}</p><p class="text-xs text-slate-400">每月 ${r.day} 號${r.note?'・'+esc(r.note):''}</p><div class="flex items-center justify-between"><b class="num text-sm">${money(r.amount,cOf(r))}</b><button data-act="${del}" data-id="${r.id}" class="text-xs text-slate-400 px-1">刪除</button></div></div>`).join(''):'<p class="text-xs text-slate-400">還沒有，按 ＋ 新增</p>'}<p class="text-xs text-slate-500 mt-2">合計 <b class="num">${money(sum(list))}</b></p></section>`,d=sum(F.recur)-sum(F.recurX);
+ return `<div class="grid grid-cols-2 gap-3 items-start">${col('🔁 固定收入',F.recur,'recadd','recedit','recdel','text-teal-700')}${col('🔁 固定支出',F.recurX,'rxadd','rxedit','rxdel','text-rose-600')}</div><section class="card p-4 text-center"><p class="text-xs text-slate-400">每月固定結餘（固定收入 − 固定支出）</p><p class="font-extrabold num ${d<0?'text-rose-600':'text-emerald-600'}">${money(d)}</p><p class="text-xs text-slate-400 mt-1">到了設定的日期會自動記到月曆；App 沒開的月份也會補上。</p></section>`}
+function stats(){return calView()}
+function anaPage(){const e=set.expense,f=set.fin;if(!e&&AV==='ana')AV='fin';if(!f&&AV==='fin')AV='ana';const seg=e&&f?`<div class="grid grid-cols-2 bg-white rounded-2xl p-1 shadow-sm">${[['ana','📦 消耗'],['fin','💰 財務']].map(([k,l])=>`<button data-av="${k}" class="py-2 rounded-xl text-sm font-bold ${AV===k?'bg-emerald-500 text-white':'text-slate-500'}">${l}</button>`).join('')}</div>`:'';return seg+(AV==='fin'?finTab():ana())}
+const cnt=e=>e.gift?0:((e.bamt!=null?e.bamt:e.amount)||0),U2={day:1,week:7,month:30,year:365};
+const fmtD=d=>d%365===0?d/365+' 年':d%30===0?d/30+' 個月':d%7===0?d/7+' 週':d+' 天';
+const LD=()=>Math.round(+$('pln').value*U2[$('plu').value])||0;
+function setLead(d){let u='day',n=d;if(d%365===0){u='year';n=d/365}else if(d%30===0){u='month';n=d/30}else if(d%7===0){u='week';n=d/7}$('pln').value=n;$('plu').value=u}
+const drawLp=()=>{$('plp').innerHTML=set.presets.map(d=>`<button data-lp="${d}" class="px-3 py-1.5 rounded-full bg-slate-50 text-sm font-semibold">${fmtD(d)}</button>`).join('')};
+const occY=(p,y)=>{let d;if(p.bf){const w=new Date(y,10,1).getDay();d=new Date(y,10,1+((4-w+7)%7)+22)}else if(p.nth){const w=new Date(y,p.nth[0]-1,1).getDay();d=new Date(y,p.nth[0]-1,1+((p.nth[1]-w+7)%7)+(p.nth[2]-1)*7)}else d=new Date(y,p.m-1,p.d);return iso(d)};
+const evOf=(ds,by,SL)=>({note:S.notes.filter(n=>n.due&&n.due.slice(0,10)===ds),inc:S.fin.income.filter(x=>x.date===ds),exp:by[ds]||[],away:S.away.filter(p=>ds>=p.from&&ds<=p.to),pan:set.pantry?S.pantry.filter(p=>p.exp===ds):[],sale:SL.filter(p=>p.date===ds),pred:S.items.filter(i=>i.predictedDepleteDate===ds)});
+const R2=(at,ic,tx,ex)=>`<div ${at||''} class="flex items-center gap-2 py-2.5 border-b border-slate-100 last:border-0 ${at?'cursor-pointer':''}"><span>${ic}</span><div class="flex-1 min-w-0">${tx}</div>${ex||''}</div>`;
+function calView(){
+ const y=CM.getFullYear(),m=CM.getMonth(),k=y+'-'+pad(m+1),all=entriesAll(),mon=all.filter(e=>e.date.slice(0,7)===k),by={};
+ all.forEach(e=>(by[e.date]=by[e.date]||[]).push(e));
+ const SL=set.sales?salePool().filter(p=>!set.off[p.id]).map(p=>({...p,date:occY(p,y)})):[];
+ const first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),td=today();let cells='<div></div>'.repeat(first);
+ for(let d=1;d<=dim;d++){const ds=k+'-'+pad(d),v=evOf(ds,by,SL),sel=ds===CD,st=v.away.some(p=>p.from===ds),en=v.away.some(p=>p.to===ds);
+  const band=v.away.length?`${v.away.every(p=>p.to<td)?'bg-sky-100':'bg-sky-200'} ${st?'rounded-l-full':''} ${en?'rounded-r-full':''}`:'';
+  const circ=sel?'bg-emerald-500 text-white':ds===td?'ring-2 ring-emerald-400 text-emerald-600':'';
+  const dots=[[v.exp.length,'bg-emerald-400'],[v.pan.length,'bg-amber-400'],[v.sale.length,'bg-rose-400'],[v.pred.length,'bg-violet-400'],[v.inc.length,'bg-teal-400'],[v.note.length,'bg-indigo-400']].filter(x=>x[0]).map(x=>`<i class="w-1.5 h-1.5 rounded-full ${x[1]} block"></i>`).join('');
+  cells+=`<button data-cal="${ds}" class="h-12 flex flex-col items-center justify-center ${band}"><span class="w-9 h-9 grid place-items-center rounded-full text-sm font-semibold ${circ}">${d}</span><span class="flex gap-0.5 h-1.5 mt-0.5">${dots}</span></button>`}
+ const v=evOf(CD,by,SL),dt=v.exp.reduce((a,e)=>a+cnt(e),0),lg=(c,t)=>`<span><i class="inline-block w-2 h-2 rounded-full ${c}"></i> ${t}</span>`;
+ const rows=[...v.away.map(p=>R2(`data-act="aedit" data-id="${p.id}"`,'✈️',`<p class="text-sm font-bold">不在家${p.note?'：'+esc(p.note):''}</p><p class="text-xs text-slate-400">${md(p.from)} ~ ${md(p.to)}・${p.n>=NM()?'全員':p.n+' 人'}</p>`)),
+  ...v.pan.map(p=>R2(`data-act="pedit" data-id="${p.id}"`,'🧺',`<p class="text-sm font-bold">${esc(p.name)} 到期</p>`)),
+  ...v.sale.map(p=>R2('',p.e,`<p class="text-sm font-bold">${esc(p.n)}</p>`)),
+  ...v.note.map(n=>R2(`data-act="noteopen" data-id="${n.id}"`,'📝',`<p class="text-sm font-bold">${esc(n.title||'無標題')}</p><p class="text-xs text-slate-400">${n.due.slice(11)}</p>`)),
+  ...v.inc.map(x=>R2(`data-act="finedit" data-id="${x.id}"`,'💰',`<p class="text-sm font-bold">${esc(x.cat)}${x.note?'・'+esc(x.note):''}</p>`,`<span class="font-bold num text-teal-700">+${money(x.amount,cOf(x))}</span><button data-act="findel" data-id="${x.id}" class="text-xs px-1 text-slate-400">刪除</button>`)),
+  ...v.pred.map(i=>R2(`data-act="detail" data-id="${i.id}"`,'⏳',`<p class="text-sm font-bold">${esc(i.icon+' '+i.name)} 預計用完</p>`)),
+  ...v.exp.map(e=>R2(`data-act="eedit" data-k="${e.kind}" data-id="${e.id}" data-u="${e.uid}"`,e.kind==='buy'?'🧾':'💸',`<p class="font-bold text-sm truncate">${esc(e.title)}</p>${(e.note||whoLbl(e.who))?`<p class="text-xs text-slate-400 truncate">${esc([whoLbl(e.who),e.note].filter(Boolean).join('・'))}</p>`:''}`,`<span class="font-bold num">${e.amount==null?(e.gift?'🎁 送的':'<span class="text-xs font-normal text-slate-400">未填價格</span>'):(e.gift?'🎁 ':'')+money(e.amount,e.cur)+(e.cur&&e.cur!==baseC()?'<span class="block text-xs font-normal text-slate-400 text-right">≈ '+money(e.bamt)+'</span>':'')}</span><button data-act="de" data-k="${e.kind}" data-id="${e.id}" data-u="${e.uid}" class="text-xs px-1 text-slate-400">刪除</button>`))].join('');
+ return `<section class="card p-4"><div class="flex items-center justify-between mb-2"><button data-act="cprev" class="w-10 h-10 rounded-full bg-slate-50 font-bold" aria-label="上個月">‹</button><div class="text-center"><p class="font-extrabold">${y} 年 ${m+1} 月</p>${set.expense?`<p class="text-xs text-slate-500">本月支出 <b class="num">${money(mon.reduce((a,e)=>a+cnt(e),0))}</b></p>`:''}</div><button data-act="cnext" class="w-10 h-10 rounded-full bg-slate-50 font-bold" aria-label="下個月">›</button></div>
+ <div class="grid grid-cols-7 text-center text-xs text-slate-400 font-semibold mb-1">${'日一二三四五六'.split('').map(c=>`<span>${c}</span>`).join('')}</div><div class="grid grid-cols-7 text-center">${cells}</div>
+ <div class="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs text-slate-500">${set.expense?lg('bg-emerald-400','支出'):''}${set.pantry?lg('bg-amber-400','到期'):''}${set.sales?lg('bg-rose-400','特價'):''}${lg('bg-teal-400','收入')}${lg('bg-indigo-400','記事')}${lg('bg-violet-400','預計用完')}<span><i class="inline-block w-3 h-2 rounded bg-sky-200"></i> 不在家</span></div></section>
+ <section class="card p-4"><div class="flex items-center justify-between"><p class="font-bold">${set.expense?`支出 <span class="num">${money(dt)}</span>`:md(CD)}</p>${set.expense?'<button data-act="addexp" class="w-9 h-9 rounded-full bg-emerald-500 text-white text-xl font-bold" aria-label="記一筆">＋</button>':''}</div>${rows||'<p class="text-sm text-slate-400 mt-3">這天沒有事項。</p>'}</section>`;
+}
+let dpp=null;
+function detail(id){
+ const it=S.items.find(x=>x.id===id);if(!it)return;detId=id;const h=byDate(it),c=cpd(it),pp=h.filter(x=>x.price!=null&&!x.gift);let ch='';
+ if(pp.length>=2){const v=pp.map(x=>toBase(x.price,cOf(x))),mx=Math.max(...v),mn=Math.min(...v),sp=mx-mn||1,X=i=>10+i*280/(v.length-1),Y=y=>10+(1-(y-mn)/sp)*50;
+  ch=`<div><p class="text-xs text-slate-400 mb-1">價格走勢（每次購買）</p><svg viewBox="0 0 300 70" class="w-full"><polyline points="${v.map((y,i)=>X(i)+','+Y(y)).join(' ')}" fill="none" stroke="#10b981" stroke-width="3" stroke-linejoin="round"/>${v.map((y,i)=>`<circle cx="${X(i)}" cy="${Y(y)}" r="3.5" fill="#10b981"/>`).join('')}</svg><p class="text-xs text-slate-500 num">最低 ${money(mn)}・最高 ${money(mx)}・最近 ${money(v[v.length-1])}</p></div>`}
+ const rows=h.map((r,i)=>{const nx=h[i+1],d=diff(r.restockDate,nx?nx.restockDate:today());
+  return `<div data-act="eedit" data-k="buy" data-id="${id}" data-u="${r.uid}" class="flex items-center gap-2 py-2.5 border-b border-slate-100 cursor-pointer"><div class="flex-1 min-w-0"><p class="text-sm font-bold">${md(r.restockDate)} ~ ${nx?md(nx.restockDate):'今天'}<span class="font-normal text-slate-400">・${d} 天</span>${(r.qty||1)>1?' ×'+r.qty:''}${r.quick?' ⚡':''}</p>${r.note?`<p class="text-xs text-slate-400 truncate">${esc(r.note)}</p>`:''}</div>${r.price!=null?`<span class="font-bold num text-sm">${r.gift?'🎁 ':''}${money(r.price*(r.qty||1),cOf(r))}</span>`:r.gift?'<span class="text-sm">🎁 送的</span>':''}<button data-act="dpur" data-id="${id}" data-u="${r.uid}" class="text-xs px-1 text-slate-400">刪除</button></div>`}).reverse().join('');
+ $('det').innerHTML=`<div class="flex items-center gap-3"><div class="text-4xl">${esc(it.icon)}</div><div class="flex-1 min-w-0"><h2 class="text-lg font-bold truncate">${esc(it.name)}</h2><p class="text-xs text-slate-500">${it.averageCycleDays?`約每 ${it.averageCycleDays} 天補一次`:'還沒有足夠紀錄'}${set.expense&&c!=null?`・${plabel()}約 ${money(perPeriod(c))}`:''}${it.cat?'・'+esc(it.cat):''}</p></div><button data-act="iedit" data-id="${id}" class="w-9 h-9 rounded-full bg-slate-100" aria-label="修改物品">✎</button><button data-act="close" class="text-slate-400 px-2 text-xl" aria-label="關閉">✕</button></div>${ch}<div><p class="text-xs text-slate-400">補貨紀錄（點一筆可修改）</p>${rows||'<p class="text-sm text-slate-400 py-3">還沒有補貨紀錄。</p>'}</div>`;show('m-det');
+}
+function ieRender(){const it=S.items.find(x=>x.id===detId);if(!it)return;
+ $('ie').innerHTML=`<div class="flex items-center justify-between"><h2 class="text-lg font-bold">修改物品</h2><button data-act="idone" class="px-4 py-1.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">完成</button></div>
+ <input id="inm" value="${esc(it.name)}" maxlength="20" aria-label="物品名稱" class="w-full bg-slate-50 rounded-2xl px-4 py-3 font-bold outline-none ring-2 ring-transparent focus:ring-emerald-400">
+ <div class="flex flex-wrap items-center gap-1">${EMOS().map(e=>`<button data-ico="${esc(e)}" class="text-2xl p-1.5 rounded-xl ${it.icon===e?'bg-emerald-100':''}">${e}</button>`).join('')}${emoOn==='edit'?`<input id="eico" maxlength="4" placeholder="😀" aria-label="輸入表情符號" class="w-14 h-10 text-2xl text-center rounded-xl bg-slate-50 ring-2 ring-emerald-400 outline-none">`:`<button data-act="emoplus" data-t="edit" class="w-10 h-10 rounded-xl bg-slate-100 font-bold" aria-label="新增表情符號">＋</button>`}</div>
+ ${set.cats?`<div class="flex flex-wrap items-center gap-2"><span class="text-sm text-slate-500">分類</span>${['',...CATS()].map(c=>`<button data-cat="${esc(c)}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${(it.cat||'')===c?'bg-emerald-500 text-white':'bg-slate-50'}">${c?esc(c):'未分類'}</button>`).join('')}<span class="inline-flex gap-1"><input id="ncat" maxlength="8" placeholder="新分類" class="w-20 bg-slate-50 rounded-full px-3 py-1.5 text-sm outline-none"><button data-act="addcat" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="新增分類">＋</button></span></div>`:''}`;
+ show('m-iedit');if(emoOn==='edit')setTimeout(()=>{const x=$('eico');if(x)x.focus()},30)}
+let LV='',detId=null,whoSel=[],giftSel=false,aEdit=null,xEdit=null;
+const CATS=()=>[...new Set(S.catList.concat(S.items.map(i=>i.cat).filter(Boolean)))];
+const resizeM=n=>{S.members=Array.from({length:n},(_,i)=>S.members[i]||{id:'m'+i,name:i?'成員'+(i+1):'我'})};
+const whoLbl=w=>{const n=(w||[]).map(i=>(S.members.find(m=>m.id===i)||{}).name).filter(Boolean);return set.multi&&n.length?n.join('、'):''};
+const drawWho=()=>{const w=NM()>1?`<span class="text-sm text-slate-500">誰的花費</span><button data-who="" class="px-3 py-1.5 rounded-full text-sm font-semibold ${whoSel.length?'bg-slate-50':'bg-emerald-500 text-white'}">全體</button>${S.members.map(m=>`<button data-who="${m.id}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${whoSel.includes(m.id)?'bg-emerald-500 text-white':'bg-slate-50'}">${esc(m.name)}</button>`).join('')}`:'',g=`<button data-who="gift" class="px-3 py-1.5 rounded-full text-sm font-semibold ${giftSel?'bg-amber-400 text-slate-900':'bg-slate-50'}">🎁 送的</button>`;
+ [['pwho',w+g],['ewho',w+g],['xwho',w+g]].forEach(([i,h])=>{const e=$(i);if(e)e.innerHTML=`<div class="flex flex-wrap items-center gap-2">${h}</div>`});
+ if(!editRec){const pw=$('pw'),pq=$('pqrow');if(pw)pw.style.display=giftSel?'none':'flex';if(pq)pq.style.display=giftSel?'none':'flex'}};
+function grouped(it){const g={};it.forEach(i=>(g[i.cat||'未分類']=g[i.cat||'未分類']||[]).push(i));
+ return Object.entries(g).sort((a,b)=>urgency(a[1][0])-urgency(b[1][0])).map(([k,l])=>`<div class="space-y-3"><button data-act="cg" data-k="${esc(k)}" class="w-full flex items-center justify-between px-2 py-1 text-sm font-bold text-slate-600"><span>${set.col[k]?'▸':'▾'} ${esc(k)}（${l.length}）</span><span class="text-xs font-semibold ${urgency(l[0])<=3?'text-rose-600':urgency(l[0])<=7?'text-amber-600':'text-slate-500'}">${urgency(l[0])<4000?l[0].icon+esc(l[0].name)+' '+(urgency(l[0])<=0?'今天用完':urgency(l[0])+' 天後'):''}</span></button>${set.col[k]?'':l.map(card).join('')}</div>`).join('')}
+function perMember(){if(!set.multi||S.members.length<2)return'';const d=new Date(),k=d.getFullYear()+'-'+pad(d.getMonth()+1),t={};S.members.forEach(m=>t[m.id]=0);
+ entriesAll().filter(e=>e.date.slice(0,7)===k).forEach(e=>{const w=(e.who||[]).filter(i=>i in t),l=w.length?w:Object.keys(t);l.forEach(i=>t[i]+=cnt(e)/l.length)});
+ const mx=Math.max(1,...Object.values(t));return `<section class="card p-5"><h2 class="font-bold mb-3">本月各成員支出</h2>${S.members.map(m=>`<div class="mb-3"><div class="flex justify-between text-sm"><span class="font-semibold">${esc(m.name)}</span><span class="font-bold num">${money(t[m.id])}</span></div><div class="h-2 rounded-full bg-slate-100 mt-1.5 overflow-hidden"><div class="h-full rounded-full bg-emerald-400" style="width:${t[m.id]/mx*100}%"></div></div></div>`).join('')}<p class="text-xs text-slate-400">共同花費（全體）平均分攤給所有成員。</p></section>`}
+const ED={},TT={home:['item','buy','pan'],stats:['exp'],sale:['sale'],set:['cat','ecat'],ana:['inc','rec','bkt']},TN={ana:'分析',home:'小倉庫',stats:'月曆',sale:'特價',pan:'小倉庫',set:'設定'};
+let AH=false,tc=false,dupTid=null,awSel=[],saleEd=null,saleEmo='⭐',saleEmoOn=false,ecAdd=false,qsel=[],emoOn=null,picV='',picOn=false,qv={p:1,x:1,n:1},qo={p:false,x:false,n:false};
+const EMO=['','🧴','🥬','💊','🐱','🍽️','📦','🛒','🚗','🏠','🎁','☕','💡','👕','📱','🎮'],ecl=c=>(c.e?c.e+' ':'')+c.n;
+const awLbl=p=>(p.who&&p.who.length?(p.who.length>=S.members.length?'全員':p.who.map(i=>(S.members.find(m=>m.id===i)||{}).name).filter(Boolean).join('、')):(p.n>=NM()?'全員':p.n+' 人'))+'不在家';
+const drawAw=()=>{$('awho').innerHTML=NM()>1?'<span class="text-sm text-slate-500">誰不在家</span>'+S.members.map(m=>`<button data-aw="${m.id}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${awSel.includes(m.id)?'bg-sky-500 text-white':'bg-slate-50'}">${esc(m.name)}</button>`).join(''):'<span class="text-sm text-slate-500">我不在家（暫停計算）</span>'};
+const drawEc=()=>{$('ec').innerHTML=S.expCats.map(c=>`<button data-ecat="${esc(ecl(c))}" class="px-3 py-2 rounded-full text-sm font-semibold ${ecl(c)===ecat?'bg-emerald-500 text-white':'bg-slate-50'}">${esc(ecl(c))}</button>`).join('')+(ecAdd?`<span class="inline-flex w-full items-center gap-1"><input id="xce" maxlength="4" placeholder="表情" aria-label="表情符號" class="w-16 bg-slate-50 rounded-full px-3 py-1.5 text-sm text-center outline-none"><input id="xcn" maxlength="8" placeholder="類別名稱" class="flex-1 bg-slate-50 rounded-full px-3 py-1.5 text-sm outline-none"><button data-act="ecnew" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="加入">✓</button></span>`:`<button data-act="ecplus" class="w-9 h-9 rounded-full bg-slate-100 font-bold" aria-label="新增類別">＋</button>`);if(ecAdd)setTimeout(()=>{const x=$('xce');if(x)x.focus()},30)};
+const quickList=()=>S.items.flatMap(it=>it.history.filter(h=>h.quick).map(h=>({it,h})));
+const vis=id=>!$(id).classList.contains('hidden');
+function xinfo(){const el=$('xinfo');if(!el)return;const p=parseFloat($('xa').value);el.textContent=xEdit&&xEdit.kind==='buy'&&!isNaN(p)&&qv.x>1?`${money(p)} × ${qv.x} = ${money(p*qv.x)}`:''}
+function xback(){const f=xEdit&&xEdit.from,id=xEdit&&xEdit.id;closeAll();if(f==='quick'){renderQ();show('m-quick')}else if(f==='det')detail(id)}
+const drawQty=k=>{const el=$('qw'+k);if(!el)return;const v=qv[k];el.innerHTML=qo[k]||v>20?`<span class="text-sm text-slate-500">×</span><input id="qi${k}" type="number" inputmode="numeric" min="1" value="${v}" class="w-16 bg-slate-100 rounded-xl px-2 py-2 text-center font-bold outline-none">`:`<select id="qs${k}" class="bg-slate-100 rounded-xl px-3 py-2 font-bold text-sm outline-none">${Array.from({length:20},(_,i)=>`<option value="${i+1}" ${v===i+1?'selected':''}>×${i+1}</option>`).join('')}<option value="other">其他…</option></select>`};
+const updTot=()=>{const t=$('qtp');if(!t)return;const p=parseFloat($('price').value);t.textContent=!isNaN(p)?`合計 ${money(p*qv.p)}`:''};
+const drawPic=()=>{$('picw').innerHTML=picOn?`<input id="pic" maxlength="4" value="${esc(picV)}" placeholder="😀" aria-label="輸入表情符號" class="w-14 h-12 text-2xl text-center bg-slate-50 rounded-xl ring-2 ring-emerald-400 outline-none">`:`<button data-act="picplus" class="w-12 h-12 rounded-xl bg-slate-100 text-2xl font-bold" aria-label="圖示">${picV?esc(picV):'＋'}</button>`;if(picOn)setTimeout(()=>{const x=$('pic');if(x)x.focus()},30)};
+function commitEmo(v){const t=emoOn;if(v){if(!EMOJIS.includes(v)&&!S.emojis.includes(v))S.emojis.push(v);if(t==='add')pick=v;else{const it=S.items.find(x=>x.id===detId);if(it){it.icon=v;render()}}save()}emoOn=null;if(t==='add')drawEmojis();else ieRender()}
+const fi=n=>{n=String(n||'').trim().toLowerCase();return n?S.items.find(i=>i.name.toLowerCase()===n)||S.items.find(i=>i.name.toLowerCase().includes(n)||n.includes(i.name.toLowerCase())):null};
+const whn=a=>(a||[]).map(n=>(S.members.find(m=>m.name===n)||{}).id).filter(Boolean),rid=()=>Date.now()+Math.random().toString(36).slice(2,5);
+function cmdPrompt(){const st={today:today(),items:S.items.map(i=>({name:i.name,category:i.cat||null})),categories:S.catList,expense_categories:S.expCats.map(ecl),members:set.multi?S.members.map(m=>m.name):[],pantry:S.pantry.map(p=>({name:p.name,expiry:p.exp})),settings:{expense:set.expense,sales:set.sales,pantry:set.pantry,multi:set.multi,cats:set.cats}};
+ return `你是「智慧補貨預測器」的操作助理。使用者會用文字（或附上發票／收據照片）說明要做什麼，你要輸出可直接貼回 App 執行的指令。
+
+【輸出規則】
+1. 只輸出一個 JSON 陣列，放在 \`\`\`json 程式碼區塊裡，不要其他說明；資訊不足時先簡短詢問。
+2. 日期一律 YYYY-MM-DD，今天是 ${today()}。
+3. 物品名稱盡量對應下方「目前資料」已有的名稱，不要擅自改名。
+4. price 是單份價格（數字），不知道就省略；買多份用 qty；幣別用 currency（可用：${set.curs.join('/')}，預設 ${baseC()}）。
+5. 發票／收據：每個品項輸出一筆 restock；不是日常補給品的用 add_expense。
+6. 不確定使用者的需求、品項對不起來或金額看不清楚時，先用提問釐清（一次問 1～2 個重點），不要亂猜。
+7. 適時主動建議更好的做法（例如歸到哪個分類、是否設定效期提醒、同一天買的多份用 qty 合併），並簡短說明理由，由使用者決定。
+
+【可用指令】（每個物件都有 "cmd"）
+- add_item {name, icon?, category?, cycle_days?}
+- restock {item, date?, price?, qty?, who?[暱稱], gift?, note?}
+- add_expense {amount, date?, category?, note?, item?, sync?, who?[暱稱], gift?}
+- edit_item {item, name?, icon?, category?}
+- delete_item {item}（會進垃圾桶）
+- add_pantry {name, expiry, qty?, lead_days?, icon?}
+- use_pantry {name, qty?}（小倉庫用完／扣掉數量）
+- add_away {from, to, note?, who?[暱稱]}
+- add_category {name}
+- add_expense_category {name, icon?}
+- add_sale {name, month, day, icon?}
+- set {key: "expense"|"sales"|"pantry"|"multi"|"cats", value: true|false}
+- set_members {names: [暱稱…]}
+
+【目前資料】
+${JSON.stringify(st)}`}
+function runCmd(c,dry){const t=c.cmd,it=c.item?fi(c.item):null,d=/^\d{4}-\d{2}-\d{2}$/.test(c.date||'')?c.date:today(),ok=m=>({ok:true,m}),no=m=>({ok:false,m});
+ const need=()=>c.item&&!it?no(`找不到物品「${c.item}」`):null;
+ if(t==='add_item'){if(!c.name)return no('缺少 name');if(S.items.some(i=>i.name.toLowerCase()===String(c.name).toLowerCase()))return no(`已有「${c.name}」`);if(!S.userStatus.isPremium&&S.items.length>=FREE)return no('補貨數量已滿');
+  if(!dry){const x={id:rid(),name:c.name,icon:c.icon||'🛒',typical:c.cycle_days||null,cat:c.category||null,history:[],averageCycleDays:null,lastRestockDate:null,predictedDepleteDate:null};recalc(x);S.items.push(x);if(c.category&&!S.catList.includes(c.category))S.catList.push(c.category)}return ok(`新增物品 ${c.icon||'🛒'} ${c.name}`)}
+ if(t==='restock'){if(!it)return no(`找不到物品「${c.item}」`);const q=Math.max(1,c.qty|0||1);if(!dry){it.history.push({uid:rid(),restockDate:d,price:c.price!=null?+c.price:null,cur:c.currency&&set.fx[c.currency]!=null?c.currency:baseC(),qty:q>1?q:undefined,note:c.note||'',who:whn(c.who),gift:!!c.gift});recalc(it)}return ok(`補貨 ${it.icon} ${it.name}${q>1?' ×'+q:''}（${d}${c.price!=null?'・'+money(c.price)+(q>1?'×'+q:''):''}${c.gift?'・送的':''}）`)}
+ if(t==='add_expense'){const e=need();if(e)return e;const a=+c.amount;if(!(a>=0))return no('金額不正確');const cc=c.currency&&set.fx[c.currency]!=null?c.currency:baseC();
+  if(!dry){if(it&&c.sync!==false){it.history.push({uid:rid(),restockDate:d,price:a,cur:cc,note:c.note||'',who:whn(c.who),gift:!!c.gift});recalc(it)}else S.expenses.push({id:rid(),date:d,amount:a,cur:cc,cat:it?it.icon+' '+it.name:(c.category||'📦 其他'),note:c.note||'',who:whn(c.who),gift:!!c.gift,itemId:it?it.id:null})}return ok(`記帳 ${money(a)}（${d}${it?'・'+it.name:c.category?'・'+c.category:''}）`)}
+ if(t==='edit_item'){if(!it)return no(`找不到物品「${c.item}」`);if(!dry){if(c.name)it.name=c.name;if(c.icon)it.icon=c.icon;if(c.category){it.cat=c.category;if(!S.catList.includes(c.category))S.catList.push(c.category)}}return ok(`修改物品 ${it.name}`)}
+ if(t==='delete_item'){if(!it)return no(`找不到物品「${c.item}」`);if(!dry){toTrash('item',it);S.items=S.items.filter(x=>x!==it)}return ok(`刪除 ${it.name}（進垃圾桶）`)}
+ if(t==='add_pantry'){if(!c.name||!c.expiry)return no('缺少 name 或 expiry');if(!dry)S.pantry.push({id:rid(),name:c.name,icon:c.icon||'',qty:Math.max(1,c.qty|0||1),exp:c.expiry,lead:c.lead_days||0,later:false});return ok(`小倉庫：${c.name} 效期 ${c.expiry}`)}
+ if(t==='use_pantry'){const p=S.pantry.find(x=>x.name.toLowerCase()===String(c.name||'').toLowerCase());if(!p)return no(`小倉庫沒有「${c.name}」`);const n=Math.max(1,c.qty|0||1);if(!dry)usePantry(p,n);return ok(`用完 ${p.name} ×${n}`)}
+ if(t==='add_away'){if(!c.from||!c.to)return no('缺少日期');const w=whn(c.who);if(!dry)S.away.push({id:rid(),from:c.from,to:c.to,note:c.note||'',who:w,n:w.length||NM()});return ok(`不在家 ${c.from} ~ ${c.to}${c.note?'（'+c.note+'）':''}`)}
+ if(t==='add_category'){if(!c.name)return no('缺少 name');if(!dry&&!S.catList.includes(c.name))S.catList.push(c.name);return ok(`新增分類 ${c.name}`)}
+ if(t==='add_expense_category'){if(!c.name)return no('缺少 name');if(!dry&&!S.expCats.some(x=>x.n===c.name))S.expCats.push({e:c.icon||'',n:c.name});return ok(`新增記帳類別 ${c.icon||''}${c.name}`)}
+ if(t==='add_sale'){if(!c.name||!c.month||!c.day)return no('缺少欄位');if(!dry)set.custom.push({id:'c'+rid(),n:c.name,m:+c.month,d:+c.day,e:c.icon||'⭐'});return ok(`自訂特價日 ${c.name} ${c.month}/${c.day}`)}
+ if(t==='set'){if(!['expense','sales','pantry','multi','cats'].includes(c.key))return no('不支援的設定 '+c.key);if(!dry){set[c.key]=!!c.value;if(c.key==='multi'&&c.value&&!S.members.length)resizeM(2)}return ok(`設定 ${c.key} = ${!!c.value}`)}
+ if(t==='set_members'){if(!Array.isArray(c.names)||!c.names.length)return no('缺少 names');if(!dry){resizeM(c.names.length);c.names.forEach((n,i)=>S.members[i].name=n);set.multi=true}return ok(`成員：${c.names.join('、')}`)}
+ return no('未知指令 '+t)}
+function cmdParse(){const x=$('cmdin').value,m=x.match(/```(?:json)?\s*([\s\S]*?)```/),r=(m?m[1]:x).match(/[\[{][\s\S]*[\]}]/);if(!r)return null;try{const j=JSON.parse(r[0]);return Array.isArray(j)?j:[j]}catch(e){return null}}
+const qgOf=h=>h.uid,quickGroups=()=>quickList().map(({it,h})=>({it,list:[h]}));
+const qn=it=>{const r=it.history.filter(h=>h.quick&&h.qts&&Date.now()-h.qts<180000).pop();return r&&(r.qty||1)>1?' ×'+r.qty:''};
+function renderQ(){const l=quickList(),cm=x=>l.filter(y=>y.it.id===x.it.id).length>1,can=l.some(cm);$('ql').innerHTML=l.length?`<button data-act="qall" class="w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-bold">全部確認無誤</button>${qsel.length>1?`<button data-act="qmerge" class="w-full py-2 rounded-xl bg-sky-500 text-white text-sm font-bold">合併所選（${qsel.length}）</button>`:can?'<p class="text-xs text-slate-400">點左邊的框選取同一物品的多筆，再按「合併」變成 ×N</p>':''}`+l.map(x=>{const {it,h}=x,n=h.qty||1,p=h.price,hc=cOf(h);return `<div class="flex items-center gap-2 py-2.5 border-b border-slate-100">${cm(x)?`<button data-act="qsel" data-u="${h.uid}" class="w-7 h-7 shrink-0 rounded-lg border-2 ${qsel.includes(h.uid)?'bg-sky-500 border-sky-500 text-white':'border-slate-300'}" aria-label="選取">${qsel.includes(h.uid)?'✓':''}</button>`:''}<div data-act="eedit" data-k="buy" data-id="${it.id}" data-u="${h.uid}" class="flex-1 min-w-0 cursor-pointer"><p class="text-sm font-bold">${esc(it.icon+' '+it.name)}${n>1?' ×'+n:''}</p><p class="text-xs text-slate-400">${md(h.restockDate)}・${p!=null?(n>1?`${money(p,hc)}×${n}=${money(p*n,hc)}`:money(p,hc)):'未填價格'}</p></div>${n>1?`<button data-act="qsplit" data-id="${it.id}" data-u="${h.uid}" class="text-xs px-2 py-1 rounded-lg bg-slate-100 font-semibold">拆開</button>`:''}<button data-act="qok" data-id="${it.id}" data-u="${h.uid}" class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">確認無誤</button></div>`}).join(''):'<p class="text-center text-slate-400 py-8">沒有待確認的快速補貨</p>'}
+function focusItem(id){const x=S.items.find(i=>i.id===id);if(!x)return;V='home';Q='';const g=x.cat||'未分類';if(set.cats&&set.col[g]){set.col[g]=false;save()}render();setTimeout(()=>{const el=$('it-'+id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('ring-4','ring-emerald-300');setTimeout(()=>el.classList.remove('ring-4','ring-emerald-300'),2200)}},130)}
+const pen=k=>`<button data-act="ed" data-k="${k}" class="w-9 h-9 rounded-full ${ED[k]?'bg-emerald-500 text-white':'bg-slate-100'}" aria-label="${ED[k]?'完成':'修改'}">${ED[k]?'✓':'✎'}</button>`;
+const acc=(k,t,b)=>`<section class="card p-4"><button data-act="acc" data-k="${k}" class="w-full flex items-center justify-between font-bold"><span>${t}</span><span class="text-slate-400">${set.acc[k]?'▾':'▸'}</span></button>${set.acc[k]?`<div class="mt-3 space-y-3">${b}</div>`:''}</section>`;
+const tog=(t,k,on,h)=>`<div class="flex items-center justify-between gap-3"><span class="text-sm">${t}${h?`<span class="block text-xs text-slate-400">${h}</span>`:''}</span>${sw(k,on)}</div>`;
+const sel=(k,o)=>`<select data-set="${k}" class="bg-slate-100 rounded-xl px-3 py-2 font-bold text-sm outline-none">${o}</select>`;
+const chipE=(on,inner)=>on?`<span class="inline-flex items-center rounded-full bg-slate-50 pl-1 pr-1">${inner}</span>`:`<span class="px-3 py-1 rounded-full bg-slate-50 text-sm font-semibold">${inner}</span>`;
+const toTrash=(type,data,ref)=>{const tid=Date.now()+Math.random().toString(36).slice(2,5);S.trash.push({tid,type,data,ref:ref||null,at:today()});return tid};
+const gone=(type,data,ref)=>{const id=toTrash(type,data,ref);toast('已移到垃圾桶',`<button data-act="restore" data-tid="${id}" class="font-bold text-emerald-300">復原</button>`)};
+const ex=i=>S.expenses.filter(x=>x.itemId===i.id).reduce((a,x)=>a+toBase(x.amount,cOf(x)),0);
+function renderTrash(){
+ const lab=t=>t.type==='item'?`${t.data.icon} ${esc(t.data.name)}（物品與全部紀錄）`:t.type==='buy'?`🧾 ${esc((S.items.find(x=>x.id===t.ref)||{name:'已刪除物品'}).name)} 補貨 ${t.data.restockDate}`:t.type==='exp'?`${esc(t.data.cat)} ${money(t.data.amount)}`:t.type==='sale'?`🏷️ ${esc(t.data.n)}（自訂特價日）`:t.type==='cat'?`🗂️ 分類 ${esc(t.data.name)}`:t.type==='ecat'?`🏷️ 記帳類別 ${esc(ecl(t.data))}`:t.type==='inv'?`📈 ${esc(t.data.sym)}（投資）`:t.type==='idiv'?`💵 ${esc(t.data.sym)} 配息 ${money(t.data.d.amt)}`:t.type==='note'?`📝 ${esc(t.data.title||'無標題')}`:t.type==='rxe'?`🔁 固定支出 ${esc(t.data.cat)}`:t.type==='goal'?`🎯 存款目標 ${esc(t.data.name)}`:t.type==='psale'?`🏷️ ${esc((PRESETS.find(p=>p.id===t.data.id)||{n:'特價'}).n)}（預設特價）`:t.type==='inc'?`💰 ${esc(t.data.cat)} +${money(t.data.amount)}`:t.type==='rec'?`🔁 固定收入 ${esc(t.data.cat)}`:t.type==='bkt'?`🥧 分配 ${esc(t.data.n)}`:`🧺 ${esc(t.data.name)}（小倉庫）`;
+ const l=[...S.trash];$('tt').textContent='🗑️ 垃圾桶';
+ $('tl').innerHTML=l.length?`<button data-act="tclear" class="w-full py-2 rounded-xl ${tc?'bg-rose-500 text-white':'bg-slate-100'} text-sm font-bold">${tc?'再按一次：永久清空此頁':'清空垃圾桶'}</button>`+[...l].reverse().map(t=>`<div class="flex items-center gap-2 py-2.5 border-b border-slate-100"><div class="flex-1 min-w-0"><p class="text-sm font-bold truncate">${lab(t)}</p><p class="text-xs text-slate-400">${t.at} 刪除・還剩 ${30-diff(t.at,today())} 天</p></div><button data-act="restore" data-tid="${t.tid}" class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">恢復</button><button data-act="tdel" data-tid="${t.tid}" class="px-2 py-1.5 text-xs text-rose-500 font-semibold">永久刪除</button></div>`).join(''):'<p class="text-center text-slate-400 py-8">這裡的垃圾桶是空的</p>';
+}
+function restore(id){
+ const t=S.trash.find(x=>x.tid===id);if(!t)return;const d=t.data;
+ if(t.type==='item'){if(!S.userStatus.isPremium&&S.items.length>=FREE)return toast('補貨物品數量已滿，無法恢復');
+  if(S.items.some(x=>x.name.toLowerCase()===d.name.toLowerCase())){dupTid=id;$('dupt').textContent=`目前已經有「${d.name}」了，要怎麼處理？`;show('m-dup');return}S.items.push(d)}
+ else if(t.type==='buy'){const it=S.items.find(x=>x.id===t.ref);if(!it)return toast('原物品已不存在，請先恢復物品');it.history.push(d);recalc(it)}
+ else if(t.type==='exp'){S.expenses.push(d);if(d.rid){const r=S.fin.recurX.find(y=>y.id===d.rid);if(r)r.skip=(r.skip||[]).filter(m=>m!==d.date.slice(0,7))}}else if(t.type==='rxe')S.fin.recurX.push(d);else if(t.type==='note')S.notes.push(d);else if(t.type==='inv')S.inv.items.push(d);else if(t.type==='idiv'){const h=S.inv.items.find(x=>x.id===d.hid);if(h)h.divs.push(d.d);else return toast('原標的已不存在，請先恢復標的')}else if(t.type==='goal')S.fin.goals.push(d);else if(t.type==='sale')set.custom.push(d);else if(t.type==='ecat')S.expCats.push(d);else if(t.type==='inc'){S.fin.income.push(d);if(d.rid){const r=S.fin.recur.find(y=>y.id===d.rid);if(r)r.skip=(r.skip||[]).filter(m=>m!==d.date.slice(0,7))}}else if(t.type==='psale')set.rm=(set.rm||[]).filter(x=>x!==d.id);else if(t.type==='rec')S.fin.recur.push(d);else if(t.type==='bkt')S.fin.buckets.push(d);
+ else if(t.type==='cat'){S.catList.push(d.name);d.ids.forEach(i=>{const x=S.items.find(y=>y.id===i);if(x)x.cat=d.name})}else S.pantry.push(d);
+ S.trash=S.trash.filter(x=>x.tid!==id);save();render();renderTrash();toast('已恢復');
+}
+function fillEi(){$('ei').innerHTML='<option value="">一般支出（不連結物品）</option>'+S.items.map(i=>`<option value="${i.id}">${esc(i.icon+' '+i.name)}</option>`).join('')+'<option value="__new">＋ 新增物品…</option>';$('enn').value='';syncEx()}
+function syncEx(){const v=$('ei').value;$('enn').style.display=v==='__new'?'block':'none';$('esw').style.display=v?'flex':'none';$('ec').style.display=v?'none':'flex'}
+let pEdit=null,pqId=null;
+function pantryCheck(name){if(!set.pantryAsk||!S.pantry.length)return;const p=S.pantry.find(x=>x.name.toLowerCase()===name.toLowerCase());if(!p)return;pqId=p.id;$('pqt').textContent=`小倉庫裡有「${p.name}」（目前效期 ${p.exp}），要更新效期嗎？`;$('pqd').value='';show('m-pq')}
+let hoardRec=null;
+// 補貨間隔短於「預計撐的時間」的 30%（同一天不算）→ 問一次：囤貨，還是上一份其實用完了
+function hoardCheck(it,rec,base){if(set.hoardAsk===false||it.noAsk||rec.asked||rec.gift||!base)return;const prev=byDate(it).filter(h=>h!==rec&&h.restockDate<rec.restockDate).pop();if(!prev)return;
+ const gap=eff(prev.restockDate,rec.restockDate);if(gap<=0)return;const pe=evts(it).find(e=>e.date===prev.restockDate),exp=base*(pe?pe.u:1);
+ if(gap<.3*exp){hoardRec={id:it.id,uid:rec.uid};$('hq').textContent=`「${it.name}」距離上次補貨才 ${Math.round(gap)} 天（平常約 ${Math.round(exp)} 天）。這次是…`;show('m-hoard')}}
+function usePantry(p,n){for(let i=0;i<n&&S.pantry.includes(p);i++){S.pHist.push({id:rid(),name:p.name,icon:p.icon||'',exp:p.exp,at:today()});if((p.qty||1)>1)p.qty--;else S.pantry=S.pantry.filter(x=>x!==p)}}
+function renderPH(){$('phl').innerHTML=S.pHist.length?[...S.pHist].reverse().map(h=>`<div class="flex items-center gap-2 py-2.5 border-b border-slate-100"><div class="flex-1 min-w-0"><p class="text-sm font-bold">${h.icon?esc(h.icon)+' ':''}${esc(h.name)}</p><p class="text-xs text-slate-400">效期 ${h.exp}・${h.at} 用完</p></div><button data-act="prest" data-id="${h.id}" class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">放回庫存</button></div>`).join(''):'<p class="text-center text-slate-400 py-8">還沒有用完的紀錄</p>'}
+function pantryView(){
+ const l=[...S.pantry].sort((a,b)=>a.exp<b.exp?-1:1);
+ return `<div class="flex gap-2"><button data-act="padd" class="flex-1 py-3 rounded-2xl bg-emerald-500 text-white font-bold">＋ 新增庫存物品</button><button data-act="phist" class="px-4 py-3 rounded-2xl bg-white shadow-sm font-bold text-sm">🕘 歷史${S.pHist.length?' '+S.pHist.length:''}</button></div>`+(l.length?`<section class="card p-2">${l.map(p=>{const n=diff(today(),p.exp),lead=p.lead||set.pantryLead,tone=n<0?'rose':n<=lead?'amber':'emerald',q=p.qty||1;
+  return `<div id="pn-${p.id}" data-act="pedit" data-id="${p.id}" class="flex items-center gap-2 p-3 cursor-pointer"><div class="flex-1 min-w-0"><p class="font-bold truncate">${p.icon?esc(p.icon)+' ':''}${esc(p.name)}${q>1?' ×'+q:''}${p.later?' <span class="text-xs text-amber-600">待更新效期</span>':''}</p><p class="text-xs text-slate-400">效期 ${p.exp}・提前 ${fmtD(lead)}提醒</p><p class="text-xs font-bold ${T[tone][0]}">${n<0?'⚠️ 已過期 '+(-n)+' 天':n===0?'⚠️ 今天到期':(n<=lead?'⏳ ':'✅ ')+'還有 '+n+' 天'}</p></div><button data-act="pused" data-id="${p.id}" class="px-3 py-2 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">用完${q>1?' -1':''}</button><button data-act="pdel2" data-id="${p.id}" class="text-xs text-slate-400 px-1">刪除</button></div>`}).join('')}</section>`:'<p class="text-center text-slate-400 py-12">小倉庫還是空的。<br>記下囤貨的效期，快過期時提醒你。</p>');
+}
+const sw=(k,on)=>`<button data-act="tg" data-k="${k}" role="switch" aria-checked="${on}" class="shrink-0 w-12 h-7 rounded-full p-0.5 ${on?'bg-emerald-500':'bg-slate-200'}"><span class="block w-6 h-6 rounded-full bg-white shadow transition-transform ${on?'translate-x-5':''}"></span></button>`;
+function saleView(){
+ const l=sales(),M=Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1} 月</option>`).join(''),D=Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1} 日</option>`).join('');
+ return `<section class="card p-5"><div class="flex items-center justify-between"><div><h2 class="font-bold">提前通知</h2><p class="text-xs text-slate-400">特價前幾天提醒你</p></div><select data-set="lead" class="bg-slate-100 rounded-xl px-3 py-2 font-bold text-sm outline-none">${[1,3,7,14,30].map(n=>`<option value="${n}" ${set.lead===n?'selected':''}>${n} 天前</option>`).join('')}</select></div></section>
+ <section class="card p-2">${l.map(s=>`<div data-act="sedit" data-k="${s.id}" class="flex items-center gap-3 p-3 cursor-pointer"><div class="text-2xl w-10 text-center">${esc(s.e)}</div><div class="flex-1 min-w-0"><p class="font-bold truncate">${esc(s.n)}</p><p class="text-xs text-slate-400">${s.date.slice(5).replace('-','/')}${s.a?'（約）':''}・${s.left?`還有 ${s.left} 天`:'今天'}</p></div><button data-act="srm" data-k="${s.id}" class="text-xs text-slate-400 px-1">移除</button>${sw(s.id,s.on)}</div>`).join('')}</section>
+ <section id="saleform" class="card p-5 space-y-3"><h2 class="font-bold">${saleEd?'修改特價日':'新增自訂特價日（每年重複）'}</h2><div class="flex items-center gap-2">${saleEmoOn?'<input id="sico" maxlength="4" placeholder="😀" aria-label="輸入表情符號" class="w-14 h-11 text-2xl text-center rounded-2xl bg-slate-50 ring-2 ring-emerald-400 outline-none">':`<button data-act="semo" class="w-11 h-11 rounded-2xl bg-slate-50 text-2xl" aria-label="自訂圖示">${saleEmo}</button>`}</div>
+ <input id="cn" maxlength="16" placeholder="名稱，例如：蝦皮 9.9" class="w-full bg-slate-50 rounded-2xl px-4 py-3 outline-none ring-2 ring-transparent focus:ring-emerald-400"><div class="flex gap-2"><select id="cm" class="flex-1 bg-slate-50 rounded-2xl px-4 py-3 outline-none">${M}</select><select id="cdd" class="flex-1 bg-slate-50 rounded-2xl px-4 py-3 outline-none">${D}</select></div>
+ <div class="flex gap-2">${saleEd?'<button data-act="scancel" class="flex-1 py-3.5 rounded-2xl bg-slate-100 font-bold">取消</button>':''}<button data-act="addc" class="flex-1 py-3.5 rounded-2xl bg-emerald-500 text-white font-bold">${saleEd?'儲存修改':'新增'}</button></div></section>`;
+}
+function settingsView(){
+ const pro=S.userStatus.isPremium,td=today(),aw=S.away.slice().sort((a,b)=>a.from<b.from?1:-1),cur=aw.filter(p=>p.to>=td),past=aw.filter(p=>p.to<td),shown=cur.concat(AH?past:past.slice(0,3));
+ const row=(t,k,on,body)=>`<div class="py-3 border-b border-slate-100 last:border-0"><div class="flex items-center justify-between gap-3"><span class="font-semibold text-sm">${t}</span><span class="flex items-center gap-2"><span class="text-xs ${on?'text-emerald-600':'text-slate-400'}">${on?'顯示':'隱藏'}</span>${sw(k,on)}</span></div>${on&&body?`<div class="mt-3 space-y-3">${body}</div>`:''}</div>`;
+ const grp=(t,c,b)=>`<div class="flex items-center gap-2 pt-4 px-1"><span class="w-1.5 h-5 rounded ${c}"></span><h2 class="font-extrabold text-slate-700">${t}</h2></div><section class="card p-4 space-y-3">${b}</section>`;
+ const mem=`<div class="flex items-center justify-between"><span class="text-sm">人數</span>${sel('mcount',[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}" ${S.members.length===n?'selected':''}>${n} 人</option>`).join(''))}</div><div class="grid grid-cols-2 gap-2">${S.members.map((m,i)=>`<input data-mem="${i}" value="${esc(m.name)}" maxlength="8" aria-label="暱稱" class="bg-slate-50 rounded-xl px-3 py-2 text-sm outline-none">`).join('')}</div>`;
+ const cats=`<div class="flex items-center justify-between"><span class="text-xs text-slate-400">分類清單</span>${pen('cat')}</div><div class="flex flex-wrap items-center gap-2">${S.catList.map(c=>chipE(ED.cat,ED.cat?`<input data-ren="${esc(c)}" value="${esc(c)}" maxlength="8" aria-label="分類名稱" class="w-20 bg-transparent px-2 py-1 text-sm font-semibold outline-none"><button data-act="delcat" data-k="${esc(c)}" class="w-6 h-6 text-slate-400" aria-label="刪除">✕</button>`:esc(c))).join('')}${ED.cat?`<span class="inline-flex gap-1"><input id="ncs" maxlength="8" placeholder="新分類（可含表情）" class="w-32 bg-slate-50 rounded-full px-3 py-1 text-sm outline-none"><button data-act="catnew" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="新增">＋</button></span>`:''}</div>`;
+ const ecs=`<div class="flex items-center justify-between"><span class="text-xs text-slate-400">「記一筆」的類別</span>${pen('ec')}</div><div class="flex flex-wrap items-center gap-2">${S.expCats.map((c,i)=>chipE(ED.ec,ED.ec?`<span class="pl-2">${c.e}</span><input data-renx="${i}" value="${esc(c.n)}" maxlength="8" aria-label="類別名稱" class="w-16 bg-transparent px-1 py-1 text-sm font-semibold outline-none"><button data-act="delec" data-k="${i}" class="w-6 h-6 text-slate-400" aria-label="刪除">✕</button>`:esc(ecl(c)))).join('')}${ED.ec?`<span class="inline-flex items-center gap-1"><input id="xce2" maxlength="4" placeholder="表情" aria-label="表情符號" class="w-14 bg-slate-50 rounded-full px-2 py-1.5 text-sm text-center outline-none"><input id="xcn2" maxlength="8" placeholder="新類別" class="w-20 bg-slate-50 rounded-full px-3 py-1.5 text-sm outline-none"><button data-act="ecnew2" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="新增">＋</button></span>`:''}</div>`;
+ const invsel=`<div class="flex items-center justify-between"><span class="text-sm">賣出／配息自動記帳</span>${sel('invAuto',[['ask','第一次詢問'],['on','自動記帳'],['off','不自動記帳']].map(([v,l])=>`<option value="${v}" ${(set.invAuto||'ask')===v?'selected':''}>${l}</option>`).join(''))}</div><p class="text-xs text-slate-400">賣出：記「已實現損益」（賺→收入、賠→支出），備註寫標的與買入／賣出價；配息：記為收入。</p>`;
+ const curg=`<div class="flex items-center justify-between"><span class="text-sm">基準貨幣<span class="block text-xs text-slate-400">總計與統計都換算成這個</span></span>${sel('base',set.curs.map(c=>`<option value="${c}" ${baseC()===c?'selected':''}>${c}</option>`).join(''))}</div>${!set.fxOk?'<p class="text-xs text-amber-700 bg-amber-50 rounded-xl px-3 py-2">⚠️ 匯率目前是預設的概略值，請依實際匯率更新後按「我已確認」。</p>':''}<div class="space-y-1.5">${set.curs.filter(c=>c!==baseC()).map(c=>`<div class="flex items-center gap-2 text-sm"><span class="w-20 shrink-0 whitespace-nowrap">1 ${c} =</span><input data-fx="${c}" type="number" inputmode="decimal" step="any" value="${Math.round(fxr(c)/fxr(baseC())*1e6)/1e6}" aria-label="${c} 匯率" class="flex-1 min-w-0 bg-slate-100 rounded-lg px-3 py-1.5 text-right font-bold outline-none num"><span class="text-xs text-slate-400 w-10 shrink-0">${baseC()}</span>${ED.fx&&!CUR0[c]?`<button data-act="fxdel" data-k="${c}" class="text-slate-400 px-1" aria-label="刪除">✕</button>`:''}</div>`).join('')}</div>${ED.fx?`<div class="flex gap-1.5"><input id="fxc" maxlength="5" placeholder="代號" class="w-16 bg-slate-100 rounded-lg px-2 py-1.5 text-sm outline-none"><input id="fxs" maxlength="4" placeholder="符號" class="w-14 bg-slate-100 rounded-lg px-2 py-1.5 text-sm outline-none"><input id="fxr" type="number" inputmode="decimal" step="any" placeholder="1 單位＝?" class="flex-1 min-w-0 bg-slate-100 rounded-lg px-2 py-1.5 text-sm outline-none"><button data-act="fxadd" class="w-9 rounded-lg bg-emerald-500 text-white font-bold">＋</button></div>`:''}<div class="flex gap-2"><button data-act="fxok" class="flex-1 py-2 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">我已確認匯率</button>${pen('fx')}</div>`;
+ const away=`<p class="text-xs text-slate-400">這段期間不計入消耗，預測自動暫停，月曆會標示。可事後補登。</p>${shown.map(p=>`<div data-act="aedit" data-id="${p.id}" class="flex items-center gap-2 text-sm cursor-pointer ${p.to<td?'opacity-45':''}"><div class="flex-1 min-w-0"><b class="num">${md(p.from)} ~ ${md(p.to)}</b><span class="text-slate-400"> ${esc(p.note)}・${awLbl(p)}${p.to<td?'・已結束':''}</span></div><button data-act="adel" data-id="${p.id}" class="text-xs text-slate-400 px-1">刪除</button></div>`).join('')}${!AH&&past.length>3?`<button data-act="ah" class="w-full py-2 rounded-xl bg-slate-50 text-sm font-semibold text-slate-500">📜 歷史資料（${past.length-3}）</button>`:''}<button data-act="aadd" class="w-full py-2.5 rounded-xl bg-slate-100 font-bold text-sm">＋ 新增不在家期間</button>`;
+ const ntb=tog('補貨間隔太短時，問我是囤貨還是用完','hoardAsk',set.hoardAsk!==false,'間隔短於預計的 30% 才會問，只問一次')+`<p class="text-sm font-bold pt-1">要通知哪些事</p>${[['low','🔴 物品快用完'],['pan','🧺 庫存快到期'],['sale','🏷️ 特價檔期'],['budget','💸 預算'],['quick','⚡ 待確認事項'],['note','📝 記事提醒'],['info','🔵 資訊（不在家、資料不足）']].map(([k,l])=>tog(l,'nt:'+k,NT(k))).join('')}<div class="flex items-center justify-between"><span class="text-sm">🔴 紅色：剩</span>${sel('redD',[0,1,2,3].map(n=>`<option value="${n}" ${(set.redD??0)===n?'selected':''}>${n?n+' 天內':'今天／已用完'}</option>`).join(''))}</div><div class="flex items-center justify-between"><span class="text-sm">🟠 橘色：剩</span>${sel('orgD',[3,5,7,10,14].map(n=>`<option value="${n}" ${(set.orgD??7)===n?'selected':''}>${n} 天內</option>`).join(''))}</div>`;
+ const noti=`<div class="flex items-center justify-between"><span class="text-sm">通知方式</span>${sel('notify',[['off','不通知'],['app','手機 App'],['line','LINE'],['both','App + LINE']].map(([v,l])=>`<option value="${v}" ${set.notify===v?'selected':''}>${l}</option>`).join(''))}</div><div class="flex items-center justify-between"><span class="text-sm">每天通知時間</span><input type="time" data-set="notifyTime" value="${set.notifyTime}" class="bg-slate-100 rounded-xl px-3 py-2 font-bold text-sm outline-none"></div><p class="text-xs text-slate-400 leading-relaxed">通知內容：快用完的物品、快到期的庫存、近期特價。目前是「開啟 App 且已過設定時間」時提醒一次；背景推播要等 App／LINE 版。</p>`+ntb;
+ const pan=tog('補貨或記帳時，詢問是否更新效期','pantryAsk',set.pantryAsk)+`<div class="flex items-center justify-between"><span class="text-sm">效期預設提前提醒</span>${sel('pantryLead',[...new Set(set.presets.concat(set.pantryLead))].sort((a,b)=>a-b).map(n=>`<option value="${n}" ${set.pantryLead===n?'selected':''}>${fmtD(n)}前</option>`).join(''))}</div><div class="flex items-center justify-between"><span class="text-xs text-slate-400">快速選項（新增庫存時直接點）</span>${pen('lp')}</div><div class="flex flex-wrap items-center gap-2">${set.presets.map(d=>chipE(ED.lp,fmtD(d)+(ED.lp?`<button data-act="lpdel" data-k="${d}" class="w-6 h-6 text-slate-400" aria-label="移除">✕</button>`:''))).join('')}${ED.lp?`<span class="inline-flex gap-1"><input id="lpn" type="number" min="1" inputmode="numeric" placeholder="數字" class="w-16 bg-slate-50 rounded-full px-3 py-1.5 text-sm outline-none"><select id="lpu" class="bg-slate-50 rounded-full px-2 text-sm outline-none"><option value="day">天</option><option value="week">週</option><option value="month">個月</option><option value="year">年</option></select><button data-act="lpadd" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="新增">＋</button></span>`:''}</div>`;
+ const look=`<div class="flex items-center justify-between"><span class="text-sm">文字大小<span class="block text-xs text-slate-400">按鈕會一起放大縮小</span></span>${sel('size',[[14,'小'],[16,'標準'],[18,'大'],[20,'特大']].map(([v,l])=>`<option value="${v}" ${set.size===v?'selected':''}>${l}</option>`).join(''))}</div><div class="flex items-center justify-between"><span class="text-sm">預測參考期間<span class="block text-xs text-slate-400">最多 40 次、只看這段期間</span></span>${sel('cap',[1,2,3].map(n=>`<option value="${n}" ${set.cap===n?'selected':''}>${n} 年</option>`).join(''))}</div>`;
+ const data=`<div class="grid grid-cols-2 gap-3"><button data-act="exp" class="py-3 rounded-2xl bg-slate-100 font-bold text-sm">匯出備份</button><label class="py-3 rounded-2xl bg-slate-100 font-bold text-sm text-center cursor-pointer">匯入備份<input type="file" accept=".json" id="imp" class="hidden"></label></div><p class="text-sm text-slate-600">${pro?'✨ Premium：已解鎖無限物品':`免費版：已使用 ${S.items.length} / ${FREE} 個名額`}</p>${pro?'':'<button data-act="unlock" class="w-full py-3 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white font-bold">🔓 解鎖無限物品</button>'}<a href="https://buymeacoffee.com/yourusername" target="_blank" rel="noopener" class="block text-center py-3 rounded-2xl bg-amber-400 text-slate-900 font-bold">☕ Buy me a coffee</a>`;
+ return grp('顯示的分頁與功能','bg-emerald-500','<p class="text-xs text-slate-400">隱藏只是不顯示，功能與提醒仍然會運作。</p>'+row('📒 記帳（價格、支出、分析）','expense',set.expense,ecs)+row('💰 財務（收入、分配試算）','fin',set.fin,'')+row('📈 投資（財務裡的投資頁）','inv',set.inv!==false,invsel)+row('🏷️ 特價分頁','sales',set.sales,'')+row('🧺 小倉庫（效期庫存）','pantry',set.pantry,'')+row('👨‍👩‍👧 多人（記帳選人、不在家選人）','multi',set.multi,mem)+row('🗂️ 分類（首頁分組）','cats',set.cats,cats))
+  +grp('不在家 ／ 出遊','bg-sky-500',away)+grp('提醒與通知','bg-amber-500',noti+pan)+grp('外觀與預測','bg-violet-500',look)+grp('貨幣與匯率','bg-sky-500',curg)+grp('資料與方案','bg-slate-500',data);
+}
+function dailyNotice(){if(set.notify==='off'||set.lastNote===today())return;const n=new Date();if(pad(n.getHours())+':'+pad(n.getMinutes())<set.notifyTime)return;
+ const a=alerts().filter(x=>x.l!=='blue').slice(0,4);set.lastNote=today();save();if(!a.length)return;const m=a.map(x=>x.ic+x.t+' '+x.s).join('、');toast('🔔 '+esc(m));try{if(/app|both/.test(set.notify)&&window.Notification&&Notification.permission==='granted')new Notification('智慧補貨預測器',{body:m})}catch(e){}}
+const NT=k=>set.nt[k]!==false,LVL={red:{n:'緊急',bg:'bg-rose-500',tx:'text-rose-600',soft:'bg-rose-50'},orange:{n:'注意',bg:'bg-orange-500',tx:'text-orange-600',soft:'bg-orange-50'},yellow:{n:'提醒',bg:'bg-yellow-400',tx:'text-yellow-700',soft:'bg-yellow-50'},blue:{n:'資訊',bg:'bg-sky-500',tx:'text-sky-600',soft:'bg-sky-50'}};
+let goalId=null,FM=new Date(new Date().getFullYear(),new Date().getMonth(),1),AV='ana',icat='',icAdd=false,incEdit=null,SH=false,ALERTS=[];
+const fk=()=>FM.getFullYear()+'-'+pad(FM.getMonth()+1),spendOf=k=>entriesAll().filter(e=>e.date.slice(0,7)===k).reduce((a,e)=>a+cnt(e),0),incOf=k=>S.fin.income.filter(x=>x.date.slice(0,7)===k).reduce((a,x)=>a+toBase(x.amount,cOf(x)),0);
+function avgInc(){const m={},lim=addDays(today(),-365).slice(0,7);S.fin.income.forEach(x=>{const k=x.date.slice(0,7);if(k>=lim)m[k]=(m[k]||0)+toBase(x.amount,cOf(x))});const v=Object.values(m);return{avg:v.length?v.reduce((a,x)=>a+x,0)/v.length:0,n:v.length}}
+// 固定收入：到了設定的日期就自動補上當月（App 沒開的月份也會補，最多回補 12 個月）；刪掉的自動紀錄會記住，不會再被補回
+function applyRecur(){let ch=false;const t=toD(today());
+ const run=(list,has,add)=>list.forEach(r=>{for(let i=11;i>=0;i--){const d=new Date(t.getFullYear(),t.getMonth()-i,1),dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(),ds=iso(new Date(d.getFullYear(),d.getMonth(),Math.min(r.day,dim))),m2=ds.slice(0,7);if(ds>today()||ds<r.start||(r.skip||[]).includes(m2)||has(r,m2))continue;add(r,ds);ch=true}});
+ run(S.fin.recur,(r,m)=>S.fin.income.some(x=>x.rid===r.id&&x.date.slice(0,7)===m),(r,ds)=>S.fin.income.push({id:rid(),date:ds,amount:r.amount,cur:r.cur,cat:r.cat,note:r.note||'',rid:r.id,auto:true}));
+ run(S.fin.recurX,(r,m)=>S.expenses.some(x=>x.rid===r.id&&x.date.slice(0,7)===m),(r,ds)=>S.expenses.push({id:rid(),date:ds,amount:r.amount,cur:r.cur,cat:r.cat,note:r.note||'',who:[],rid:r.id,auto:true}));
+ if(ch)save()}
+function act(a,o){const t=document.createElement('button');t.dataset.act=a;Object.entries(o||{}).forEach(([k,v])=>t.dataset[k]=v);document.body.appendChild(t);t.click();t.remove()}
+const drawIc=()=>{const xx=incEdit&&incEdit.xx;$('icc').innerHTML=(xx?S.expCats.map(ecl):S.fin.icats).map(c=>`<button data-ic="${esc(c)}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${c===icat?'bg-emerald-500 text-white':'bg-slate-50'}">${esc(c)}</button>`).join('')+(icAdd?`<span class="inline-flex gap-1"><input id="icn" maxlength="8" placeholder="新類別" class="w-24 bg-slate-50 rounded-full px-3 py-1.5 text-sm ring-2 ring-emerald-400 outline-none"><button data-act="icnew" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold" aria-label="加入">✓</button></span>`:(xx?'':`<button data-act="icplus" class="w-9 h-9 rounded-full bg-slate-100 font-bold" aria-label="新增類別">＋</button>`));if(icAdd)setTimeout(()=>{const x=$('icn');if(x)x.focus()},30)};
+const pendHtml=()=>{const l=S.items.filter(i=>cpd(i)==null&&i.history.some(h=>h.price!=null&&!h.gift)),any=S.items.some(i=>cpd(i)!=null);return l.length||!any?`<div class="mt-3 space-y-2"><p class="text-xs text-slate-400">${l.length?'還不能算每日成本（需要至少兩個「不同日期」的補貨）：':'補貨時輸入價格，在不同日期補貨兩次以上，就會算出每個物品的消耗成本。'}</p>${l.map(i=>{const ps=i.history.filter(h=>h.price!=null&&!h.gift);return `<div class="flex justify-between text-sm cursor-pointer" data-act="detail" data-id="${i.id}"><span class="font-semibold">${esc(i.icon)} ${esc(i.name)}</span><span class="num text-slate-500">累計 ${money(ps.reduce((a,h)=>a+toBase(h.price*(h.qty||1),cOf(h)),0))}（${ps.length} 次）</span></div>`}).join('')}</div>`:''};
+function avgSpend3(){const t=new Date(),v=[1,2,3].map(i=>spendOf(iso(new Date(t.getFullYear(),t.getMonth()-i,1)).slice(0,7))).filter(x=>x>0);return v.length?v.reduce((a,x)=>a+x,0)/v.length:0}
+function efHtml(F){const sv0=toBase(F.savings||0,F.savingsCur||baseC()),base=Math.max(avgSpend3(),F.recurX.reduce((a,r)=>a+toBase(r.amount,cOf(r)),0)),tg=F.efM||6;if(!base)return '<p class="text-sm text-slate-400">還沒有支出資料，記幾筆帳或設定固定支出後就能估算。</p>';
+ const mo=sv0/base,pct=Math.min(100,mo/tg*100),tone=mo>=tg?'emerald':mo>=tg/2?'amber':'rose',need=Math.max(0,tg*base-sv0);
+ return `<p class="text-sm">可支撐 <b class="num text-lg ${T[tone][0]}">${mo.toFixed(1)}</b> 個月<span class="text-slate-400">（月支出約 ${money(base)}）</span></p><div class="h-3 rounded-full bg-slate-100 mt-2 overflow-hidden"><div class="h-full rounded-full ${T[tone][1]}" style="width:${pct}%"></div></div><p class="text-xs text-slate-500 mt-1">${need?`距離 ${tg} 個月還差 ${money(need)}`:`已達 ${tg} 個月目標 ✓`}</p>`}
+function goalsHtml(F,sal){if(!F.goals.length)return '<p class="text-sm text-slate-400">例如旅遊基金、買車頭期款。設定目標金額和已存金額，會顯示進度。</p>';
+ const sv=F.buckets.find(b=>/存/.test(b.n)),msB=sv?sal*sv.p/100:0;
+ return F.goals.map(g=>{const c=cOf(g),p=Math.min(100,g.target?g.saved/g.target*100:0),left=Math.max(0,g.target-g.saved),mleft=g.due?Math.max(1,Math.round(diff(today(),g.due)/30.4)):0,ms=Math.round(fromBase(msB,c));
+  return `<div data-act="goaledit" data-id="${g.id}" class="py-3 border-b border-slate-100 last:border-0 cursor-pointer"><div class="flex items-center justify-between"><p class="font-bold text-sm">${esc(g.name)}</p><b class="num text-sm">${money(g.saved,c)} <span class="text-slate-400 font-normal">/ ${money(g.target,c)}</span></b></div><div class="h-2.5 rounded-full bg-slate-100 mt-2 overflow-hidden"><div class="h-full rounded-full ${p>=100?'bg-emerald-500':'bg-sky-500'}" style="width:${p}%"></div></div><p class="text-xs text-slate-500 mt-1">${p>=100?'🎉 已達成':`${Math.round(p)}%・還差 ${money(left,c)}`}${g.due&&p<100?`・${md(g.due)} 前，每月需存 ${money(left/mleft,c)}`:''}${ms&&p<100?`・照每月存款額度 ${money(ms,c)}，約 ${Math.ceil(left/ms)} 個月`:''}</p></div>`}).join('')}
+function finView(){
+ const F=S.fin,k=fk(),inc=incOf(k),sp=spendOf(k),bal=inc-sp,rate=inc>0?Math.round(bal/inc*100):null,av=avgInc(),list=F.income.filter(x=>x.date.slice(0,7)===k).sort((a,b)=>a.date<b.date?1:-1),sal=toBase(F.salary||0,F.salaryCur||baseC())||inc||Math.round(av.avg)||0,
+  tot=F.buckets.reduce((a,b)=>a+(+b.p||0),0),cols=['#10b981','#3b82f6','#f59e0b','#8b5cf6','#ef4444','#14b8a6','#ec4899','#64748b'],bud=F.buckets.find(b=>/日常/.test(b.n));
+ let acc=0;const stops=F.buckets.map((b,i)=>{const s0=acc;acc+=(+b.p||0);return `${cols[i%8]} ${Math.min(100,s0)}% ${Math.min(100,acc)}%`}).join(',');
+ return `<section class="card p-5"><div class="flex items-center justify-between mb-3"><button data-act="fprev" class="w-10 h-10 rounded-full bg-slate-50 font-bold" aria-label="上個月">‹</button><p class="font-extrabold">${FM.getFullYear()} 年 ${FM.getMonth()+1} 月</p><button data-act="fnext" class="w-10 h-10 rounded-full bg-slate-50 font-bold" aria-label="下個月">›</button></div>
+ <div class="grid grid-cols-3 gap-2 text-center"><div><p class="text-xs text-slate-400">收入</p><p class="font-extrabold text-teal-700 num">${money(inc)}</p></div><div><p class="text-xs text-slate-400">支出</p><p class="font-extrabold num">${money(sp)}</p></div><div><p class="text-xs text-slate-400">結餘</p><p class="font-extrabold num ${bal<0?'text-rose-600':'text-emerald-600'}">${money(bal)}</p></div></div>
+ ${rate!=null?`<p class="text-xs text-slate-500 text-center mt-2">儲蓄率 ${rate}%</p>`:''}<p class="text-xs text-slate-400 text-center mt-1">${av.n?`近 12 個月平均月收入 ${money(av.avg)}（${av.n} 個月有收入）`:'還沒有收入紀錄，新增後會算平均月收入'}</p></section>
+ <section class="card p-5"><div class="flex items-center justify-between mb-2"><h2 class="font-bold">🛟 緊急預備金</h2><select data-efm="1" aria-label="目標月數" class="bg-slate-100 rounded-xl px-3 py-1.5 font-bold text-sm outline-none">${[3,6,9,12].map(n=>`<option value="${n}" ${(F.efM||6)===n?'selected':''}>目標 ${n} 個月</option>`).join('')}</select></div>
+ <div class="flex items-center bg-slate-100 rounded-xl px-3 mb-3">${curSel('fsv')}<span class="text-xs text-slate-400 mr-1 shrink-0 whitespace-nowrap">目前存款</span><input data-fsv="1" type="number" inputmode="numeric" value="${F.savings||''}" placeholder="輸入金額" class="w-full bg-transparent py-2 font-bold outline-none text-right num"></div>
+ ${efHtml(F)}<p class="text-xs text-slate-400 mt-2">每月支出以 App 內記帳（含固定支出）的近 3 個月平均估算；沒有資料時用固定支出合計。</p></section>
+ <section class="card p-5"><div class="flex items-center justify-between mb-2"><h2 class="font-bold">🎯 存款目標</h2><button data-act="goaladd" class="w-9 h-9 rounded-full bg-emerald-500 text-white text-xl font-bold" aria-label="新增目標">＋</button></div>${goalsHtml(F,sal)}</section>
+ <section class="card p-5"><div class="flex items-center justify-between mb-3"><h2 class="font-bold">🥧 薪水分配試算</h2>${pen('bk')}</div>
+ <div class="flex items-center gap-4"><div class="w-28 h-28 rounded-full shrink-0" style="background:conic-gradient(${stops}${tot<100?`,#e2e8f0 ${tot}% 100%`:''})"></div><div class="flex-1 space-y-2"><div class="flex items-center bg-slate-100 rounded-xl px-3">${curSel('fs')}<span class="text-xs text-slate-400 mr-1 shrink-0 whitespace-nowrap">薪水</span><input data-fs="1" type="number" inputmode="numeric" value="${F.salary||sal||''}" placeholder="輸入金額" class="w-full bg-transparent py-2 font-bold outline-none text-right num"></div><div class="flex gap-1.5"><button data-act="fsin" class="flex-1 py-1.5 rounded-lg bg-slate-100 text-xs font-bold">本月收入</button><button data-act="fsavg" class="flex-1 py-1.5 rounded-lg bg-slate-100 text-xs font-bold">平均月收入</button></div></div></div>
+ ${F.buckets.map((b,i)=>`<div class="flex items-center gap-2 mt-3"><i class="w-3 h-3 rounded-full shrink-0" style="background:${cols[i%8]}"></i><span class="flex-1 min-w-0">${ED.bk?`<input data-bn="${b.id}" value="${esc(b.n)}" maxlength="8" aria-label="項目名稱" class="w-full bg-slate-50 rounded-lg px-2 py-1 text-sm font-semibold outline-none">`:`<span class="text-sm font-semibold">${esc(b.n)}</span>`}</span><span class="flex items-center bg-slate-100 rounded-lg px-2"><input data-bp="${b.id}" type="number" inputmode="decimal" value="${b.p}" aria-label="比例" class="w-11 bg-transparent py-1 text-right text-sm font-bold outline-none num"><span class="text-xs text-slate-400">%</span></span><span class="w-24 text-right text-sm font-bold num">${money(sal*b.p/100)}</span>${ED.bk?`<button data-act="bdel" data-id="${b.id}" class="text-slate-400 px-1" aria-label="刪除">✕</button>`:''}</div>`).join('')}
+ <p class="text-xs mt-3 ${tot===100?'text-emerald-600':'text-amber-600'}">合計 ${tot}%${tot===100?' ✓':'（建議加總 100%）'}</p>
+ ${ED.bk?`<div class="flex gap-2 mt-2"><input id="bnn" maxlength="8" placeholder="新項目（如：旅遊基金）" class="flex-1 bg-slate-50 rounded-xl px-3 py-2 text-sm outline-none"><button data-act="badd" class="w-9 h-9 rounded-full bg-emerald-500 text-white font-bold" aria-label="新增">＋</button></div><div class="flex gap-2 mt-2"><button data-act="bpre" data-k="a" class="flex-1 py-2 rounded-xl bg-slate-100 text-xs font-bold">套用 50/30/20</button><button data-act="bpre" data-k="b" class="flex-1 py-2 rounded-xl bg-slate-100 text-xs font-bold">還原預設</button></div>`:''}
+ ${bud?`<button data-act="bbud" class="w-full mt-3 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">把「${esc(bud.n)}」${money(sal*bud.p/100)} 設為每月預算</button>`:''}</section>`;
+}
+function usesFx(){const f=x=>cOf(x)!==baseC()&&x.cur!==undefined;return S.items.some(i=>i.history.some(f))||S.expenses.some(f)||S.fin.income.some(f)||S.fin.recur.some(f)||S.fin.recurX.some(f)||S.inv.items.some(f)||S.fin.goals.some(f)}
+function alerts(){const a=[],R0=set.redD??0,O0=set.orgD??7;
+ if(NT('low'))S.items.forEach(i=>{const u=urgency(i);if(u>=4000)return;const l=u<=R0?'red':u<=O0?'orange':null;if(l)a.push({l,ic:i.icon,t:i.name,s:u<0?`已超過預測 ${-u} 天`:u===0?'預計今天用完':`預計 ${u} 天後用完`,k:'item',id:i.id,u})});
+ if(NT('pan'))S.pantry.forEach(p=>{const d=diff(today(),p.exp),lead=p.lead||set.pantryLead,l=d<=0?'red':d<=lead?'orange':p.later?'yellow':null;if(l)a.push({l,ic:p.icon||'🧺',t:p.name+((p.qty||1)>1?' ×'+p.qty:''),s:d<0?`已過期 ${-d} 天`:d===0?'今天到期':l==='yellow'?'待更新效期':`${d} 天後到期`,k:'pan',id:p.id,u:d})});
+ if(NT('sale'))sales().filter(x=>x.on&&x.left<=set.lead).forEach(x=>a.push({l:'yellow',ic:x.e,t:x.n,s:x.left?`${x.left} 天後，可趁特價補貨`:'今天開始',k:'sale',u:x.left}));
+ if(NT('budget')&&+set.budget>0){const c=monthSpend(0),b=toBase(+set.budget,set.budgetCur||baseC());if(c>b)a.push({l:'orange',ic:'💸',t:'本月預算超支',s:`已超出 ${money(c-b)}`,k:'budget',u:-1});else if(c>=b*.8)a.push({l:'yellow',ic:'💸',t:'本月預算快用完',s:`已用 ${Math.round(c/b*100)}%，剩 ${money(b-c)}`,k:'budget',u:0})}
+ if(NT('note'))S.notes.forEach(n=>{if(!n.due)return;const mins=(new Date(n.due)-new Date())/6e4;if(mins<0&&(n.ack===n.due||mins<-4320))return;const l=mins<0?'red':mins<=1440?'orange':mins<=4320?'yellow':null;if(l)a.push({l,ic:'📝',t:n.title||'記事',s:`${mins<0?'已過提醒時間 ':''}${md(n.due.slice(0,10))} ${n.due.slice(11)}`,k:'note',id:n.id,u:mins/60})});
+ if(NT('quick')&&quickList().length)a.push({l:'yellow',ic:'⚡',t:'待確認的快速補貨',s:`${quickList().length} 筆`,k:'quick',u:0});
+ if(!set.fxOk&&usesFx())a.push({l:'yellow',ic:'💱',t:'匯率是預設概略值',s:'請到設定更新匯率',k:'fx',u:0});
+ if(NT('info')){if(wt(today())<1)a.push({l:'blue',ic:'✈️',t:'目前有人不在家',s:'預測已自動調整',k:'info',u:0});const nd=S.items.filter(i=>i.history.length&&urgency(i)>=4000).length;if(nd)a.push({l:'blue',ic:'📉',t:'資料還不足以預測',s:`${nd} 個物品，再補貨一次就能預測`,k:'info',u:0})}
+ const ord={red:0,orange:1,yellow:2,blue:3};return a.sort((x,y)=>ord[x.l]-ord[y.l]||x.u-y.u)}
+function renderShade(){const el=$('shade');if(!el)return;if(V!=='home'){el.style.display='none';return}el.style.display='block';const a=alerts(),c={};a.forEach(x=>c[x.l]=(c[x.l]||0)+1);ALERTS=a;const ug=(c.red||0)+(c.orange||0)+(c.yellow||0);
+ $('sht').innerHTML=`<span class="w-7 h-1 rounded-full bg-slate-300"></span>${ug?['red','orange','yellow'].filter(l=>c[l]).map(l=>`<span class="inline-flex items-center gap-1 text-xs font-bold ${LVL[l].tx}"><i class="w-2.5 h-2.5 rounded-full ${LVL[l].bg} block"></i>×${c[l]}</span>`).join(''):'<span class="text-xs font-bold text-emerald-600">✓ 一切安好</span>'}${c.blue&&!ug?`<span class="text-xs font-bold text-sky-600">ⓘ ${c.blue}</span>`:''}<span class="text-slate-400 text-xs">${SH?'▲':'▼'}</span>`;
+ const row=(x,i)=>`<div data-act="shgo" data-i="${i}" class="flex items-center gap-3 p-3 rounded-2xl ${LVL[x.l].soft} cursor-pointer"><span class="w-1.5 self-stretch rounded ${LVL[x.l].bg}"></span><span class="text-xl">${esc(x.ic)}</span><div class="flex-1 min-w-0"><p class="font-bold text-sm truncate">${esc(x.t)}</p><p class="text-xs ${LVL[x.l].tx}">${esc(x.s)}</p></div><span class="text-slate-300">›</span></div>`;
+ $('shpc').innerHTML=(ug?`<p class="font-extrabold text-slate-800">有 ${ug} 件事需要留意</p>`:`<div class="text-center py-2"><div class="text-4xl">🌿</div><p class="font-extrabold text-emerald-600 mt-1">一切安好</p><p class="text-xs text-slate-400">今天沒有需要處理的事</p></div>`)+['red','orange','yellow','blue'].filter(l=>c[l]).map(l=>`<div><p class="text-xs font-bold ${LVL[l].tx} mb-1.5">${LVL[l].n}（${c[l]}）</p><div class="space-y-1.5">${a.map((x,i)=>x.l===l?row(x,i):'').join('')}</div></div>`).join('')+`<button data-act="shclose" class="w-full py-2 text-sm text-slate-400 font-semibold">收起 ▲</button>`}
+function setShade(o){SH=o;const p=$('shp');if(!p)return;p.style.transition='max-height .28s ease';p.style.maxHeight=o?'70dvh':'0px';p.style.overflowY=o?'auto':'hidden';renderShade()}
+function initShade(){const t=$('sht');if(!t||!t.addEventListener)return;let y0=null,h0=0,mv=false;
+ t.addEventListener('pointerdown',e=>{y0=e.clientY;h0=SH?$('shp').offsetHeight:0;mv=false;try{t.setPointerCapture(e.pointerId)}catch(x){}});
+ t.addEventListener('pointermove',e=>{if(y0==null)return;const dy=e.clientY-y0;if(Math.abs(dy)>6)mv=true;if(mv){const p=$('shp');p.style.transition='none';p.style.overflowY='hidden';p.style.maxHeight=Math.max(0,Math.min(h0+dy,innerHeight*.7))+'px'}});
+ const end=e=>{if(y0==null)return;const dy=e.clientY-y0;y0=null;setShade(mv?(SH?dy>-60:dy>60):!SH)};t.addEventListener('pointerup',end);t.addEventListener('pointercancel',end)}
+// 日期輸入：年/月/日 分段、斜線固定、自動跳下一格、數字鍵盤；也保留 📅 選日期
+function dtISO(y,m,d){if(String(y).length<4||!m||!d)return'';const Y=+y,M=+m,D=+d,dt=new Date(Y,M-1,D);return M>=1&&M<=12&&D>=1&&dt.getFullYear()===Y&&dt.getMonth()===M-1&&dt.getDate()===D?Y+'-'+pad(M)+'-'+pad(D):''}
+function initDate(el){if(el.dataset.dt)return;el.dataset.dt='1';const prot=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value'),w=document.createElement('span');
+ w.className='dtw relative inline-flex items-center gap-0.5 bg-slate-100 rounded-xl px-3 py-1.5 text-sm font-semibold';
+ w.innerHTML='<input data-p="y" inputmode="numeric" maxlength="4" placeholder="年" aria-label="年" class="w-10 text-center bg-transparent outline-none placeholder:text-slate-300"><span>/</span><input data-p="m" inputmode="numeric" maxlength="2" placeholder="月" aria-label="月" class="w-7 text-center bg-transparent outline-none placeholder:text-slate-300"><span>/</span><input data-p="d" inputmode="numeric" maxlength="2" placeholder="日" aria-label="日" class="w-7 text-center bg-transparent outline-none placeholder:text-slate-300"><span class="dtp relative inline-block w-7 h-7 ml-1 text-center text-lg leading-7" style="position:relative;display:inline-block;width:28px;height:28px;margin-left:4px;line-height:28px">📅</span>';
+ el.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:28px';
+ el.parentNode.insertBefore(w,el);w.querySelector('.dtp').appendChild(el);
+ const P=[...w.querySelectorAll('input[data-p]')],fill=v=>{const q=(v||'').split('-');P[0].value=q[0]||'';P[1].value=q[1]||'';P[2].value=q[2]||''};
+ Object.defineProperty(el,'value',{get(){return prot.get.call(el)},set(v){prot.set.call(el,v);fill(v)}});fill(el.value);el.addEventListener('input',()=>fill(prot.get.call(el)));
+ const commit=()=>{const v=dtISO(P[0].value,P[1].value,P[2].value);if(v!==prot.get.call(el)){prot.set.call(el,v);el.dispatchEvent(new Event('change',{bubbles:true}))}};
+ P.forEach((x,i)=>{x.addEventListener('input',()=>{let v=x.value.replace(/\D/g,'');const mx=i?2:4;
+   if(i===1&&v.length===1&&+v>1)v='0'+v;if(i===1&&v.length===2&&+v>12){P[2].value=v[1];v='0'+v[0];P[2].focus()}
+   if(i===2&&v.length===1&&+v>3)v='0'+v;x.value=v.slice(0,mx);commit();if(x.value.length===mx&&P[i+1])P[i+1].focus()});
+  x.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!x.value&&i>0){e.preventDefault();const p=P[i-1];p.focus();p.value=p.value.slice(0,-1);commit()}});x.addEventListener('focus',()=>{try{x.select()}catch(e){}})})}
+function initDates(){document.querySelectorAll('input[type=date]').forEach(initDate)}
+const cp=x=>{try{const r=navigator.clipboard.writeText(x);return r&&r.catch?r.catch(()=>{}):r}catch(e){}};
+let NID=null,NP=false,NH=[],NI=-1,nTimer=null,NQ='',LM=false,LMcaret=0;
+const NTPL=[['📅 每日計畫',"# {{date}} 每日計畫\n\n## 📋 今日待辦\n- [ ] \n- [ ] \n- [ ] \n\n## 📝 筆記\n\n\n## ✅ 今天完成\n- \n"],['🛒 採買／補貨清單',"# 🛒 採買清單\n\n## 要買\n- [ ] \n- [ ] \n\n## 價格備註\n- \n\n> 小提示：在這裡按「📍 抓取 App 連結」，再長按 App 裡的物品，就能把連結貼進記事，點了直接跳過去。\n"],['📞 會議紀錄',"# 會議紀錄\n\n**時間**：\n**地點／人員**：\n\n## 重點\n- \n\n## 決議\n- \n\n## 待辦\n- [ ] \n"],['💡 靈感',"# 💡 靈感\n\n## 一句話\n\n## 為什麼值得做\n\n## 下一步\n- [ ] \n"],['📈 投資筆記',"# 📈 投資筆記\n\n**標的**：\n**買進理由**：\n\n## 風險\n- \n\n## 賣出條件\n- 停利：\n- 停損：\n\n## 檢討\n"],['📚 學習筆記',"# 📚 學習筆記\n\n## 重點\n- \n\n## 例子\n\n## 待釐清\n- [ ] \n\n## 參考\n- \n"],['🗓️ 每週回顧',"# 🗓️ 每週回顧\n\n## 本週亮點\n- \n\n## 花費檢討\n- \n\n## 下週目標\n- [ ] \n- [ ] \n"]];
+const LINK_BAN=/^(del|de|dpur|findel|recdel|rxdel|bdel|srm|adel2?|pdel2?|tdel|tclear|goaldel|pused|undo|qok|qall|cmdrun|incsave|xsave|psave|goalsave|addc|save|saveprice|skipprice|saveexp|qmerge|qsplit|tg|catnew|delcat|delec|lpdel|restore|dupm|dupk|hoardstock|hoardused|hoardnever|icnew|icplus|unlock|quick|gift|ndel|prest|badd|bpre|fsin|fsavg|bbud)$/;
+function mdHtml(src){const E=esc,inl=t=>{t=E(t);
+  t=t.replace(/`([^`]+)`/g,'<code class="px-1 rounded bg-slate-100 text-sm">$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<i>$2</i>').replace(/~~([^~]+)~~/g,'<s>$1</s>').replace(/==([^=]+)==/g,'<mark class="bg-yellow-200 rounded px-0.5">$1</mark>');
+  t=t.replace(/(^|[\s>])(https?:\/\/[^\s<)]+)/g,(m,p,u)=>`${p}<a href="${u}" target="_blank" rel="noopener" class="text-sky-600 underline break-all">${u}</a>`);
+  t=t.replace(/\[([^\]]+)\]\((app:\/\/[^)\s]+)\)/g,(m,a,u)=>`<a href="#" data-link="${u}" class="text-emerald-600 underline font-semibold">📍${a}</a>`).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,(m,a,u)=>`<a href="${u}" target="_blank" rel="noopener" class="text-sky-600 underline">${a}</a>`).replace(/\[\[([^\]]+)\]\]/g,(m,a)=>`<a href="#" data-note="${a}" class="text-violet-600 underline">${a}</a>`);return t};
+ let out='',lt=null,code=false;const close=()=>{if(lt){out+=lt==='ol'?'</ol>':'</ul>';lt=null}};
+ for(const ln of String(src).split('\n')){let m;
+  if(/^```/.test(ln)){close();code=!code;out+=code?'<pre class="bg-slate-100 rounded-xl p-3 text-sm overflow-x-auto my-2"><code>':'</code></pre>';continue}
+  if(code){out+=E(ln)+'\n';continue}
+  if(m=ln.match(/^(#{1,3})\s+(.*)$/)){close();const n=m[1].length;out+=`<h${n} class="${['text-2xl','text-xl','text-lg'][n-1]} font-extrabold mt-4 mb-1">${inl(m[2])}</h${n}>`}
+  else if(m=ln.match(/^\s*[-*]\s+\[( |x|X)\]\s*(.*)$/)){if(lt!=='todo'){close();out+='<ul class="space-y-1 my-1">';lt='todo'}const dn=m[1]!==' ';out+=`<li class="flex gap-2 items-start"><span>${dn?'☑':'☐'}</span><span class="${dn?'line-through text-slate-400':''}">${inl(m[2])}</span></li>`}
+  else if(m=ln.match(/^\s*[-*]\s+(.*)$/)){if(lt!=='ul'){close();out+='<ul class="list-disc pl-5 my-1">';lt='ul'}out+=`<li>${inl(m[1])}</li>`}
+  else if(m=ln.match(/^\s*\d+\.\s+(.*)$/)){if(lt!=='ol'){close();out+='<ol class="list-decimal pl-5 my-1">';lt='ol'}out+=`<li>${inl(m[1])}</li>`}
+  else if(m=ln.match(/^>\s?(.*)$/)){close();out+=`<blockquote class="border-l-4 border-emerald-300 pl-3 text-slate-600 my-1">${inl(m[1])}</blockquote>`}
+  else if(/^-{3,}\s*$/.test(ln)){close();out+='<hr class="my-3">'}
+  else if(!ln.trim()){close();out+='<div class="h-2"></div>'}
+  else{close();out+=`<p class="my-0.5">${inl(ln)}</p>`}}
+ close();return out}
+function nfmt(n){const o=[n.title,n.body];if(n.due){const d=n.due.slice(0,10),[y,m,dd]=d.split('-');o.push(n.due,d,y+'/'+m+'/'+dd,m+'/'+dd,(+m)+'/'+(+dd),(+m)+'月'+(+dd)+'日',m+'-'+dd,n.due.slice(11),y+'年'+(+m)+'月'+(+dd)+'日')}return o.join('\n').toLowerCase()}
+function nMatch(n,q){q=q.trim().toLowerCase();if(!q)return true;const f=nfmt(n);return q.split(/\s+/).every(w=>f.includes(w)||(/^[\d\/\-:.]+$/.test(w)&&n.due&&n.due.replace(/\D/g,'').includes(w.replace(/\D/g,''))))}
+const nSnippet=b=>String(b||'').replace(/[#>*`=~\[\]()]|^-\s|\n-\s/g,' ').replace(/\s+/g,' ').trim().slice(0,90);
+function nList(){const l=S.notes.filter(n=>nMatch(n,NQ)).sort((a,b)=>(b.updated||'')>(a.updated||'')?1:-1),now=new Date();
+ return l.length?l.map(n=>{const od=n.due&&new Date(n.due)<now;return `<article data-act="noteopen" data-id="${n.id}" class="card p-4 cursor-pointer"><h3 class="font-bold truncate">${esc(n.title||nSnippet(n.body).slice(0,20)||'無標題')}</h3><p class="text-sm text-slate-500 mt-1 break-words">${esc(nSnippet(n.body))}</p>${n.due?`<p class="text-xs mt-2 font-bold ${od?'text-rose-600':'text-amber-600'}">🔔 ${md(n.due.slice(0,10))} ${n.due.slice(11)}</p>`:''}</article>`}).join(''):`<p class="text-center text-slate-400 py-12">${NQ?'找不到符合的記事':'還沒有記事。按右下角 ＋ 開始寫。'}</p>`}
+function notesView(){return `<input id="nq" value="${esc(NQ)}" placeholder="🔍 搜尋標題、內文、日期（如 10/28）" class="w-full bg-white rounded-2xl px-4 py-3 text-sm shadow-sm outline-none ring-2 ring-transparent focus:ring-emerald-300"><div id="nlist" class="space-y-3">${nList()}</div>`}
+function nSnap(){const v=$('nbody').value+'\u0000'+$('ntitle').value;if(NH[NI]===v)return;NH=NH.slice(0,NI+1);NH.push(v);if(NH.length>200)NH.shift();NI=NH.length-1}
+function nApply(v){const [b,t]=v.split('\u0000');$('nbody').value=b;$('ntitle').value=t||'';nSave();if(NP)nView()}
+function nSave(){const t=$('ntitle').value,b=$('nbody').value,d=$('ndt').value,tm=$('ntm').value,due=d?d+'T'+(tm||'09:00'):'';let n=S.notes.find(x=>x.id===NID);
+ if(!n){if(!t.trim()&&!b.trim()&&!due)return;n={id:rid(),title:'',body:'',due:'',created:today()};NID=n.id;S.notes.push(n)}
+ Object.assign(n,{title:t,body:b,due,updated:new Date().toISOString()});save()}
+const nSched=()=>{clearTimeout(nTimer);nTimer=setTimeout(()=>{nSnap();nSave()},350)};
+function nView(){$('nbody').style.display=NP?'none':'block';$('nview').style.display=NP?'block':'none';$('ntool').style.display=NP?'none':'flex';$('ntitle').readOnly=NP;$('nprev').style.background=NP?'#d1fae5':'';if(NP)$('nview').innerHTML=mdHtml($('nbody').value||'*（沒有內容）*')}
+function openNote(id){const n=id?S.notes.find(x=>x.id===id):null;NID=n?n.id:null;NP=false;$('ntitle').value=n?n.title:'';$('nbody').value=n?n.body:'';const d=n&&n.due?n.due.slice(0,10):'';$('ndt').value=d;$('ntm').value=n&&n.due?n.due.slice(11):'';$('nbellrow').style.display=d?'flex':'none';$('ntm').style.display=d?'inline-block':'none';if(n&&n.due)n.ack=n.due;
+ NH=[];NI=-1;nSnap();nView();$('npage').style.display='flex';document.body.classList.add('mo');if(!n)setTimeout(()=>$('ntitle').focus(),60)}
+function hideNote(){clearTimeout(nTimer);if($('npage').style.display!=='none')nSave();$('npage').style.display='none';document.body.classList.remove('mo')}
+function nTool(k){if(NP)return;const ta=$('nbody');ta.focus();const a=ta.selectionStart,b=ta.selectionEnd,v=ta.value,sel=v.slice(a,b),wrap=(l,r,ph)=>{const t=sel||ph;ta.setRangeText(l+t+r,a,b,'end');if(!sel)ta.setSelectionRange(a+l.length,a+l.length+t.length)},line=p=>{const ls=v.lastIndexOf('\n',a-1)+1;ta.setRangeText(p,ls,ls,'end')};
+ if(k==='b')wrap('**','**','粗體');else if(k==='i')wrap('*','*','斜體');else if(k==='mark')wrap('==','==','標注');else if(k==='h')line('## ');else if(k==='todo')line('- [ ] ');else if(k==='ul')line('- ');else if(k==='quote')line('> ');
+ else if(k==='link')wrap('[','](https://)','連結名稱');else if(k==='today')ta.setRangeText(`${a&&v[a-1]!=='\n'?'\n':''}## 📋 今日待辦（${today()}）\n- [ ] \n- [ ] \n- [ ] \n`,a,b,'end');nSnap();nSched()}
+function nTpl(i){const x=NTPL[i][1].replace('{{date}}',today()),ta=$('nbody');if(!ta.value.trim()){ta.value=x;if(!$('ntitle').value)$('ntitle').value=x.split('\n')[0].replace(/^#+\s*/,'')}else ta.setRangeText('\n'+x,ta.selectionStart,ta.selectionEnd,'end');nSnap();nSched()}
+function linkFor(el){let x;if(x=el.closest('[data-nav]'))return 'app://tab/'+x.dataset.nav;if(x=el.closest('[data-cal]'))return 'app://day/'+x.dataset.cal;if(x=el.closest('[data-act]')){const d=x.dataset;return 'app://act/'+d.act+'/'+(d.id||'-')+'/'+(d.k||'-')+'/'+(d.u||'-')}if(x=el.closest('[id^="it-"]'))return 'app://item/'+x.id.slice(3);if(x=el.closest('[id^="pn-"]'))return 'app://pantry/'+x.id.slice(3);return ''}
+const labelFor=el=>{const x=el.closest('[data-act],[data-nav],[data-cal],[id^="it-"],[id^="pn-"]')||el;return String(x.innerText||x.textContent||'').trim().replace(/\s+/g,' ').slice(0,14)||'連結'};
+function startLink(){nSave();LMcaret=$('nbody').selectionStart||$('nbody').value.length;$('npage').style.display='none';document.body.classList.remove('mo');LM=true;document.body.classList.add('lm');$('linkbar').style.display='flex';V='home';render()}
+function endLink(lk,label){LM=false;document.body.classList.remove('lm');$('linkbar').style.display='none';openNote(NID);const ta=$('nbody'),p=Math.min(LMcaret,ta.value.length);ta.setRangeText(`[${label}](${lk})`,p,p,'end');nSnap();nSched();cp(lk);toast('已插入連結，可直接改名稱')}
+function runLink(u){hideNote();const p=u.replace('app://','').split('/'),ty=p[0],g=i=>p[i]&&p[i]!=='-'?decodeURIComponent(p[i]):undefined;
+ if(ty==='tab'){V=g(1)||'home';render()}else if(ty==='day'){V='stats';CV='cal';CD=g(1);CM=new Date(+CD.slice(0,4),+CD.slice(5,7)-1,1);render()}
+ else if(ty==='item'){setTimeout(()=>focusItem(g(1)),80)}else if(ty==='pantry'){V='home';HV='pan';render();setTimeout(()=>{const el=$('pn-'+g(1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
+ else if(ty==='act'){const a=g(1),o={};if(g(2))o.id=g(2);if(g(3))o.k=g(3);if(g(4))o.u=g(4);if(a==='sedit'){V='sale';render()}act(a,o)}}
+function initNotes(){$('ntpl').innerHTML+=NTPL.map((x,i)=>`<option value="${i}">${x[0]}</option>`).join('');
+ let tm=null,sx=0,sy=0,tg=null;
+ document.addEventListener('pointerdown',e=>{if(!LM||e.target.closest('#linkbar'))return;tg=e.target;sx=e.clientX;sy=e.clientY;clearTimeout(tm);tm=setTimeout(()=>{if(!tg)return;const el=tg;tg=null;const lk=linkFor(el);if(!lk){toast('這裡沒有可連結的項目，換個地方長按');return}const ac=lk.startsWith('app://act/')?lk.split('/')[3]:'';if(LINK_BAN.test(ac)){toast('這個按鈕會直接修改資料，不能做成連結');return}endLink(lk,labelFor(el))},550)},true);
+ document.addEventListener('pointermove',e=>{if(tg&&Math.hypot(e.clientX-sx,e.clientY-sy)>10){clearTimeout(tm);tg=null}},true);
+ const up=()=>{clearTimeout(tm);tg=null};document.addEventListener('pointerup',up,true);document.addEventListener('pointercancel',up,true);
+ document.addEventListener('click',e=>{if(!LM||e.target.closest('[data-nav],[data-hv],[data-av],select,#linkbar'))return;e.stopPropagation();e.preventDefault()},true);
+ document.addEventListener('contextmenu',e=>{if(LM)e.preventDefault()})}
+let FV='main',invId=null,invEdit=null,imk='',mkAdd=false,pendAuto=null,sellId=null;
+const invCost=h=>h.qty*h.buy,invPnl=h=>h.sold?h.qty*(h.sell-h.buy):(h.price?h.qty*(h.price-h.buy):0);
+function invStats(){let cost=0,val=0,real=0,div=0,div12=0,divM=0;const lim=addDays(today(),-365),mk=today().slice(0,7),by={},B=(n,x)=>toBase(n,cOf(x));
+ S.inv.items.forEach(h=>{if(h.sold)real+=B(h.qty*(h.sell-h.buy),h);else{cost+=B(invCost(h),h);val+=B(h.qty*(h.price||h.buy),h)}h.divs.forEach(d=>{const a=toBase(d.amt,d.cur||cOf(h));div+=a;if(d.date>=lim)div12+=a;if(d.date.slice(0,7)===mk)divM+=a;by[d.date.slice(0,7)]=(by[d.date.slice(0,7)]||0)+a})});return{cost,val,unreal:val-cost,real,div,div12,divM,by}}
+const divSum=(h,all)=>h.divs.filter(d=>all||d.date>=addDays(today(),-365)).reduce((a,d)=>a+fromBase(toBase(d.amt,d.cur||cOf(h)),cOf(h)),0);
+const sgn=(n,c)=>(n>=0?'+':'−')+money(Math.abs(n),c),pc=n=>`<span class="${n>=0?'text-emerald-600':'text-rose-600'}">`;
+function finTab(){const sg=set.inv!==false?`<div class="grid grid-cols-2 bg-slate-100 rounded-2xl p-1">${[['main','💰 收支'],['inv','📈 投資']].map(([k,l])=>`<button data-fv="${k}" class="py-2 rounded-xl text-sm font-bold ${FV===k?'bg-white shadow-sm':'text-slate-500'}">${l}</button>`).join('')}</div>`:'';return sg+(FV==='inv'&&set.inv!==false?invView():finView())}
+function invView(){const I=S.inv,st=invStats(),ret=st.cost?st.unreal/st.cost*100:0,tot=st.unreal+st.real+st.div,mx=1,cols=['#10b981','#3b82f6','#f59e0b','#8b5cf6','#ef4444','#14b8a6'];
+ const open=I.items.filter(h=>!h.sold),mks=[...new Set(I.markets.concat(I.items.map(h=>h.market)))].filter(m=>I.items.some(h=>h.market===m));
+ let acc=0;const mc=mks.map((m,i)=>({m,v:open.filter(h=>h.market===m).reduce((a,h)=>a+toBase(invCost(h),cOf(h)),0),c:cols[i%6]})).filter(x=>x.v>0),stops=mc.map(x=>{const s0=acc;acc+=x.v/st.cost*100;return `${x.c} ${s0}% ${acc}%`}).join(',');
+ const ms=[...Array(6)].map((_,i)=>{const d=new Date(new Date().getFullYear(),new Date().getMonth()-5+i,1),k=iso(d).slice(0,7);return[k,st.by[k]||0]}),dm=Math.max(1,...ms.map(x=>x[1]));
+ return `<section class="card p-5"><div class="flex items-center justify-between mb-3"><h2 class="font-bold">📈 投資總覽</h2><button data-act="invadd" class="w-9 h-9 rounded-full bg-emerald-500 text-white text-xl font-bold" aria-label="新增標的">＋</button></div>
+ <div class="grid grid-cols-2 gap-3 text-center"><div><p class="text-xs text-slate-400">持有成本</p><p class="font-extrabold num">${money(st.cost)}</p></div><div><p class="text-xs text-slate-400">持有現值</p><p class="font-extrabold num">${money(st.val)}</p></div><div><p class="text-xs text-slate-400">未實現損益</p><p class="font-extrabold num">${pc(st.unreal)}${sgn(st.unreal)}（${ret.toFixed(1)}%）</span></p></div><div><p class="text-xs text-slate-400">已實現損益</p><p class="font-extrabold num">${pc(st.real)}${sgn(st.real)}</span></p></div></div>
+ <div class="mt-3 rounded-2xl bg-slate-50 p-3 text-center"><p class="text-xs text-slate-400">總報酬（未實現＋已實現＋配息）</p><p class="font-extrabold text-lg num">${pc(tot)}${sgn(tot)}</span></p></div>
+ ${mc.length?`<div class="flex items-center gap-4 mt-4"><div class="w-20 h-20 rounded-full shrink-0" style="background:conic-gradient(${stops})"></div><div class="space-y-1">${mc.map(x=>`<p class="text-xs"><i class="inline-block w-2.5 h-2.5 rounded-full mr-1" style="background:${x.c}"></i>${esc(x.m)} ${Math.round(x.v/st.cost*100)}%</p>`).join('')}</div></div>`:''}
+ <p class="text-xs text-slate-400 mt-3">現價請在標的列手動輸入；即時行情需要後端或 App 版（目前頁面無法直接連外）。</p></section>
+ <section class="card p-5"><div class="flex items-center justify-between"><h2 class="font-bold">💵 配息收益</h2><span class="text-xs text-slate-500">近 12 個月 <b class="num">${money(st.div12)}</b>（月均 ${money(st.div12/12)}）</span></div><p class="text-xs text-slate-500 mt-1">本月 <b class="num">${money(st.divM)}</b>・累計 <b class="num">${money(st.div)}</b></p><div class="flex items-end gap-2 h-20 mt-3">${ms.map(([k,v],i)=>`<div class="flex-1 flex flex-col items-center justify-end h-full"><div class="w-full rounded-lg ${i===5?'bg-emerald-500':'bg-emerald-200'}" style="height:${Math.max(3,v/dm*100)}%"></div><span class="text-xs text-slate-400 mt-1">${+k.slice(5)}月</span></div>`).join('')}</div></section>
+ ${I.items.length?mks.map(m=>{const l=I.items.filter(h=>h.market===m);return `<section class="card p-4"><div class="flex items-center justify-between mb-1"><h3 class="font-bold text-sm">${esc(m)}</h3><span class="text-xs text-slate-400">${l.length} 檔</span></div>${l.map(h=>{const pl=invPnl(h),cost=invCost(h),pct=cost?pl/cost*100:0,dv=divSum(h,true),hc=cOf(h);
+  return `<div class="py-2.5 border-b border-slate-100 last:border-0"><div data-act="invd" data-id="${h.id}" class="cursor-pointer"><div class="flex items-center justify-between"><p class="font-bold text-sm ${h.sold?'text-slate-400 line-through':''}">${esc(h.sym)}</p><b class="num text-sm">${h.sold||h.price?pc(pl)+sgn(pl,hc)+'</span>':''}</b></div><p class="text-xs text-slate-400">${h.qty} × ${h.buy}＝${money(cost,hc)}・${md(h.bdate)} 買入${h.sold?`・已賣出 @${h.sell}（${pct.toFixed(1)}%）`:h.price?`・${pct.toFixed(1)}%`:''}${dv?`・配息 ${money(dv,hc)}`:''}</p></div>${h.sold?'':`<div class="flex items-center gap-2 mt-1.5"><span class="text-xs text-slate-400">現價</span><input data-ip="${h.id}" type="number" inputmode="decimal" value="${h.price||''}" placeholder="輸入" aria-label="現價" class="w-20 bg-slate-100 rounded-lg px-2 py-1 text-sm text-right num outline-none"><button data-act="isell" data-id="${h.id}" class="ml-auto px-3 py-1 rounded-lg bg-slate-100 text-xs font-bold">已賣出</button><button data-act="idiv" data-id="${h.id}" class="px-3 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-bold">配息</button></div>`}</div>`}).join('')}</section>`}).join(''):'<section class="card p-5 text-center text-sm text-slate-400">還沒有標的。按右上的 ＋：選市場 → 填標的 → 買入價格。</section>'}`}
+const drawMk=()=>{$('imk').innerHTML=S.inv.markets.map(m=>`<button data-mk="${esc(m)}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${m===imk?'bg-emerald-500 text-white':'bg-slate-50'}">${esc(m)}</button>`).join('')+(mkAdd?`<span class="inline-flex gap-1"><input id="mkn" maxlength="8" placeholder="新市場" class="w-24 bg-slate-50 rounded-full px-3 py-1.5 text-sm ring-2 ring-emerald-400 outline-none"><button data-act="mknew" class="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold">✓</button></span>`:`<button data-act="mkplus" class="w-9 h-9 rounded-full bg-slate-100 font-bold" aria-label="新增市場">＋</button>`);if(mkAdd)setTimeout(()=>{const x=$('mkn');if(x)x.focus()},30)};
+function renderInvD(){const h=S.inv.items.find(x=>x.id===invId);if(!h)return;const pl=invPnl(h),cost=invCost(h),days=Math.max(1,diff(h.bdate,h.sold?h.sdate:today())),dv=divSum(h,true),y12=divSum(h,false),hc=cOf(h);
+ $('invd').innerHTML=`<div class="flex items-center gap-2"><div class="flex-1 min-w-0"><h2 class="text-lg font-bold truncate">${esc(h.sym)}</h2><p class="text-xs text-slate-500">${esc(h.market)}・${h.qty} × ${h.buy}＝${money(cost,hc)}</p></div><button data-act="invedit" data-id="${h.id}" class="w-9 h-9 rounded-full bg-slate-100" aria-label="編輯">✎</button><button data-act="close" class="text-slate-400 px-2 text-xl" aria-label="關閉">✕</button></div>
+ <div class="rounded-2xl bg-slate-50 p-3 text-sm space-y-1"><p>買入 ${md(h.bdate)}（持有 ${days} 天）${h.note?'・'+esc(h.note):''}</p>${h.sold?`<p>賣出 ${md(h.sdate)} @ ${h.sell} → 損益 ${pc(pl)}<b>${sgn(pl,hc)}（${(cost?pl/cost*100:0).toFixed(1)}%，年化約 ${(cost?pl/cost*100/days*365:0).toFixed(1)}%）</b></span></p>`:h.price?`<p>現價 ${h.price} → 未實現 ${pc(pl)}<b>${sgn(pl,hc)}</b></span></p>`:'<p class="text-slate-400">尚未輸入現價</p>'}<p>配息累計 <b class="num">${money(dv,hc)}</b>・近 12 個月殖利率 <b>${cost?(y12/cost*100).toFixed(2):0}%</b></p></div>
+ <div><p class="text-xs text-slate-400 mb-1">配息紀錄</p>${h.divs.length?[...h.divs].sort((a,b)=>a.date<b.date?1:-1).map(d=>`<div class="flex items-center gap-2 py-2 border-b border-slate-100"><span class="flex-1 text-sm">${md(d.date)}${d.note?'・'+esc(d.note):''}</span><b class="num text-sm">${money(d.amt,d.cur||hc)}</b><button data-act="iddel" data-id="${h.id}" data-u="${d.id}" class="text-xs text-slate-400 px-1">刪除</button></div>`).join(''):'<p class="text-sm text-slate-400">還沒有配息紀錄</p>'}</div>
+ <div class="grid grid-cols-2 gap-2"><button data-act="idiv" data-id="${h.id}" class="py-3 rounded-2xl bg-emerald-50 text-emerald-700 font-bold text-sm">💵 新增配息</button>${h.sold?`<button data-act="iunsell" data-id="${h.id}" class="py-3 rounded-2xl bg-slate-100 font-bold text-sm">↩︎ 取消賣出</button>`:`<button data-act="isell" data-id="${h.id}" class="py-3 rounded-2xl bg-slate-100 font-bold text-sm">已賣出</button>`}</div><button data-act="invdel" data-id="${h.id}" class="w-full py-2 text-sm text-rose-500 font-semibold">刪除這檔（可從垃圾桶恢復）</button>`;show('m-invd')}
+// 賣出／配息自動記帳：賣出記「已實現損益」，配息記收入；備註寫標的與買入／賣出價
+function invBook(kind,h,d){if(kind==='sell'){const pl=h.qty*(h.sell-h.buy),note=`${h.sym} 買入 ${h.buy} 賣出 ${h.sell} ×${h.qty}`;if(!S.fin.icats.includes('投資'))S.fin.icats.push('投資');
+  if(pl>=0)S.fin.income.push({id:rid(),date:h.sdate,amount:pl,cur:cOf(h),cat:'投資',note,inv:h.id,ik:'sell'});else S.expenses.push({id:rid(),date:h.sdate,amount:-pl,cur:cOf(h),cat:'📈 投資',note,who:[],inv:h.id,ik:'sell'})}
+ else{if(!S.fin.icats.includes('配息'))S.fin.icats.push('配息');S.fin.income.push({id:rid(),date:d.date,amount:d.amt,cur:d.cur||cOf(h),cat:'配息',note:`${h.sym} 配息${d.note?'・'+d.note:''}`,inv:h.id,ik:'div',did:d.id})}save()}
+function invAfter(kind,h,d){if(set.invAuto==='ask'){pendAuto={kind,id:h.id,did:d&&d.id};show('m-iask');return}if(set.invAuto==='on')invBook(kind,h,d)}
+let SHF=false,NCUR=null;
+function renderFix(){const el=$('fixd');if(!el)return;if(V!=='stats'){el.style.display='none';return}el.style.display='block';const F=S.fin,sm=a=>a.reduce((x,r)=>x+toBase(r.amount,cOf(r)),0);
+ $('fxt').innerHTML=`<span class="w-7 h-1 rounded-full bg-slate-300"></span><span class="text-xs font-bold text-slate-600">🔁 固定收支</span><span class="text-xs font-bold text-teal-700">+${money(sm(F.recur))}</span><span class="text-xs font-bold text-rose-600">−${money(sm(F.recurX))}</span><span class="text-slate-400 text-xs">${SHF?'▲':'▼'}</span>`;
+ $('fxpc').innerHTML=fixView()+`<button data-act="fxclose" class="w-full py-2 text-sm text-slate-400 font-semibold">收起 ▲</button>`}
+function setFix(o){SHF=o;const p=$('fxp');if(!p)return;p.style.transition='max-height .28s ease';p.style.maxHeight=o?'70dvh':'0px';p.style.overflowY=o?'auto':'hidden';renderFix()}
+function initFix(){const t=$('fxt');if(!t||!t.addEventListener)return;let y0=null,h0=0,mv=false;
+ t.addEventListener('pointerdown',e=>{y0=e.clientY;h0=SHF?$('fxp').offsetHeight:0;mv=false;try{t.setPointerCapture(e.pointerId)}catch(x){}});
+ t.addEventListener('pointermove',e=>{if(y0==null)return;const dy=e.clientY-y0;if(Math.abs(dy)>6)mv=true;if(mv){const p=$('fxp');p.style.transition='none';p.style.overflowY='hidden';p.style.maxHeight=Math.max(0,Math.min(h0+dy,innerHeight*.7))+'px'}});
+ const end=e=>{if(y0==null)return;const dy=e.clientY-y0;y0=null;setFix(mv?(SHF?dy>-60:dy>60):!SHF)};t.addEventListener('pointerup',end);t.addEventListener('pointercancel',end)}
+let HV='sup';
+function homeTab(){const seg=set.pantry?`<div class="grid grid-cols-2 bg-white rounded-2xl p-1 shadow-sm">${[['sup','🔄 補給品'],['pan','🧺 效期庫存']].map(([k,l])=>`<button data-hv="${k}" class="py-2 rounded-xl text-sm font-bold ${HV===k?'bg-emerald-500 text-white':'text-slate-500'}">${l}</button>`).join('')}</div>`:'';return seg+(HV==='pan'&&set.pantry?pantryView():home())}
+
+function render(){
+ const nav=[['home','🧺','小倉庫'],['stats','📅','月曆']].concat(set.expense||set.fin?[['ana','📊','分析']]:[],[['notes','📝','記事']],set.sales?[['sale','🏷️','特價']]:[],[['set','⚙️','設定']]);
+ if(!nav.some(n=>n[0]===V))V='home';
+ $('nav').style.gridTemplateColumns=`repeat(${nav.length},1fr)`;
+ $('nav').innerHTML=nav.map(n=>`<button data-nav="${n[0]}" class="py-2.5 text-center ${V===n[0]?'bg-emerald-50 text-emerald-600':'text-slate-400'}"><div class="text-xl">${n[1]}</div><div class="text-xs font-bold">${n[2]}${n[0]==='home'&&S.pantry.some(p=>p.later)?' •':''}</div></button>`).join('');
+ document.documentElement.style.fontSize=set.size+'px';$('fab').style.display=(V==='home'||V==='notes')?'block':'none';$('fab').dataset.act=V==='notes'?'notenew':(V==='home'&&HV==='pan')?'padd':'add';$('count').style.display=V==='home'?'':'none';{const n=S.trash.length;$('mtrash').textContent='🗑️ 垃圾桶'+(n?'（'+n+'）':'');$('menuDot').style.display=n?'block':'none'}$('title').textContent={home:HV==='pan'&&set.pantry?'小倉庫':'我的補給站',stats:'月曆',ana:'分析',notes:'記事本',sale:'特價提醒',set:'設定'}[V];
+ $('count').textContent=S.userStatus.isPremium?`${S.items.length} 個物品・Premium`:`${S.items.length} / ${FREE}`;
+ $('app').classList.toggle('fresh',V!==LV);LV=V;$('app').innerHTML={home:homeTab,stats,ana:anaPage,notes:notesView,sale:saleView,set:settingsView}[V]();renderShade();renderFix();initDates();
+}
+const show=id=>{$(id).classList.remove('hidden');$(id).classList.add('flex');document.body.classList.add('mo');fillCur()},hide=id=>{$(id).classList.add('hidden');$(id).classList.remove('flex')};
+const closeAll=()=>{document.body.classList.remove('mo');['m-add','m-price','m-pro','m-det','m-exp','m-trash','m-pan','m-pq','m-away','m-edit','m-dup','m-quick','m-iedit','m-cmd','m-ph','m-inc','m-hoard','m-goal','m-inv','m-sell','m-div','m-invd','m-iask'].forEach(hide)};
+const EMOS=()=>EMOJIS.concat(S.emojis),drawDays=()=>{const v=$('pd').value;$('dchips').innerHTML=[['0','今天'],['1','昨天'],['2','前天']].map(([n,l])=>{const d=new Date();d.setDate(d.getDate()-n);return `<button data-day="${n}" class="px-3 py-1.5 rounded-full text-sm font-semibold ${iso(d)===v?'bg-emerald-500 text-white':'bg-slate-100'}">${l}</button>`}).join('')};
+const drawEmojis=()=>{$('emojis').innerHTML=EMOS().map(e=>`<button data-emoji="${esc(e)}" class="text-3xl py-2 rounded-2xl border-2 ${e===pick?'border-emerald-500 bg-emerald-50':'border-transparent bg-slate-50'}">${e}</button>`).join('')+(emoOn==='add'?`<input id="eico" maxlength="4" placeholder="😀" aria-label="輸入表情符號" class="min-w-0 text-3xl text-center py-2 rounded-2xl bg-slate-50 ring-2 ring-emerald-400 outline-none">`:`<button data-act="emoplus" data-t="add" class="text-2xl py-2 rounded-2xl bg-slate-100 font-bold" aria-label="新增表情符號">＋</button>`);if(emoOn==='add')setTimeout(()=>{const x=$('eico');if(x)x.focus()},30)};
+
+document.addEventListener('click',ev=>{{const m=$('menu');if(m&&m.style.display!=='none'&&!(ev.target.closest&&ev.target.closest('#menu,#menuBtn')))m.style.display='none'}
+ const nv=ev.target.closest('[data-nav]');if(nv){V=nv.dataset.nav;delId=null;render();scrollTo(0,0);return}
+ const em=ev.target.closest('[data-emoji]');if(em){pick=em.dataset.emoji;drawEmojis();return}
+ const nt=ev.target.closest('[data-nt]');if(nt){nTool(nt.dataset.nt);return}
+ const lk=ev.target.closest('a[data-link]');if(lk){ev.preventDefault();runLink(lk.dataset.link);return}
+ const nl=ev.target.closest('a[data-note]');if(nl){ev.preventDefault();const n0=S.notes.find(x=>(x.title||'').trim().toLowerCase()===nl.dataset.note.trim().toLowerCase());if(n0){hideNote();openNote(n0.id)}else toast('找不到標題為「'+esc(nl.dataset.note)+'」的記事');return}
+ const av=ev.target.closest('[data-av]');if(av){AV=av.dataset.av;render();return}
+ const ik=ev.target.closest('[data-ic]');if(ik){icat=ik.dataset.ic;drawIc();return}
+ const fv=ev.target.closest('[data-fv]');if(fv){FV=fv.dataset.fv;render();return}
+ const mkb=ev.target.closest('[data-mk]');if(mkb){imk=mkb.dataset.mk;drawMk();return}
+ const hv=ev.target.closest('[data-hv]');if(hv){HV=hv.dataset.hv;render();return}
+ const sv=ev.target.closest('[data-sv]');if(sv){SV=sv.dataset.sv;dp=null;render();return}
+ const cl=ev.target.closest('[data-cal]');if(cl){CD=cl.dataset.cal;dp=null;render();return}
+ const ek=ev.target.closest('[data-ecat]');if(ek){ecat=ek.dataset.ecat;drawEc();return}
+ const aw=ev.target.closest('[data-aw]');if(aw){const v=aw.dataset.aw;awSel=awSel.includes(v)?awSel.filter(x=>x!==v):awSel.concat(v);drawAw();return}
+ const pn=ev.target.closest('[data-pn]');if(pn){const x=S.items.find(i=>i.id===pn.dataset.pn);if(x){$('pnm').value=x.name;picV=x.icon;picOn=false;drawPic()}return}
+ const ct=ev.target.closest('[data-cat]');if(ct){const it=S.items.find(x=>x.id===detId);if(it){it.cat=ct.dataset.cat||null;save();render();ieRender()}return}
+ const ic=ev.target.closest('[data-ico]');if(ic){const it=S.items.find(x=>x.id===detId);if(it){it.icon=ic.dataset.ico;save();render();ieRender()}return}
+ const lp=ev.target.closest('[data-lp]');if(lp){setLead(+lp.dataset.lp);return}
+ const wh=ev.target.closest('[data-who]');if(wh){const v=wh.dataset.who;if(v==='gift'){giftSel=!giftSel;drawWho();return}whoSel=!v?[]:whoSel.includes(v)?whoSel.filter(x=>x!==v):whoSel.concat(v);if(whoSel.length>=S.members.length)whoSel=[];giftSel=false;drawWho();return}
+ const dy=ev.target.closest('[data-day]');if(dy){const d=new Date();d.setDate(d.getDate()-dy.dataset.day);$('pd').value=iso(d);drawDays();return}
+ const b=ev.target.closest('[data-act]');if(!b)return;
+ const a=b.dataset.act,id=b.dataset.id,it=S.items.find(x=>x.id===id);if(a!=='del')delId=null;
+ if(a==='add'){if(!S.userStatus.isPremium&&S.items.length>=FREE){show('m-pro');return}$('name').value='';pick=EMOJIS[0];emoOn=null;drawEmojis();drawCommon();show('m-add')}
+ else if(a==='save'){const n=$('name').value.trim();if(!n){$('name').focus();return}addItem(n,pick,null)}
+ else if(a==='common'){addItem(b.dataset.n,b.dataset.e,+b.dataset.t)}
+ else if(a==='restock'&&it){set.expense?openR(id,null):(whoSel=[],giftSel=false,addP(it,today(),null))}
+ else if(a==='saveprice'||a==='skipprice'){const t=S.items.find(x=>x.id===pend),d=$('pd').value||today();if(!t)return;
+  if(editRec){editRec.restockDate=d;recalc(t);save();closeAll();render()}else{const p=parseFloat($('price').value);NCUR=CU.p;addP(t,d,giftSel||isNaN(p)?null:p,$('pn').value.trim(),giftSel?1:qv.p)}}
+ else if(a==='catson'){set.cats=true;save();render()}
+ else if(a==='catsno'){set.catAsk=false;save();render()}
+ else if(a==='cg'){const k=b.dataset.k;set.col[k]=!set.col[k];save();render()}
+ else if(a==='aadd'||a==='aedit'){const p=a==='aedit'?S.away.find(x=>x.id===id):null;aEdit=p?p.id:null;$('af').value=p?p.from:today();$('ato').value=p?p.to:today();$('anote').value=p?p.note:'';
+  awSel=(p&&p.who&&p.who.length)?p.who.slice():S.members.slice(0,p?p.n:NM()).map(m=>m.id);drawAw();$('adl').style.display=p?'block':'none';show('m-away')}
+ else if(a==='asave'){const f=$('af').value,t=$('ato').value;if(!f||!t||t<f){toast('請選擇正確的日期範圍');return}
+  if(NM()>1&&!awSel.length){toast('請選擇誰不在家');return}const p=aEdit&&S.away.find(x=>x.id===aEdit),o={from:f,to:t,note:$('anote').value.trim(),who:NM()>1?awSel.slice():[],n:NM()>1?awSel.length:1};if(p)Object.assign(p,o);else S.away.push({id:(Date.now()+Math.random().toString(36).slice(2,5)),...o});S.items.forEach(recalc);save();closeAll();render();toast('已設定，預測已重新計算')}
+ else if(a==='adel2'){S.away=S.away.filter(p=>p.id!==aEdit);S.items.forEach(recalc);save();closeAll();render()}
+ else if(a==='adel'){S.away=S.away.filter(p=>p.id!==id);S.items.forEach(recalc);save();render()}
+ else if(a==='addcat'){const n=$('ncat').value.trim(),it=S.items.find(x=>x.id===detId);if(n&&it){if(!S.catList.includes(n))S.catList.push(n);it.cat=n;save();render();ieRender()}}
+ else if(a==='delcat'){const c=b.dataset.k;gone('cat',{name:c,ids:S.items.filter(i=>i.cat===c).map(i=>i.id)});S.items.forEach(i=>{if(i.cat===c)i.cat=null});S.catList=S.catList.filter(x=>x!==c);save();render()}
+ else if(a==='lpadd'){const d=Math.round(parseFloat($('lpn').value)*U2[$('lpu').value]);if(d>0&&!set.presets.includes(d)){set.presets.push(d);set.presets.sort((x,y)=>x-y);save();render()}}
+ else if(a==='lpdel'){set.presets=set.presets.filter(x=>x!==+b.dataset.k);save();render()}
+ else if(a==='pused'){const p=S.pantry.find(x=>x.id===id);if(p){const nm=p.name;usePantry(p,1);save();render();toast(`「${esc(nm)}」已用完${S.pantry.includes(p)?`（剩 ×${p.qty}）`:''}，已記到歷史`)}}
+ else if(a==='phist'){renderPH();show('m-ph')}
+ else if(a==='prest'){const h=S.pHist.find(x=>x.id===id);if(h){const p=S.pantry.find(x=>x.name===h.name&&x.exp===h.exp);if(p)p.qty=(p.qty||1)+1;else S.pantry.push({id:rid(),name:h.name,icon:h.icon,qty:1,exp:h.exp,lead:0,later:false});S.pHist=S.pHist.filter(x=>x!==h);save();renderPH();render()}}
+ else if(a==='picplus'){picOn=true;drawPic()}
+ else if(a==='pdel2'){const p=S.pantry.find(x=>x.id===id);if(p){gone('pan',p);S.pantry=S.pantry.filter(x=>x.id!==id);save();render()}}
+ else if(a==='eedit'){const k=b.dataset.k,u=b.dataset.u;let r;if(k==='exp')r=S.expenses.find(x=>x.id===u);else{const t=S.items.find(x=>x.id===id);r=t&&t.history.find(x=>x.uid===u)}if(!r)return;
+  const from=vis('m-quick')?'quick':vis('m-det')?'det':'';hide('m-quick');hide('m-det');xEdit={kind:k,id,uid:u,from};CU.x=cOf(r);
+  $('xt').textContent=k==='exp'?'修改支出':r.quick?'修改快速補貨':'修改補貨紀錄';$('xq').style.display=r.quick?'block':'none';$('xd').value=r.date||r.restockDate;$('xa').value=k==='exp'?r.amount:(r.price==null?'':r.price);$('xn').value=r.note||'';whoSel=(r.who||[]).slice();giftSel=!!r.gift;drawWho();
+  $('xqrow').style.display=k==='buy'?'flex':'none';qv.x=k==='buy'?(r.qty||1):1;qo.x=false;drawQty('x');xinfo();show('m-edit')}
+ else if(a==='xcancel'){xback()}
+ else if(a==='iedit'){detId=id;emoOn=null;ieRender()}
+ else if(a==='idone'){hide('m-iedit');detail(detId)}
+ else if(a==='emoplus'){emoOn=b.dataset.t;if(emoOn==='add')drawEmojis();else ieRender()}
+ else if(a==='emook'){const v=$('eico').value.trim();if(v){if(!EMOJIS.includes(v)&&!S.emojis.includes(v))S.emojis.push(v);if(b.dataset.t==='add')pick=v;else{const it=S.items.find(x=>x.id===detId);if(it){it.icon=v;render()}}save()}const t=b.dataset.t;emoOn=null;if(t==='add')drawEmojis();else ieRender()}
+ else if(a==='ecplus'){ecAdd=true;drawEc()}
+ else if(a==='semo'){saleEmoOn=true;render();setTimeout(()=>{const x=$('sico');if(x)x.focus()},30)}
+ else if(a==='xsave'){const d=$('xd').value;if(!d)return;const v2=$('xa').value===''?null:parseFloat($('xa').value),o={note:$('xn').value.trim(),who:whoSel.slice(),gift:giftSel};
+  if(xEdit.kind==='exp'){const e=S.expenses.find(y=>y.id===xEdit.id);if(!(v2>0)){$('xa').focus();return}Object.assign(e,o,{date:d,amount:v2,cur:CU.x})}
+  else{const t=S.items.find(y=>y.id===xEdit.id),r=t.history.find(y=>y.uid===xEdit.uid);Object.assign(r,o,{restockDate:d,price:v2!=null&&v2>=0?v2:null,cur:CU.x,qty:qv.x>1?qv.x:undefined,quick:false});if(r.note==='快速補貨')r.note='';recalc(t)}
+  CD=d;CM=new Date(+d.slice(0,4),+d.slice(5,7)-1,1);save();closeAll();render();if(xEdit.from==='quick'){renderQ();show('m-quick')}else if(xEdit.from==='det')detail(xEdit.id)}
+ else if(a==='menu'){const m=$('menu');m.style.display=m.style.display==='none'?'block':'none'}
+ else if(a==='sedit'){const s0=salePool().find(x=>x.id===b.dataset.k);if(!s0)return;const dt=occ(s0);saleEd=s0.id;saleEmo=s0.e||'⭐';saleEmoOn=false;render();setTimeout(()=>{$('cn').value=s0.n;$('cm').value=+dt.slice(5,7);$('cdd').value=+dt.slice(8);const f=$('saleform');if(f)f.scrollIntoView({behavior:'smooth',block:'center'})},60)}
+ else if(a==='addc'){const n=$('cn').value.trim(),m=+$('cm').value,d=+$('cdd').value;if(!n){$('cn').focus();return}const dim=[31,29,31,30,31,30,31,31,30,31,30,31][m-1];if(d>dim){toast(`${m} 月最多 ${dim} 天`);return}
+  if(saleEd){const c=set.custom.find(x=>x.id===saleEd);if(c){c.n=n;c.m=m;c.d=d;c.e=saleEmo}else{set.ov=set.ov||{};set.ov[saleEd]={n,m,d,e:saleEmo}}saleEd=null}else set.custom.push({id:'c'+rid(),n,m,d,e:saleEmo});saleEmo='⭐';saleEmoOn=false;save();render()}
+ else if(a==='scancel'){saleEd=null;saleEmo='⭐';saleEmoOn=false;render()}
+ else if(a==='srm'){const k=b.dataset.k,c=set.custom.find(x=>x.id===k);if(c){gone('sale',c);set.custom=set.custom.filter(x=>x.id!==k)}else{gone('psale',{id:k});set.rm=(set.rm||[]).concat(k)}save();render()}
+ else if(a==='hoardstock'||a==='hoardused'||a==='hoardnever'){const it=hoardRec&&S.items.find(x=>x.id===hoardRec.id),r=it&&it.history.find(x=>x.uid===hoardRec.uid);if(r){r.asked=true;if(a==='hoardstock')r.stock=true;else if(a==='hoardused')r.real=true;else it.noAsk=true;recalc(it);save()}closeAll();render()}
+ else if(a==='tominc'){const d0=$('ed').value;hide('m-exp');act('finadd');$('idt').value=d0||CD}
+ else if(a==='tomexp'){if(incEdit&&incEdit.id){return}const d0=$('idt').value;hide('m-inc');act('addexp');$('ed').value=d0||CD}
+ else if(a==='goaladd'||a==='goaledit'){const g=a==='goaledit'?S.fin.goals.find(x=>x.id===id):null;goalId=g?g.id:null;CU.g=g?cOf(g):baseC();$('gn').value=g?g.name:'';$('gtg').value=g?g.target:'';$('gsv').value=g?g.saved:'';$('gdu').value=g&&g.due?g.due:'';$('gdl').style.display=g?'block':'none';show('m-goal')}
+ else if(a==='goalsave'){const n=$('gn').value.trim(),tg=parseFloat($('gtg').value);if(!n||!(tg>0)){$((n?'gtg':'gn')).focus();return}const o={name:n,target:tg,saved:Math.max(0,parseFloat($('gsv').value)||0),due:$('gdu').value||'',cur:CU.g};if(goalId)Object.assign(S.fin.goals.find(x=>x.id===goalId),o);else S.fin.goals.push({id:rid(),...o});save();closeAll();render()}
+ else if(a==='goaldel'){const g=S.fin.goals.find(x=>x.id===goalId);if(g){gone('goal',g);S.fin.goals=S.fin.goals.filter(x=>x!==g);save();closeAll();render()}}
+ else if(a==='notenew'){openNote(null)}
+ else if(a==='noteopen'){openNote(id)}
+ else if(a==='nback'){hideNote();render()}
+ else if(a==='nundo'){if(NI>0){NI--;nApply(NH[NI])}}
+ else if(a==='nredo'){if(NI<NH.length-1){NI++;nApply(NH[NI])}}
+ else if(a==='nprev'){NP=!NP;nSave();nView()}
+ else if(a==='nbell'){const r=$('nbellrow');r.style.display=r.style.display==='none'?'flex':'none'}
+ else if(a==='nbclr'){$('ndt').value='';$('ntm').value='';$('ntm').style.display='none';$('nbellrow').style.display='none';nSched()}
+ else if(a==='ndel'){const n=S.notes.find(x=>x.id===NID);if(n){gone('note',n);S.notes=S.notes.filter(x=>x!==n)}NID=null;$('npage').style.display='none';document.body.classList.remove('mo');save();render()}
+ else if(a==='nlink'){startLink()}
+ else if(a==='lcancel'){LM=false;document.body.classList.remove('lm');$('linkbar').style.display='none';openNote(NID)}
+ else if(a==='invadd'||a==='invedit'){const h=a==='invedit'?S.inv.items.find(x=>x.id===id):null;invEdit=h?h.id:null;CU.iv=h?cOf(h):baseC();imk=h?h.market:S.inv.markets[0];mkAdd=false;$('ivt').textContent=h?'修改標的':'新增標的';$('ivs').value=h?h.sym:'';$('ivq').value=h?h.qty:'';$('ivb').value=h?h.buy:'';$('ivd').value=h?h.bdate:today();$('ivn').value=h&&h.note?h.note:'';drawMk();hide('m-invd');show('m-inv')}
+ else if(a==='mkplus'){mkAdd=true;drawMk()}
+ else if(a==='mknew'){const n=$('mkn').value.trim();if(n&&!S.inv.markets.includes(n))S.inv.markets.push(n);if(n)imk=n;mkAdd=false;save();drawMk()}
+ else if(a==='invsave'){const sym=$('ivs').value.trim(),q=parseFloat($('ivq').value),bp=parseFloat($('ivb').value);if(!sym){$('ivs').focus();return}if(!(q>0)){$('ivq').focus();return}if(!(bp>=0)){$('ivb').focus();return}const o={market:imk,sym,qty:q,buy:bp,bdate:$('ivd').value||today(),cur:CU.iv,note:$('ivn').value.trim()};
+  if(invEdit)Object.assign(S.inv.items.find(x=>x.id===invEdit),o);else S.inv.items.push({id:rid(),...o,sold:false,sell:0,sdate:'',price:0,divs:[]});save();closeAll();render()}
+ else if(a==='invd'){invId=id;renderInvD()}
+ else if(a==='invdel'){const h=S.inv.items.find(x=>x.id===id);if(h){gone('inv',h);S.inv.items=S.inv.items.filter(x=>x!==h);save();closeAll();render()}}
+ else if(a==='isell'){const h=S.inv.items.find(x=>x.id===id);if(!h)return;sellId=id;$('slc').textContent=cOf(h);$('sli').textContent=`${h.sym}・${h.qty} × ${h.buy}（買入 ${md(h.bdate)}）`;$('isp').value=h.price||'';$('isd').value=today();$('slp').textContent='';hide('m-invd');show('m-sell')}
+ else if(a==='isellsave'){const h=S.inv.items.find(x=>x.id===sellId),sp=parseFloat($('isp').value);if(!h)return;if(!(sp>=0)){$('isp').focus();return}h.sold=true;h.sell=sp;h.sdate=$('isd').value||today();save();closeAll();render();invAfter('sell',h)}
+ else if(a==='iunsell'){const h=S.inv.items.find(x=>x.id===id);if(h){h.sold=false;S.fin.income=S.fin.income.filter(x=>!(x.inv===h.id&&x.ik==='sell'));S.expenses=S.expenses.filter(x=>!(x.inv===h.id&&x.ik==='sell'));save();renderInvD();render()}}
+ else if(a==='idiv'){const h=S.inv.items.find(x=>x.id===id);if(!h)return;sellId=id;CU.dv=cOf(h);$('dvt').textContent='新增配息 · '+h.sym;$('idm').value='';$('idd').value=today();$('idn').value='';hide('m-invd');show('m-div')}
+ else if(a==='idivsave'){const h=S.inv.items.find(x=>x.id===sellId),am=parseFloat($('idm').value);if(!h)return;if(!(am>0)){$('idm').focus();return}const d={id:rid(),date:$('idd').value||today(),amt:am,cur:CU.dv,note:$('idn').value.trim()};h.divs.push(d);save();closeAll();render();invAfter('div',h,d)}
+ else if(a==='iddel'){const h=S.inv.items.find(x=>x.id===id),d=h&&h.divs.find(x=>x.id===b.dataset.u);if(d){gone('idiv',{hid:h.id,sym:h.sym,d});h.divs=h.divs.filter(x=>x!==d);S.fin.income=S.fin.income.filter(x=>x.did!==d.id);save();renderInvD();render()}}
+ else if(a==='iaskyes'||a==='iaskno'){set.invAuto=a==='iaskyes'?'on':'off';const h=pendAuto&&S.inv.items.find(x=>x.id===pendAuto.id);if(a==='iaskyes'&&h){invBook(pendAuto.kind,h,h.divs.find(x=>x.id===pendAuto.did))}pendAuto=null;save();closeAll();render()}
+ else if(a==='fxok'){set.fxOk=true;save();render()}
+ else if(a==='fxadd'){const c=($('fxc').value||'').trim().toUpperCase().slice(0,5),r=parseFloat($('fxr').value);if(!c||!(r>0)||set.curs.includes(c)){toast('請輸入新的幣別代號與匯率');return}set.curs.push(c);set.cs[c]=($('fxs').value||'').trim()?($('fxs').value.trim()+' '):c+' ';set.fx[c]=r*fxr(baseC());save();render()}
+ else if(a==='fxdel'){const c=b.dataset.k;set.curs=set.curs.filter(x=>x!==c);delete set.fx[c];delete set.cs[c];save();render()}
+ else if(a==='shgo'){const x=ALERTS[+b.dataset.i];if(!x)return;setShade(false);
+  if(x.k==='item')setTimeout(()=>focusItem(x.id),220);
+  else if(x.k==='pan'){V='home';HV='pan';render();setTimeout(()=>{const el=$('pn-'+x.id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('ring-4','ring-emerald-300');setTimeout(()=>el.classList.remove('ring-4','ring-emerald-300'),2200)}},220)}
+  else if(x.k==='note'){openNote(x.id)}else if(x.k==='sale'){V='sale';render()}else if(x.k==='budget'){V='ana';AV='ana';render()}else if(x.k==='quick'){renderQ();show('m-quick')}else{V='set';render()}}
+ else if(a==='fxclose'){setFix(false)}
+ else if(a==='shclose'){setShade(false)}
+ else if(a==='fprev'||a==='fnext'){FM=new Date(FM.getFullYear(),FM.getMonth()+(a==='fnext'?1:-1),1);render()}
+ else if(a==='finadd'||a==='finedit'||a==='recadd'||a==='recedit'||a==='rxadd'||a==='rxedit'){const rec=a[0]==='r',xx=a.startsWith('rx'),ed=a.endsWith('edit'),x=ed?(xx?S.fin.recurX:rec?S.fin.recur:S.fin.income).find(y=>y.id===id):null;incEdit={rec,xx,id:ed?id:null};icat=x?x.cat:(xx?ecl(S.expCats[0]):S.fin.icats[0]);icAdd=false;
+  $('it2').textContent=(ed?'修改':'新增')+(xx?'固定支出':rec?'固定收入':'收入');$('iseg').style.display=(!rec&&!ed)?'grid':'none';$('ia').value=x?x.amount:'';$('inote').value=x&&x.note?x.note:'';$('idt').value=x&&!rec?x.date:today();$('iday').value=x&&rec?x.day:new Date().getDate();
+  $('idr').style.display=rec?'none':'flex';$('ird').style.display=rec?'flex':'none';$('irc').style.display=rec||ed?'none':'flex';$('irec').checked=false;CU.i=x?cOf(x):baseC();drawIc();show('m-inc')}
+ else if(a==='icplus'){icAdd=true;drawIc()}
+ else if(a==='icnew'){const n=$('icn').value.trim();if(n){if(!S.fin.icats.includes(n))S.fin.icats.push(n);icat=n;save()}icAdd=false;drawIc()}
+ else if(a==='incsave'){const v=parseFloat($('ia').value);if(!(v>0)){$('ia').focus();return}const note=$('inote').value.trim(),F=S.fin;
+  if(incEdit.rec){const day=Math.min(31,Math.max(1,parseInt($('iday').value)||1));if(incEdit.id)Object.assign((incEdit.xx?F.recurX:F.recur).find(y=>y.id===incEdit.id),{amount:v,cur:CU.i,cat:icat,day,note});else (incEdit.xx?F.recurX:F.recur).push({id:rid(),amount:v,cur:CU.i,cat:icat,day,note,on:true,start:today().slice(0,8)+'01',skip:[]});applyRecur()}
+  else{const d=$('idt').value||today();if(incEdit.id)Object.assign(F.income.find(y=>y.id===incEdit.id),{amount:v,cur:CU.i,cat:icat,date:d,note});else{const x={id:rid(),date:d,amount:v,cur:CU.i,cat:icat,note};if($('irec').checked){const r={id:rid(),amount:v,cur:CU.i,cat:icat,day:+d.slice(8),note,on:true,start:d.slice(0,8)+'01',skip:[]};F.recur.push(r);x.rid=r.id}F.income.push(x)}}
+  save();closeAll();render()}
+ else if(a==='findel'){const x=S.fin.income.find(y=>y.id===id);if(x){gone('inc',x);if(x.rid){const r=S.fin.recur.find(y=>y.id===x.rid);if(r)r.skip=(r.skip||[]).concat(x.date.slice(0,7))}S.fin.income=S.fin.income.filter(y=>y!==x);save();render()}}
+ else if(a==='rxdel'){const r=S.fin.recurX.find(y=>y.id===id);if(r){gone('rxe',r);S.fin.recurX=S.fin.recurX.filter(y=>y!==r);save();render()}}
+ else if(a==='recdel'){const r=S.fin.recur.find(y=>y.id===id);if(r){gone('rec',r);S.fin.recur=S.fin.recur.filter(y=>y!==r);save();render()}}
+ else if(a==='bdel'){const x=S.fin.buckets.find(y=>y.id===id);if(x){gone('bkt',x);S.fin.buckets=S.fin.buckets.filter(y=>y!==x);save();render()}}
+ else if(a==='badd'){const n=$('bnn').value.trim();if(n){S.fin.buckets.push({id:rid(),n,p:0});save();render()}}
+ else if(a==='bpre'){S.fin.buckets=(b.dataset.k==='a'?[['日常開銷',50],['娛樂',30],['存款',20]]:[['日常開銷',50],['投資',20],['娛樂',10],['存款',20]]).map(([n,p])=>({id:rid(),n,p}));save();render()}
+ else if(a==='fsin'){S.fin.salaryCur=baseC();S.fin.salary=incOf(fk());save();render()}
+ else if(a==='fsavg'){S.fin.salaryCur=baseC();S.fin.salary=Math.round(avgInc().avg);save();render()}
+ else if(a==='bbud'){const x=S.fin.buckets.find(y=>/日常/.test(y.n)),sl=toBase(S.fin.salary||0,S.fin.salaryCur||baseC())||incOf(fk())||Math.round(avgInc().avg)||0;if(x){set.budget=Math.round(sl*x.p/100);set.budgetCur=baseC();save();render();toast('已設為每月預算')}}
+ else if(a==='trash'){$('menu').style.display='none';tc=false;renderTrash();show('m-trash')}
+ else if(a==='tdel'){S.trash=S.trash.filter(t=>t.tid!==b.dataset.tid);save();renderTrash();render()}
+ else if(a==='tclear'){if(!tc){tc=true;renderTrash();return}S.trash=[];tc=false;save();renderTrash();render()}
+ else if(a==='dupm'||a==='dupk'){const t=S.trash.find(x=>x.tid===dupTid);if(t){const d=t.data;if(a==='dupm'){const ex=S.items.find(x=>x.name.toLowerCase()===d.name.toLowerCase());d.history.forEach(h=>{if(!ex.history.some(y=>y.uid===h.uid))ex.history.push(h)});recalc(ex)}else{d.name+='（還原）';S.items.push(d)}S.trash=S.trash.filter(x=>x.tid!==dupTid);save();closeAll();render()}}
+ else if(a==='gotop'){focusItem(id)}
+ else if(a==='cmd'){$('menu').style.display='none';$('cmdin').value='';$('cmdout').innerHTML='';show('m-cmd')}
+ else if(a==='cmdcopy'){const p=cmdPrompt();$('cmdp').value=p;$('cmdp').style.display='block';try{navigator.clipboard.writeText(p).then(()=>toast('已複製提示詞')).catch(()=>toast('請長按下方文字全選複製'))}catch(e){toast('請長按下方文字全選複製')}}
+ else if(a==='cmdprev'||a==='cmdrun'){const l=cmdParse();if(!l){$('cmdout').innerHTML='<p class="text-rose-600">看不懂這段指令，請確認貼上的是 AI 給的 JSON。</p>';return}
+  if(a==='cmdprev'){$('cmdout').innerHTML=l.map(c=>{const r=runCmd(c,true);return `<p class="${r.ok?'text-slate-700':'text-rose-600'}">${r.ok?'✅':'⚠️'} ${esc(r.m)}</p>`}).join('');return}
+  const res=l.map(c=>runCmd(c,false));S.items.forEach(recalc);save();closeAll();render();const n=res.filter(r=>r.ok).length;toast(`已執行 ${n} 項${n<res.length?`，${res.length-n} 項失敗`:''}`)}
+ else if(a==='quick'&&it){const ps=it.history.filter(h=>h.price!=null&&!h.gift),lp=ps[ps.length-1],lr=it.history[it.history.length-1],now=Date.now(),pv=it.history.filter(h=>h.quick&&h.qts&&now-h.qts<180000).pop();
+  if(pv){pv.qty=(pv.qty||1)+1;pv.qts=now;recalc(it);save();render();toast(`${it.icon} ${esc(it.name)} 快速補貨 ×${pv.qty}`)}
+  else{whoSel=lr&&lr.who?lr.who.slice():[];giftSel=false;addP(it,today(),lp?lp.price:null,'快速補貨');const r=it.history.find(x=>x.uid===last.uid);if(r){r.cur=lp?cOf(lp):baseC();r.quick=true;r.qts=now;save();render();setTimeout(render,181000)}}}
+ else if(a==='qlist'){renderQ();show('m-quick')}
+ else if(a==='qok'){const t=S.items.find(x=>x.id===id),r=t&&t.history.find(x=>x.uid===b.dataset.u);if(r){r.quick=false;if(r.note==='快速補貨')r.note='';save();renderQ();render()}}
+ else if(a==='qsel'){const u=b.dataset.u;qsel=qsel.includes(u)?qsel.filter(x=>x!==u):qsel.concat(u);renderQ()}
+ else if(a==='qsplit'){const t=S.items.find(x=>x.id===id),r=t&&t.history.find(x=>x.uid===b.dataset.u);if(r&&(r.qty||1)>1){const n=r.qty;r.qty=undefined;for(let i=1;i<n;i++)t.history.push({...r,uid:rid()});recalc(t);save();renderQ();render()}}
+ else if(a==='qmerge'){const rs=quickList().filter(x=>qsel.includes(x.h.uid));if(new Set(rs.map(x=>x.it.id)).size>1){toast('只能合併同一個物品的紀錄');return}const t=rs[0].it,f=rs[0].h;rs.slice(1).forEach(x=>{f.qty=(f.qty||1)+(x.h.qty||1);t.history=t.history.filter(y=>y!==x.h)});qsel=[];recalc(t);save();renderQ();render()}
+ else if(a==='qall'){S.items.forEach(t=>t.history.forEach(r=>{if(r.quick){r.quick=false;if(r.note==='快速補貨')r.note=''}}));save();renderQ();render()}
+ else if(a==='acc'){set.acc[b.dataset.k]=!set.acc[b.dataset.k];save();render()}
+ else if(a==='ed'){ED[b.dataset.k]=!ED[b.dataset.k];render()}
+ else if(a==='ah'){AH=true;render()}
+ else if(a==='catnew'){const n=$('ncs').value.trim();if(n&&!S.catList.includes(n)){S.catList.push(n);save()}render()}
+ else if(a==='delec'){const i=+b.dataset.k,c=S.expCats[i];if(c){gone('ecat',c);S.expCats.splice(i,1);save();render()}}
+ else if(a==='ecnew'||a==='ecnew2'){const x=a==='ecnew'?'':'2',n=$('xcn'+x).value.trim();if(!n)return;const c={e:$('xce'+x).value,n};if(!S.expCats.some(y=>ecl(y)===ecl(c)))S.expCats.push(c);ecat=ecl(c);save();if(a==='ecnew'){ecAdd=false;drawEc()}else render()}
+ else if(a==='restore'){restore(b.dataset.tid)}
+ else if(a==='gopan'){V='home';HV='pan';render()}
+ else if(a==='padd'||a==='pedit'){const p=a==='pedit'?S.pantry.find(x=>x.id===id):null;pEdit=p?p.id:null;$('pt2').textContent=p?'編輯庫存物品':'新增庫存物品';$('pnm').value=p?p.name:'';picV=p&&p.icon?p.icon:'';picOn=false;drawPic();qv.n=p&&p.qty?p.qty:1;qo.n=false;drawQty('n');$('pnames').innerHTML=S.items.map(i=>`<button data-pn="${i.id}" class="px-3 py-1.5 rounded-full bg-slate-50 text-sm font-semibold">${esc(i.icon+' '+i.name)}</button>`).join('');$('pe').value=p?p.exp:'';
+  setLead(p&&p.lead?p.lead:set.pantryLead);drawLp();$('pdl').style.display=p?'block':'none';show('m-pan')}
+ else if(a==='psave'){const n=$('pnm').value.trim(),e=$('pe').value;if(!n){$('pnm').focus();return}if(!e){$('pe').focus();return}
+  const p=pEdit&&S.pantry.find(x=>x.id===pEdit);if(p){p.name=n;p.icon=picV;p.qty=qv.n;p.exp=e;p.lead=LD();p.later=false}else S.pantry.push({id:(Date.now()+Math.random().toString(36).slice(2,5)),name:n,icon:picV,qty:qv.n,exp:e,lead:LD(),later:false});save();closeAll();render()}
+ else if(a==='pdel'){const p=S.pantry.find(x=>x.id===pEdit);if(p){gone('pan',p);S.pantry=S.pantry.filter(x=>x.id!==pEdit);save();closeAll();render()}}
+ else if(a==='pqyes'||a==='pqno'||a==='pqlater'){const p=S.pantry.find(x=>x.id===pqId);
+  if(a==='pqyes'){if(!$('pqd').value){$('pqd').focus();return}if(p){p.exp=$('pqd').value;p.later=false}}else if(a==='pqlater'&&p)p.later=true;save();closeAll();render()}
+ else if(a==='detail'){dpp=null;detail(id)}
+ else if(a==='dpur'){const t=S.items.find(x=>x.id===id),r=t.history.find(x=>x.uid===b.dataset.u);gone('buy',r,id);t.history=t.history.filter(x=>x.uid!==b.dataset.u);recalc(t);save();render();detail(id)}
+ else if(a==='cprev'||a==='cnext'){CM=new Date(CM.getFullYear(),CM.getMonth()+(a==='cnext'?1:-1),1);const t=new Date();CD=(t.getFullYear()===CM.getFullYear()&&t.getMonth()===CM.getMonth())?today():iso(CM);dp=null;render()}
+ else if(a==='addexp'){CU.e=baseC();$('ea').value='';$('en').value='';$('ed').value=CD;whoSel=[];giftSel=false;ecAdd=false;drawWho();drawEc();fillEi();show('m-exp')}
+ else if(a==='saveexp'){const v=parseFloat($('ea').value);if(!(v>0)){$('ea').focus();return}
+  const d=$('ed').value||CD,note=$('en').value.trim(),iv=$('ei').value;let it=null;
+  if(iv==='__new'){const nn=$('enn').value.trim();if(!nn){$('enn').focus();return}it=S.items.find(x=>x.name.toLowerCase()===nn.toLowerCase());
+   if(!it){if(!S.userStatus.isPremium&&S.items.length>=FREE){toast('補貨數量已滿（免費版上限 '+FREE+' 個物品）');return}it={id:(Date.now()+Math.random().toString(36).slice(2,5)),name:nn,icon:'🛒',typical:null,history:[],averageCycleDays:null,lastRestockDate:null,predictedDepleteDate:null};S.items.push(it)}}
+  else if(iv)it=S.items.find(x=>x.id===iv);
+  if(it&&$('es').checked){it.history.push({uid:(Date.now()+Math.random().toString(36).slice(2,5)),restockDate:d,price:v,cur:CU.e,note,who:whoSel.slice(),gift:giftSel});recalc(it)}
+  else S.expenses.push({id:(Date.now()+Math.random().toString(36).slice(2,5)),date:d,amount:v,cur:CU.e,cat:it?it.icon+' '+it.name:ecat,note,who:whoSel.slice(),gift:giftSel,itemId:it?it.id:null});
+  CD=d;CM=new Date(+d.slice(0,4),+d.slice(5,7)-1,1);save();closeAll();render();if(it)pantryCheck(it.name)}
+ else if(a==='de'){const u=b.dataset.u;if(b.dataset.k==='exp'){const ex0=S.expenses.find(x=>x.id===u);if(ex0&&ex0.rid){const r0=S.fin.recurX.find(y=>y.id===ex0.rid);if(r0)r0.skip=(r0.skip||[]).concat(ex0.date.slice(0,7))}gone('exp',S.expenses.find(x=>x.id===u));S.expenses=S.expenses.filter(x=>x.id!==u)}else{const t=S.items.find(x=>x.id===id),r=t&&t.history.find(x=>x.uid===u);if(r){gone('buy',r,id);t.history=t.history.filter(x=>x.uid!==u);recalc(t)}}save();render()}
+ else if(a==='undo'&&last){const t=S.items.find(x=>x.id===last.id);if(t){t.history=t.history.filter(r=>r.uid!==last.uid);recalc(t);save();render()}last=null;$('toast').style.display='none'}
+ else if(a==='chd'&&last){const t=S.items.find(x=>x.id===last.id),r=t&&t.history.find(x=>x.uid===last.uid);if(r)openR(t.id,r)}
+ else if(a==='exp'){const j=JSON.stringify(S);try{const u=URL.createObjectURL(new Blob([j],{type:'application/json'})),x=document.createElement('a');x.href=u;x.download='smart-replenish-'+today()+'.json';x.click()}catch(e){}cp(j);toast('已匯出備份（同時複製到剪貼簿）')}
+ else if(a==='del'&&it){gone('item',it);S.items=S.items.filter(x=>x.id!==id);save();render()}
+ else if(a==='unlock'){show('m-pro')}
+ else if(a==='buy'){S.userStatus.isPremium=true;save();closeAll();render()}
+ else if(a==='tg'){const k=b.dataset.k;if(k.startsWith('nt:')){const n2=k.slice(3);set.nt[n2]=set.nt[n2]===false}else if(k==='fin')set.fin=!set.fin;else if(k==='inv')set.inv=set.inv===false;else if(k==='hoardAsk')set.hoardAsk=set.hoardAsk===false;else if(k==='expense')set.expense=!set.expense;else if(k==='sales')set.sales=!set.sales;else if(k==='pantry')set.pantry=!set.pantry;else if(k==='multi'){set.multi=!set.multi;if(set.multi&&!S.members.length)resizeM(2)}else if(k==='away')set.away=!set.away;else if(k==='cats')set.cats=!set.cats;else if(k==='pantryAsk')set.pantryAsk=!set.pantryAsk;else set.off[k]=!set.off[k];save();render()}
+ else if(a==='rmc'){const c=set.custom.find(x=>x.id===b.dataset.k);if(c)gone('sale',c);set.custom=set.custom.filter(x=>x.id!==b.dataset.k);save();render()}
+ else if(a==='close'){closeAll()}
+});
+document.addEventListener('change',e=>{
+ if(e.target.dataset.ren!=null){const o=e.target.dataset.ren,n=e.target.value.trim();if(n&&n!==o&&!S.catList.includes(n)){S.catList=S.catList.map(c=>c===o?n:c);S.items.forEach(i=>{if(i.cat===o)i.cat=n});if(o in set.col){set.col[n]=set.col[o];delete set.col[o]}save()}render();return}
+if(e.target.dataset.renx!=null){const c=S.expCats[+e.target.dataset.renx],n=e.target.value.trim();if(n&&c){const ol=ecl(c);c.n=n;S.expenses.forEach(x=>{if(x.cat===ol)x.cat=ecl(c)});save()}render();return}
+if(e.target.id==='ndt'){const d=e.target.value;$('ntm').style.display=d?'inline-block':'none';if(d&&!$('ntm').value)$('ntm').value='09:00';if(!d)$('ntm').value='';nSched();return}
+if(e.target.id==='ntm'){nSched();return}
+if(e.target.id==='ntpl'){if(e.target.value!==''){nTpl(+e.target.value);e.target.value=''}return}
+if(e.target.dataset.ip!=null){const h=S.inv.items.find(x=>x.id===e.target.dataset.ip);if(h){h.price=parseFloat(e.target.value)||0;save();render()}return}
+if(e.target.dataset.cs!=null){const k=e.target.dataset.cs,v=e.target.value;if(k==='fs')S.fin.salaryCur=v;else if(k==='fsv')S.fin.savingsCur=v;else if(k==='bud')set.budgetCur=v;else CU[k]=v;save();if(k==='fs'||k==='fsv'||k==='bud')render();return}
+if(e.target.dataset.fx!=null){const v=parseFloat(e.target.value);if(v>0){set.fx[e.target.dataset.fx]=v*fxr(baseC());save();render()}return}
+if(e.target.dataset.cv!=null){CV=e.target.value;render();return}
+if(e.target.dataset.fsv!=null){S.fin.savings=parseFloat(e.target.value)||0;save();render();return}
+if(e.target.dataset.efm!=null){S.fin.efM=+e.target.value;save();render();return}
+if(e.target.dataset.bp!=null){const x=S.fin.buckets.find(y=>y.id===e.target.dataset.bp);if(x){x.p=Math.max(0,Math.min(100,parseFloat(e.target.value)||0));save();render()}return}
+if(e.target.dataset.bn!=null){const x=S.fin.buckets.find(y=>y.id===e.target.dataset.bn);if(x){x.n=e.target.value.trim()||x.n;save();render()}return}
+if(e.target.dataset.fs!=null){S.fin.salary=parseFloat(e.target.value)||0;save();render();return}
+if(e.target.dataset.mem!=null){const i=+e.target.dataset.mem;S.members[i].name=e.target.value.trim()||('成員'+(i+1));save();return}const k=e.target.dataset.set;if(!k)return;let v=e.target.value;
+ if(k==='n')v=Math.max(1,parseInt(v)||1);else if(k==='lead'||k==='budget'||k==='size'||k==='pantryLead'||k==='redD'||k==='orgD')v=+v||0;
+ if(k==='cap'){set.cap=+v;S.items.forEach(recalc);save();render();return}if(k==='mcount'){resizeM(+v);S.away.forEach(p=>p.n=Math.min(p.n,+v));S.items.forEach(recalc);save();render();return}if(k==='notifyTime')set.lastNote='';if(k==='notify'&&/app|both/.test(v))try{window.Notification&&Notification.requestPermission()}catch(x){}set[k]=v;save();render();
+});
+['m-add','m-price','m-pro','m-det','m-exp','m-trash','m-pan','m-pq','m-away','m-edit','m-dup','m-quick','m-iedit','m-cmd','m-ph','m-inc','m-hoard','m-goal','m-inv','m-sell','m-div','m-invd','m-iask'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target.id===id)id==='m-edit'?xback():closeAll()}));
+document.addEventListener('input',e=>{if(e.target.id==='nbody'||e.target.id==='ntitle')nSched();if(e.target.id==='nq'){NQ=e.target.value;$('nlist').innerHTML=nList()}if(e.target.id==='isp'){const h=S.inv.items.find(x=>x.id===sellId),v=parseFloat(e.target.value);$('slp').textContent=h&&!isNaN(v)?`損益 ${sgn(h.qty*(v-h.buy),cOf(h))}（${(h.buy?(v-h.buy)/h.buy*100:0).toFixed(1)}%）`:''}if(e.target.id==='xa')xinfo();if(e.target.id==='price')updTot();if(/^qi[pxn]$/.test(e.target.id)){qv[e.target.id[2]]=Math.max(1,parseInt(e.target.value)||1);updTot();xinfo()}if(e.target.id==='q'){Q=e.target.value.trim();$('list').innerHTML=listHtml()}});
+document.addEventListener('change',e=>{if(e.target.id!=='imp')return;const f=e.target.files[0];if(!f)return;
+ f.text().then(t=>{try{const d=JSON.parse(t);if(!Array.isArray(d.items))throw 0;S.items=d.items;S.expenses=d.expenses||[];S.pantry=d.pantry||[];S.trash=d.trash||[];S.members=d.members||[];S.pHist=d.pHist||[];S.notes=d.notes||[];S.inv=Object.assign({},S.inv,d.inv||{});S.fin=Object.assign({},S.fin,d.fin||{});S.catList=d.catList||S.catList;S.expCats=d.expCats||S.expCats;S.emojis=d.emojis||[];S.away=d.away||[];Object.assign(S.userStatus,d.userStatus);Object.assign(set,d.settings);S.items.forEach(recalc);save();render();toast('已匯入備份')}catch(x){toast('檔案格式不正確')}})});
+{const vv=window.visualViewport;let cur=vv?vv.height:0,raf;const go=()=>{cancelAnimationFrame(raf);const t=vv.height,s0=cur,t0=performance.now(),step=n=>{const k=Math.min(1,(n-t0)/220);cur=s0+(t-s0)*(1-Math.pow(1-k,3));document.documentElement.style.setProperty('--vvh',cur+'px');if(k<1)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)};if(vv){vv.addEventListener('resize',go);go()}}
+document.addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('input:not([type=checkbox]):not([type=file]):not([type=time]):not([type=date]),textarea')){document.body.classList.add('kb');setTimeout(()=>t.scrollIntoView({block:'center',behavior:'smooth'}),320)}});
+document.addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;if(!(a&&a.matches&&a.matches('input:not([type=checkbox]):not([type=file]):not([type=time]):not([type=date]),textarea')))document.body.classList.remove('kb')},60));
+document.addEventListener('focusout',e=>{const id=e.target.id;if(id==='eico'||id==='pic'||id==='sico')setTimeout(()=>{if(id==='eico'&&emoOn){const t=emoOn;emoOn=null;if(t==='add')drawEmojis();else ieRender()}if(id==='pic'&&picOn){picOn=false;drawPic()}if(id==='sico'&&saleEmoOn){saleEmoOn=false;render()}},150)});
+document.addEventListener('mousedown',e=>{if(e.target.closest('.rounded-t-3xl button,#ntool button'))e.preventDefault()});
+document.addEventListener('change',e=>{if(e.target.id==='ei')syncEx();if(/^qs[pxn]$/.test(e.target.id)){const k=e.target.id[2],v=e.target.value;if(v==='other'){qo[k]=true;drawQty(k);const i=$('qi'+k);if(i)i.focus()}else qv[k]=+v;updTot();xinfo()}if(e.target.id==='pd')drawDays();if(e.target.id==='sico'){saleEmo=e.target.value.trim()||saleEmo;saleEmoOn=false;render()}if(e.target.id==='eico')commitEmo(e.target.value.trim());if(e.target.id==='pic'){picV=e.target.value.trim();picOn=false;drawPic()}if(e.target.id==='dico'){const it=S.items.find(x=>x.id===detId),v=e.target.value.trim();if(it&&v){it.icon=v;save();render();ieRender()}}if(e.target.id==='inm'){const it=S.items.find(x=>x.id===detId),v=e.target.value.trim();if(it&&v){it.name=v;save();render()}}if(e.target.id==='icat'){const it=S.items.find(x=>x.id===detId);if(it){it.cat=e.target.value.trim()||null;save();render()}}});
+S.items.forEach(it=>{const m={};it.history=it.history.filter(h=>{if(h.quick&&h.qg){const f=m[h.qg];if(f){f.qty=(f.qty||1)+(h.qty||1);return false}m[h.qg]=h}return true})});
+S.items.forEach(recalc);applyRecur();render();initDates();initShade();initFix();initNotes();dailyNotice();document.addEventListener('visibilitychange',()=>{if(!document.hidden){applyRecur();dailyNotice()}});
+try{if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
+</script>
+</body>
+</html>
